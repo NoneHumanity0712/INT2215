@@ -51,7 +51,7 @@ void initGame(string& secretWord, string& guessWord, int& badGuessCount) {
 void display(const string& secretWord, const string& guessWord, int badGuessCount) 
 {
     cout << guessWord << " " << endl;
-    cout << "Guess remains: " << MAX_BAD_GUESSES - badGuessCount << endl;
+    cout << "Wrong guess remains: " << MAX_BAD_GUESSES - badGuessCount << endl;
     cout << "Please enter your guess: " << endl;
 
     //hangman
@@ -80,9 +80,9 @@ bool gameOver(const string& secretWord, const string& guessWord, int badGuessCou
 void displayResult(const string& guessWord, int badGuessCount)
 {
     if (badGuessCount >= MAX_BAD_GUESSES)
-        cout << "You lost!\n";
+        cout << "You lost!" << endl;
     else
-        cout << "You won!\n";
+        cout << "You won!" << endl;
 }
 
 char getInput() {
@@ -108,5 +108,6 @@ int main()
     displayResult(guessWord, badGuessCount);
     cout << "The word is " << secretWord;
     cout << endl;
+    
     return 0;
 }

@@ -4,9 +4,10 @@
 #include <ctime>
 #include <fstream>
 #include <vector>
-#define MAX_BAD_GUESSES 10
 
 using namespace std;
+
+const int MAX_BAD_GUESSES = 10;
 
 vector<string> words;
 
@@ -44,7 +45,7 @@ void initGame(string& secretWord, string& guessWord, int& badGuessCount) {
 void display(const string& secretWord, const string& guessWord, int badGuessCount) 
 {
     cout << guessWord << " " << endl;
-    cout << "Guess remains: " << MAX_BAD_GUESSES - badGuessCount << endl;
+    cout << "Wrong guess remains: " << MAX_BAD_GUESSES - badGuessCount << endl;
     cout << "Please enter your guess: " << endl;
     cout << endl;
     //hangman
@@ -86,8 +87,8 @@ char getInput() {
 
 int main()
 {
-    srand(time(0));
     get_words();
+    srand(time(0));
 
     string secretWord;
     string guessWord;
