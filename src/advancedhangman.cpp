@@ -33,9 +33,10 @@ void tolower(string& word)
     }
 }
 
-void initGame(string& secretWord, string& guessWord, int& badGuessCount) {
+void initGame(string& secretWord, string& guessWord, int& badGuessCount) 
+{
     badGuessCount = 0;
-    int index  = rand() % 100;
+    int index  = rand() % words.size();
     cout << index << endl;
     secretWord = words[index];
     tolower(secretWord);
