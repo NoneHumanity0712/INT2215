@@ -4,11 +4,12 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <string>
 #include <SDL2/SDL_image.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 800;
 
 //Starts up SDL and creates window
 bool init();
@@ -44,7 +45,7 @@ bool init()
 	else
 	{
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "SDL Load Image", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -66,10 +67,11 @@ bool loadMedia()
 	bool success = true;
 
 	//Load splash image
-	gHelloWorld = IMG_Load("C:\\Users\\HP\\Pictures\\ace.jpg");
+	
+	gHelloWorld = IMG_Load("C:\\Users\\HP\\OneDrive - vnu.edu.vn\\UET\\Courses\\INT2215\\build\\bmp_24.bmp");
 	if( gHelloWorld == NULL )
 	{
-		printf( "Unable to load image %s! SDL Error: %s\n", "hello_world.bmp", SDL_GetError() );
+		printf( "Unable to load image %s! SDL Error: %s\n", "ace.jpg", SDL_GetError() );
 		success = false;
 	}
 
