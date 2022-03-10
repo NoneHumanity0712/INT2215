@@ -4,7 +4,6 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include <SDL2/SDL_image.h>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -26,8 +25,6 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 
 //The image we will load and show on the screen
-SDL_Surface* gHelloWorld = NULL;
-
 SDL_Surface* gXOut = NULL;
 
 bool init()
@@ -66,10 +63,10 @@ bool loadMedia()
 	bool success = true;
 
 	//Load splash image
-	gHelloWorld = IMG_Load("C:\\Users\\HP\\Pictures\\ace.jpg");
-	if( gHelloWorld == NULL )
+	gXOut = SDL_LoadBMP( "03_event_driven_programming/x.bmp" );
+	if( gXOut == NULL )
 	{
-		printf( "Unable to load image %s! SDL Error: %s\n", "hello_world.bmp", SDL_GetError() );
+		printf( "Unable to load image %s! SDL Error: %s\n", "03_event_driven_programming/x.bmp", SDL_GetError() );
 		success = false;
 	}
 
@@ -79,8 +76,8 @@ bool loadMedia()
 void close()
 {
 	//Deallocate surface
-	SDL_FreeSurface( gHelloWorld );
-	gHelloWorld = NULL;
+	SDL_FreeSurface( gXOut );
+	gXOut = NULL;
 
 	//Destroy window
 	SDL_DestroyWindow( gWindow );
@@ -105,10 +102,14 @@ int main( int argc, char* args[] )
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{
+		{			
+			//Main loop flag
 			bool quit = false;
+
+			//Event handler
 			SDL_Event e;
 
+			//While application is running
 			while( !quit )
 			{
 				//Handle events on queue

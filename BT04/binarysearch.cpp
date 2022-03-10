@@ -4,7 +4,7 @@ using namespace std;
 int binarySearch(int arr[], int l, int r, int x)
 {
 	if (r >= l) {
-		int mid = l + (r - l) / 2;
+		int mid = l + (r - l)/2;
 
 		if (arr[mid] == x)
 			return mid;
@@ -27,10 +27,10 @@ int main(void)
         cin >> arr[i];
     }
     
-	int x = 10;
+	int x;
+	cin >> x;
 	int result = binarySearch(arr, 0, n - 1, x);
-	(result == -1)
-		? cout << "Element is not present in array"
-		: cout << "Element is present at index " << result;
+	if (result == -1) cout << "Element is not present in array"
+	else cout << "Element is present at index " << result;
 	return 0;
 }
