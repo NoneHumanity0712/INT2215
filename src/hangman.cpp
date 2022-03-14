@@ -3,7 +3,7 @@
 #include <cstring>
 #include <ctime>
 
-#define MAX_BAD_GUESSES 7
+#define MAX_BAD_GUESSES 10
 
 using namespace std;
 
