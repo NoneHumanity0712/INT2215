@@ -16,7 +16,7 @@ int main()
 {
     while (!GameOver)
     {
-         GameInit();
+        GameInit();
         int newPiece;
         UpdateGame(newPiece);
         PrintMap();
