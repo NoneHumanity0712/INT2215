@@ -2,7 +2,7 @@
 and may not be redistributed without written permission.*/
 
 //Using SDL and standard IO
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdio.h>
 
 //Screen dimension constants
@@ -83,6 +83,7 @@ void close()
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 
+
 	//Quit SDL subsystems
 	SDL_Quit();
 }
@@ -131,6 +132,7 @@ int main( int argc, char* args[] )
 		}
 	}
 
+	
 	//Free resources and close SDL
 	close();
 

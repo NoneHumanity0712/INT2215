@@ -3,6 +3,7 @@ and may not be redistributed without written permission.*/
 
 //Using SDL and standard IO
 #include <SDL.h>
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include <SDL_image.h>
