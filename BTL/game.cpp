@@ -10,8 +10,8 @@ void getNewPiece(Piece &newPiece)
 {
     int Shape = rand()%7;
     int Rotation = rand()%4;
-    int X;
-    int Y;
+    int X = 0;
+    int Y = 0;
     newPiece.getTetromino(Shape, Rotation, X, Y);
     newPiece.getBeginXPos(Shape, Rotation);
     newPiece.getBeginYPos(Shape, Rotation);
@@ -23,9 +23,23 @@ void GameInit()
 {
 }
 
-void UpdateGame(Piece newPiece);
+void UpdateGame(Piece newPiece)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            /* code */
+        }
+        
+    }
+    
+}
 
-void PrintMap();
+void PrintMap(Piece newPiece)
+{
+
+}
 
 int main()
 {
@@ -38,7 +52,7 @@ int main()
         GameInit();
         
         UpdateGame(newPiece);
-        PrintMap();
+        PrintMap(newPiece);
     }
     return 0;
 }
