@@ -52,7 +52,7 @@ void initGame(Game &game) {
     int index  = rand() % (sizeof(words) / sizeof(string));
     game.secretWord = words[index];
     tolower(game.secretWord);
-    game.secretWord = string(game.secretWord.length(), '-');
+    game.guessWord = string(game.secretWord.length(), '-');
 }
 
 void display(Game game) 
