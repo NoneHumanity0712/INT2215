@@ -4,23 +4,21 @@
 
 using namespace std;
 
-int board[20][10] = {0};
+const int boardHeight = 20;
+const int boardWidth = 10;
+
+int board[boardHeight][boardWidth] = {0};
 
 void getNewPiece(Piece &newPiece)
 {
-    int Shape = rand()%7;
-    int Rotation = rand()%4;
-    int X = 0;
-    int Y = 0;
-    newPiece.getTetromino(Shape, Rotation, X, Y);
-    newPiece.getBeginXPos(Shape, Rotation);
-    newPiece.getBeginYPos(Shape, Rotation);
+    newPiece.Shape = rand()%7;
+    newPiece.Rotation = rand()%4;
 }
 
 bool GameOver();
 
 void GameInit()
-{
+{  
 }
 
 void UpdateGame(Piece newPiece)
@@ -29,16 +27,23 @@ void UpdateGame(Piece newPiece)
     {
         for (int j = 0; j < 5; j++)
         {
-            /* code */
-        }
-        
+            getNewPiece(newPiece);
+            board[i][j] = newPiece.positionValue[i][j];
+        } 
     }
-    
 }
 
-void PrintMap(Piece newPiece)
+void PrintMap()
 {
-
+    for (int i = 0; i < boardHeight; i++)
+    {
+        for (int j = 0; j < boardWidth; j++)
+        {
+            if (board[i][j] == 0) cout << "-";
+            else cout << "*";
+        }
+        cout << endl;
+    }
 }
 
 int main()
@@ -48,11 +53,10 @@ int main()
     while (!GameOver)
     {
         Piece newPiece;
-        getNewPiece(newPiece);
         GameInit();
         
         UpdateGame(newPiece);
-        PrintMap(newPiece);
+        PrintMap();
     }
     return 0;
 }

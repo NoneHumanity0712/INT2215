@@ -291,19 +291,31 @@ int beginPosition[7][4][2] =
 
 struct Piece
 {
-    int getTetromino (int pShape, int pRotation, int pX, int pY)
+    int Shape;
+    int Rotation;
+
+    int getTetromino (int pX, int pY)
     {
-        return shape[pShape][pRotation][pX][pY];
+        return shape[Shape][Rotation][pX][pY];
     }
 
-    int getBeginXPos (int pShape, int pRotation)
+    int PositionValue[5][5];
+    for (int i = 0; i < 5; i++)
     {
-        return beginPosition[pShape][pRotation][0];
+        for (int j = 0; j < 5; j++)
+        {
+            positionValue[i][j] = getTetromino(i, j);
+        }
     }
 
-    int getBeginYPos (int pShape, int pRotation)
+    int getBeginXPos ()
     {
-        return beginPosition[pShape][pRotation][1];
+        return beginPosition[Shape][Rotation][0];
+    }
+
+    int getBeginYPos ()
+    {
+        return beginPosition[Shape][Rotation][1];
     }
 };
 
