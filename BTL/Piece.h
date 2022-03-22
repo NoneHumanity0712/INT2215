@@ -291,8 +291,14 @@ const int beginPosition[7][4][2] =
 
 struct Piece
 {
-    int Shape;
-    int Rotation;
+    int Shape = -1;
+    int Rotation = -1;
+
+    Piece (int _Shape, int _Rotation)
+    {
+        Shape = _Shape;
+        Rotation = _Rotation;
+    }
 
     int getTetromino (int pX, int pY)
     {

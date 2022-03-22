@@ -18,10 +18,8 @@ void GameInit()
 {  
 }
 
-void UpdateGame(Piece newPiece, int shapeIndex, int rotationIndex)
+void UpdateGame(Piece newPiece)
 {
-    newPiece.Shape = shapeIndex;
-    newPiece.Rotation = rotationIndex;
     for (int i = 0; i < 5 + newPiece.getBeginYPos; i++)
     {
         for (int j = 0; j < 5 + newPiece.getBeginXPos; j++)
@@ -54,9 +52,9 @@ int main()
     cout << shapeIndex << " " << rotationIndex << endl;
     while (!GameOver())
     {
-        Piece newPiece;
+        Piece newPiece (shapeIndex, rotationIndex);
         // GameInit();
-        UpdateGame(newPiece, shapeIndex, rotationIndex);
+        UpdateGame(newPiece);
         PrintMap();
         break;
     }
