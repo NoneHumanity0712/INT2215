@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ctime>
-#include <cmath>
 #include "Piece.h"
 
 using namespace std;
@@ -21,9 +20,9 @@ void GameInit()
 
 void UpdateGame(Piece newPiece)
 {
-    for (int i = 0; i < 5 + newPiece.getBeginXPos; i++)
+    for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < 5 + newPiece.getBeginYPos; j++)
+        for (int j = 0; j < 5; j++)
         {
             board[i][j] = newPiece.getTetromino(i, j);
         } 
@@ -49,8 +48,8 @@ int main()
     int shapeIndex = index%7;
     int rotationIndex = index%4;
 
-    cout << index << endl;
-    cout << shapeIndex << " " << rotationIndex << endl;
+    // cout << index << endl;
+    // cout << shapeIndex << " " << rotationIndex << endl;
     while (!GameOver())
     {
         Piece newPiece (shapeIndex, rotationIndex);
