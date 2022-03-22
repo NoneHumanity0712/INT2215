@@ -9,26 +9,24 @@ const int boardWidth = 10;
 
 int board[boardHeight][boardWidth] = {0};
 
-void getNewPiece(Piece &newPiece)
+bool GameOver()
 {
-    newPiece.Shape = rand()%7;
-    newPiece.Rotation = rand()%4;
+    return false;
 }
-
-bool GameOver();
 
 void GameInit()
 {  
 }
 
-void UpdateGame(Piece newPiece)
+void UpdateGame(Piece newPiece, int shapeIndex, int rotationIndex)
 {
-    for (int i = 0; i < 5; i++)
+    newPiece.Shape = shapeIndex;
+    newPiece.Rotation = rotationIndex;
+    for (int i = 0; i < 5 + newPiece.getBeginYPos; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 5 + newPiece.getBeginXPos; j++)
         {
-            getNewPiece(newPiece);
-            board[i][j] = newPiece.positionValue[i][j];
+            board[i][j] = newPiece.getTetromino(i - newPiece.getBeginYPos, j - newPiece.getBeginXPos);
         } 
     }
 }
@@ -39,24 +37,28 @@ void PrintMap()
     {
         for (int j = 0; j < boardWidth; j++)
         {
-            if (board[i][j] == 0) cout << "-";
-            else cout << "*";
+            cout << board[i][j] << " ";
         }
-        cout << endl;
+        cout << endl << endl;
     }
 }
 
 int main()
 {
-    srand(time(0));
+    srand(static_cast <unsigned int> (time(0)));
+    unsigned int index = rand();
+    int shapeIndex = index%7;
+    int rotationIndex = index%4;
 
-    while (!GameOver)
+    cout << index << endl;
+    cout << shapeIndex << " " << rotationIndex << endl;
+    while (!GameOver())
     {
         Piece newPiece;
-        GameInit();
-        
-        UpdateGame(newPiece);
+        // GameInit();
+        UpdateGame(newPiece, shapeIndex, rotationIndex);
         PrintMap();
+        break;
     }
     return 0;
 }
