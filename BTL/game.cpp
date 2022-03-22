@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int boardHeight = 20;
+const int boardHeight = 10;
 const int boardWidth = 10;
 
 int board[boardHeight][boardWidth] = {0};
@@ -24,7 +24,7 @@ void UpdateGame(Piece newPiece)
     {
         for (int j = 0; j < 5 + newPiece.getBeginXPos; j++)
         {
-            board[i][j] = newPiece.getTetromino(i - newPiece.getBeginYPos, j - newPiece.getBeginXPos);
+            board[i][j] = newPiece.getTetromino(i, j);
         } 
     }
 }
@@ -53,6 +53,7 @@ int main()
     while (!GameOver())
     {
         Piece newPiece (shapeIndex, rotationIndex);
+        cout << tetrominoes_name[shapeIndex] << endl;
         // GameInit();
         UpdateGame(newPiece);
         PrintMap();

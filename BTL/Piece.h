@@ -1,5 +1,5 @@
-#ifndef _PIECES_
-#define _PIECES_
+#ifndef _PIECE_
+#define _PIECE_
 
 const char tetrominoes_name[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
@@ -291,8 +291,8 @@ const int beginPosition[7][4][2] =
 
 struct Piece
 {
-    int Shape = -1;
-    int Rotation = -1;
+    unsigned int Shape = 0;
+    unsigned int Rotation = 0;
 
     Piece (int _Shape, int _Rotation)
     {
@@ -300,14 +300,14 @@ struct Piece
         Rotation = _Rotation;
     }
 
-    int getTetromino (int pX, int pY)
-    {
-        return shape[Shape][Rotation][pX][pY];
-    }
-
     int getBeginXPos = beginPosition[Shape][Rotation][0];
 
     int getBeginYPos = beginPosition[Shape][Rotation][1];
+
+    int getTetromino (int pX, int pY)
+    {
+        return shape[Shape][Rotation][pX - getBeginYPos][pY - getBeginXPos];
+    }
 };
 
 #endif
