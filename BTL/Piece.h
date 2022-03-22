@@ -306,7 +306,7 @@ struct Piece
 
     int getTetromino (int pX, int pY)
     {
-        return shape[Shape][Rotation][pX - getBeginYPos][pY - getBeginXPos];
+        return shape[Shape][Rotation][pX][pY];
     }
 };
 

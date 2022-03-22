@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <cmath>
 #include "Piece.h"
 
 using namespace std;
@@ -20,9 +21,9 @@ void GameInit()
 
 void UpdateGame(Piece newPiece)
 {
-    for (int i = 0; i < 5 + newPiece.getBeginYPos; i++)
+    for (int i = 0; i < 5 + newPiece.getBeginXPos; i++)
     {
-        for (int j = 0; j < 5 + newPiece.getBeginXPos; j++)
+        for (int j = 0; j < 5 + newPiece.getBeginYPos; j++)
         {
             board[i][j] = newPiece.getTetromino(i, j);
         } 
