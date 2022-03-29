@@ -69,3 +69,7 @@ tetris_tutorial_sdl/SDL/include/SDL_version.h
 tetris_tutorial_sdl/SDL/include/SDL_video.h
 tetris_tutorial_sdl/SDL/include/SDL.h
 tetris_tutorial_sdl/SDL/lib/SDL.lib
+11_clip_rendering_and_sprite_sheets/11_clip_rendering_and_sprite_sheets.cpp
+11_clip_rendering_and_sprite_sheets/dots.png
+11_clip_rendering_and_sprite_sheets/readme.txt
+build/11_clip_rendering_and_sprite_sheets.exe

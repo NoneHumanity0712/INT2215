@@ -48,3 +48,14 @@ void waitUntilKeyPressed()
         SDL_Delay(100);
     }
 }
+
+// void background_render(SDL_Window* window, SDL_Renderer* renderer, const SDL_Rect& old_filled_rect)
+// {
+//     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);   // blue
+//     SDL_RenderClear(renderer);
+
+//     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);   // white
+//     SDL_RenderFillRect(renderer, &old_filled_rect);
+
+//     SDL_RenderPresent(renderer);
+// }
