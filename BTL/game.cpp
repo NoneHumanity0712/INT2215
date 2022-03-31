@@ -1,13 +1,9 @@
 #include <iostream>
 #include <ctime>
 #include "Piece.h"
+#include "Board.h"
 
 using namespace std;
-
-const int boardHeight = 10;
-const int boardWidth = 10;
-
-int board[boardHeight][boardWidth] = {0};
 
 bool GameOver()
 {
@@ -20,13 +16,13 @@ void GameInit()
 
 void UpdateGame(Piece newPiece)
 {
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = 0; j < 5; j++)
-        {
-            board[i][j] = newPiece.getTetromino(i, j);
-        } 
-    }
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     for (int j = 0; j < 5; j++)
+    //     {
+    //         board[i][j] = newPiece.getTetromino(i, j);
+    //     } 
+    // }
 }
 
 void PrintMap()
