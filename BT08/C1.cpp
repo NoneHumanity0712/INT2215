@@ -2,18 +2,22 @@
 
 using namespace std;
 
-void reverse(char a[])
+char* reverse(char a[])
 {
-    int *temp;
-    for (char *p = a; (*p) != '\0'; p++)
+    int n = 0;
+    for (char* p = a; (*p) != '\0'; p++) n++;
+    cout << n << endl;
+    char temp[n];
+    char *p;
+    for (int i = 0; i < n; i++)
     {
-        /* code */
+        temp[i] = a[n-i-1]; 
     }
-    
+    return temp;
 }
 
 int main()
 {
     char a[] = "abcde";
-    reverse(char a[]);
+    char* a_reverse = reverse(a);
 }

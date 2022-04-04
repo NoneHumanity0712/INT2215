@@ -14,7 +14,7 @@ void GameInit()
 {  
 }
 
-void UpdateGame(Piece newPiece)
+void UpdateGame(const Piece& newPiece)
 {
     // for (int i = 0; i < 5; i++)
     // {

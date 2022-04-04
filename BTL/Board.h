@@ -43,11 +43,21 @@ struct Board
     public:
         Board(Piece *pPiece, int ScreenHeight);
 
-        int GetXPosInPixels;
-        int GetYPosInPixels;
-        bool IsFreeBlock;
-        bool IsPossibleMovement;
-        void StorePiece(int pX, int pY, int pPiece, int pRotation)
+        int pPos, pX, pY;
+
+        int GetXPosInPixels = ((BoardPosition - (BlockSize * (BoardWidth/2))) + (pPos * BlockSize));
+
+
+        int GetYPosInPixels = return ((mScreenHeight - (BlockSize * BoardHeight)) + (pPos * BlockSize));
+
+        bool IsFreeBlock = (board[pX][pY] == PosFree);
+
+        bool IsPossibleMovement (int pX, int pY, int pPiece, int pRotation)
+        {
+            for (int i1 = pX, i2 = 0; )
+        }
+
+        void StorePiece(int pPiece, int pRotation)
         {
             for (int i1 = pX, i2 = 0; i1 < pX + PieceBlock; i1++, i2++)
             {
@@ -58,7 +68,21 @@ struct Board
                 }
             }
         }
-        void DeleteCompleteLine();
+
+        void DeleteCompleteLine()
+        {
+            for (int j = 0; j < BoardHeight; j++)
+            {
+                int i = 0;
+                while (i < BoardWidth)
+                {
+                    if (board[i][j] != PosFilled) break;
+                    i++;
+                }
+                if (i == BoardWidth) DeleteLine(j);
+            }
+        }
+
         bool IsGameOver()
         {
             for (int i = 0; i < BoardWidth; i++)
