@@ -1,3 +1,12 @@
+/*
+1.	Viết hàm mô phỏng quá trình đổ 1 quân xúc xắc (trả về giá trị trong khoảng từ 1-6),
+Sử dụng hàm đổ xúc xắc trên viết chương trình mô phỏng trò chơi sau: 
+Hai người chơi, lần lượt đổ 1 xúc xắc, tổng điểm được cộng gộp vào cho mỗi người chơi. 
+Ai có tổng điểm BẰNG 100 trước là thắng. Đổi lượt đổ xúc xắc cho người chơi kia theo 2 cách:
+	A. Mỗi người chơi lần lượt đổ xúc xắc.
+	B. Người có tổng điểm nhỏ hơn sẽ được đổ xúc xắc.
+*/
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
