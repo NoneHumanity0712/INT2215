@@ -48,13 +48,32 @@ struct Board
         int GetXPosInPixels = ((BoardPosition - (BlockSize * (BoardWidth/2))) + (pPos * BlockSize));
 
 
-        int GetYPosInPixels = return ((mScreenHeight - (BlockSize * BoardHeight)) + (pPos * BlockSize));
+        int GetYPosInPixels = ((mScreenHeight - (BlockSize * BoardHeight)) + (pPos * BlockSize));
 
-        bool IsFreeBlock = (board[pX][pY] == PosFree);
+        bool IsFreeBlock(int posX, int posY)
+        {
+            return (board[pX][pY] == PosFree);
+        } 
 
         bool IsPossibleMovement (int pX, int pY, int pPiece, int pRotation)
         {
-            for (int i1 = pX, i2 = 0; )
+            for (int i1 = pX, i2 = 0; i1 < pX + PieceBlock; i1++, i2++)
+            {
+                for (int j1 = pX, j2 = 0; j1 < pY + PieceBlock; j1++, j2++)
+                {
+                    if (i1 < 0 || i1 > BoardWidth - 1 || i1 > BoardHeight - 1)
+                    {
+                        if (mPiece->getTetromino(j2, i2) != 0) return 0;
+                    }
+
+                    if (j1 >= 0)
+                    {
+                        if ((mPiece->getTetromino(j2, i2) != 0) && (!IsFreeBlock(i1, j1))) return false;
+                    }
+                    
+                }
+            }
+            return true;
         }
 
         void StorePiece(int pPiece, int pRotation)
