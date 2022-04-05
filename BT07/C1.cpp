@@ -77,7 +77,7 @@ int main()
     int two = 0;
 
     srand(time(0));
-    // A(one, two);
+    //A(one, two);
     B(one, two);
     return 0;
 }
