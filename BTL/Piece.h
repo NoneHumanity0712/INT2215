@@ -1,6 +1,33 @@
 #ifndef _PIECE_
 #define _PIECE_
 
+/*
+    I:
+        o
+        o
+        o
+        o
+    J:
+        _o
+        _o
+        oo 
+    L:
+        o
+        o
+        oo
+    O:
+        oo
+        oo
+    S:
+        _oo
+        oo
+    Z:
+        oo
+        _oo
+    T:
+        ooo
+        _o
+*/
 const char tetrominoes_name[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
 const int shape[7][4][5][5] = 

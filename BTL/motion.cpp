@@ -120,7 +120,7 @@ void refreshScreen(SDL_Window* window, SDL_Renderer* renderer, const SDL_Rect& f
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);   // white
     SDL_RenderFillRect(renderer, &filled_rect);
 
-    // Dùng lệnh hiển thị (đưa) hình đã vẽ ra mành hình
+    // Dùng lệnh hiển thị (đưa) hình đã vẽ ra màn hình
    //Khi thông thường chạy với môi trường bình thường ở nhà
     SDL_RenderPresent(renderer);
    //Khi chạy ở máy thực hành WinXP ở trường (máy ảo)
