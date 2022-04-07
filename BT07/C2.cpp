@@ -20,34 +20,6 @@ void move_turtle(int &turtle)
         turtle -= 6;
         cout << "Rua truot. Vi tri hien tai la: " << turtle;
     }
-    // switch (move)
-    // {
-    //     case 1:
-    //     case 2:
-    //     case 3:
-    //     case 4:
-    //     case 5:
-    //     {
-    //         turtle += 3;
-    //         cout << "Rùa tiến dài. Vị trí hiện tại là: " << turtle;
-    //         break;  
-    //     }
-    //     case 6:
-    //     case 7:
-    //     case 8:
-    //     {
-    //         turtle += 1;
-    //         cout << "Rùa tiến ngắn. Vị trí hiện tại là: " << turtle;
-    //         break;
-    //     }
-    //     case 9:
-    //     case 10:
-    //     {
-    //         turtle -= 6;
-    //         cout << "Rùa trượt. Vị trí hiện tại là: " << turtle;
-    //         break;
-    //     }
-    // }
     cout << endl;
 }
 
@@ -74,45 +46,6 @@ void move_rabbit(int &rabbit)
         rabbit -= 2;
         cout << "Tho truot ngan. Vi tri hien tai la: " << rabbit;
     }
-    /*
-    switch (move)
-    {
-        case 1:
-        case 2:
-        {
-            cout << "Thỏ ngủ. Vị trí hiện tại là " << rabbit;
-            break;
-        }
-        case 3:
-        case 4:
-        {
-            rabbit += 9;
-            cout << "Thỏ tiến dài. Vị trí hiện tại là " << rabbit;
-            break;
-        }
-        case 5:
-        {
-            rabbit -= 12;
-            cout << "Thỏ trượt dài. Vị trí hiện tại là " << rabbit;
-            break;
-        }
-        case 6:
-        case 7:
-        case 8:
-        {
-            rabbit += 1;
-            cout << "Thỏ tiến ngắn. Vị trí hiện tại là " << rabbit;
-            break;
-        }
-        case 9:
-        case 10:
-        {
-            rabbit -= 2;
-            cout << "Thỏ trượt ngắn. Vị trí hiện tại là " << rabbit;
-            break;
-        }
-    }
-    */
     cout << endl;
 }
 

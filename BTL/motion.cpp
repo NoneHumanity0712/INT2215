@@ -27,49 +27,54 @@ int right(SDL_Rect filled_rect)
     else return SCREEN_WIDTH - filled_rect.w;
 }
 
-void initGame(SDL_Rect filled_rect, SDL_Event e, SDL_Window* window, SDL_Renderer* renderer)
+int up(SDL_Rect filled_rect)
+{
+    int y = filled_rect.y - step;
+    if (y > 0) return y;
+    else return 0;
+}
+
+void initGame(SDL_Rect &filled_rect, SDL_Event e, SDL_Window* window, SDL_Renderer* renderer)
 {
     bool out = false;
     while (!out) 
-    {
-        bool piece_bottom = false;  
-        // Nếu không có sự kiện gì thì tiếp tục chạy theo hướng ban đầu
+    {   
         if (SDL_PollEvent(&e) == 0) SDL_Delay(50);
         // Nếu sự kiện là kết thúc (như đóng cửa sổ) thì thoát khỏi vòng lặp
         else if (e.type == SDL_QUIT) out = true;
         // Nếu có một phím được nhấn, thì xét phím đó là gì để xử lý tiếp
-        else if (e.type == SDL_KEYDOWN) {
-            switch (e.key.keysym.sym) {
+        else if (e.type == SDL_KEYDOWN) 
+        {
+            switch (e.key.keysym.sym) 
+            {
                 case SDLK_ESCAPE: break; 
-                //sang trái
+            
                 case SDLK_a:
                 case SDLK_LEFT: filled_rect.x = left(filled_rect);
                     break;
-                //sang phải
+                
                 case SDLK_d:
                 case SDLK_RIGHT: filled_rect.x = right(filled_rect);
                     break;
-                //quay
-                // case SDLK_w:
-                // case SDLK_LEFT:
-                //
+                
                 case SDLK_s:
                 case SDLK_DOWN: 
                 {
                     filled_rect.y = SCREEN_HEIGHT - filled_rect.h;
-                    piece_bottom = true;
+                    out = true;
                     break;
                 }
+
                 default: break;
             }
         }
-        SDL_Delay(100);
+        SDL_Delay(50);
         int y = filled_rect.y + step/4;
         if (y < SCREEN_HEIGHT - filled_rect.h) filled_rect.y = y;
         else 
         {
             filled_rect.y =  SCREEN_HEIGHT - filled_rect.h;
-            piece_bottom = true;
+            out = true;
         }
         // Xoá toàn bộ màn hình và vẽ lại
         refreshScreen(window, renderer, filled_rect);
@@ -99,8 +104,8 @@ int main(int argc, char* argv[])
     
     initGame(filled_rect, e, window, renderer);
     
-
-    quitSDL(window, renderer);
+    refreshScreen(window, renderer, filled_rect);
+    //if(e.type == SDL_QUIT) quitSDL(window, renderer);
     return 0;
 }
 

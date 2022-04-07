@@ -19,6 +19,7 @@ struct Board
         int board[BoardWidth][BoardHeight];
         Piece *mPiece;
         int mScreenHeight;
+
         void InitBoard()
         {
             for (int i = 0; i < BoardWidth; i++)
@@ -29,6 +30,7 @@ struct Board
                 }
             }
         }
+
         void DeleteLine(int pY)
         {
             for (int j = pY; j > 0; j--)
@@ -68,7 +70,8 @@ struct Board
 
                     if (j1 >= 0)
                     {
-                        if ((mPiece->getTetromino(j2, i2) != 0) && (!IsFreeBlock(i1, j1))) return false;
+                        if ((mPiece->getTetromino(j2, i2) != 0) && (!IsFreeBlock(i1, j1))) 
+                            return false;
                     }
                     
                 }
