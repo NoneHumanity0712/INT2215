@@ -291,8 +291,8 @@ const int beginPosition[7][4][2] =
 
 struct Piece
 {
-    unsigned int Shape = 0;
-    unsigned int Rotation = 0;
+    unsigned int Shape;
+    unsigned int Rotation;
 
     Piece (int _Shape, int _Rotation)
     {
