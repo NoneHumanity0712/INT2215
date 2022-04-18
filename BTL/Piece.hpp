@@ -1,5 +1,5 @@
-#ifndef _PIECE_
-#define _PIECE_
+#ifndef PIECE
+#define PIECE
 
 /*
     I:
@@ -30,7 +30,8 @@
 */
 const char tetrominoes_name[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
-const int shape[7][4][5][5] = 
+//shape of tetrominoes in 5x5 matrixes
+const int tetrominoes_type[7][4][5][5] = 
 {
     //I
     {
@@ -318,25 +319,21 @@ const int beginPosition[7][4][2] =
 
 struct Piece
 {
-    unsigned int Shape;
-    unsigned int Rotation;
+    //Piece(type of piece index, rotation of piece index)
+    Piece (int piece_type, int piece_rotation);
 
-    Piece (int _Shape, int _Rotation)
-    {
-        Shape = _Shape;
-        Rotation = _Rotation;
-    }
+    Piece (const Piece &piece);
 
-    char nameofTetromino = tetrominoes_name[Shape];
+    //row offset
+    int getBeginXPos();
 
-    int getBeginXPos = beginPosition[Shape][Rotation][0];
+    //column offset
+    int getBeginYPos();
 
-    int getBeginYPos = beginPosition[Shape][Rotation][1];
+    //get cell values in a 5x5 matrix
+    int getTetromino (int x_index, int y_index);
 
-    int getTetromino (int pX, int pY)
-    {
-        return shape[Shape][Rotation][pX][pY];
-    }
+    int type, rotation, x, y;
 };
 
 #endif
