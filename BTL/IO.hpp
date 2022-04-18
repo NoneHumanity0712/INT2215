@@ -2,7 +2,7 @@
 #define _IO_
 
 #include <SDL.h>
-#include "SDL_utils.h"
+#include "SDL_utils.hpp"
 #include <time.h>
 
 //colors: Black, Red, Green, Blue, Cyan, Magenta, Yellow, Orange, White

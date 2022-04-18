@@ -1,5 +1,5 @@
 #include <iostream>
-#include "LTexture.h"
+#include "LTexture.hpp"
 
 using namespace std;
 

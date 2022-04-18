@@ -12,7 +12,7 @@ const char WINDOW_TITLE[] = "Game Tetris";
 
 static SDL_Surface *screen;
 
-const int color_code[Color_Max][3] = 
+Uint8 color_code[Color_Max][3] = 
 {
     //Black
     {0, 0, 0},
@@ -47,10 +47,10 @@ void IO::DrawRectangle(int X1, int Y1, int X2, int Y2, enum color C)
     smallBox.w = X2 - X1;
     smallBox.h = Y2 - Y1;
 
-    //color codes
+    // //color codes
     int R, G, B;
     
-    //get box color
+    // //get box color
     R = color_code[C][0];
     G = color_code[C][1];
     B = color_code[C][2];
