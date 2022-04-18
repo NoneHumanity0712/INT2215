@@ -1,18 +1,36 @@
-#ifndef Game
-#define Game
+#ifndef GAME
+#define GAME
 
-#include <vector>
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include <queue>
+#include "board.hpp"
+#include "piece.hpp"
 
 using namespace std;
 
 class Game
 {
-private:
-    static Game *mInstance;
-    Game();
-    SDL_Window *window;
-    vector<
 public:
+    Game();
+    void checkState();
+    void createNewPiece();
+    void drawScene();
+    void event();
+    void initializeScene();
+    bool gameOver();
+    void pieceFalling();
+
+private:
+    Board *board;
+    Piece currentPiece {0, 0};
+    Piece ghostPiece {0, 0};
+    Piece nextPiece {0, 0};
+    queue<Piece> nextPieces;
+
+    void drawBoard();
+    void drawCurrentPiece (Piece piece);
+    void drawGhostPiece (Piece piece);
+    void drawNextPiece (Piece piece);
+    int getRandom (int min, int max);
 };
+
+#endif
