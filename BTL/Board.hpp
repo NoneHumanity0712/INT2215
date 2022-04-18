@@ -19,7 +19,7 @@ const int matrix_blocks = 5;
 
 class Board
 {
-    //{'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
+    //block status
     enum BlockStatus: int{empty, I, J, L, O, S, Z, T};
     
 private:
