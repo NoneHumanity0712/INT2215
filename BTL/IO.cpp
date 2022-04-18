@@ -2,8 +2,7 @@
 #include <SDL.h>
 // #include "SDL_utils.h"
 #include <time.h>
-#include <queue>
-#include "IO.h"
+#include "IO.hpp"
 
 using namespace std;
 
@@ -11,8 +10,7 @@ const int SCREEN_WIDTH = 500;
 const int SCREEN_HEIGHT = 1000;
 const char WINDOW_TITLE[] = "Game Tetris";
 
-SDL_Window* window;
-SDL_Renderer* renderer;
+static SDL_Surface *screen;
 
 const int color_code[Color_Max][3] = 
 {
@@ -30,6 +28,8 @@ const int color_code[Color_Max][3] =
     {87, 1, 78},
     //Yellow
     {247, 255, 99},
+    //Orange
+    {255, 51, 0},
     //White
     {255, 255, 255},
 };
@@ -47,6 +47,7 @@ void IO::DrawRectangle(int X1, int Y1, int X2, int Y2, enum color C)
     smallBox.w = X2 - X1;
     smallBox.h = Y2 - Y1;
 
+    //color codes
     int R, G, B;
     
     //get box color
@@ -63,6 +64,7 @@ void IO::DrawRectangle(int X1, int Y1, int X2, int Y2, enum color C)
 
 void IO::ClearScreen()
 {
+    //color codes
     int R, G, B;
 
     //get background color codes
@@ -78,23 +80,50 @@ void IO::ClearScreen()
 
 int IO::GetScreenHeight()
 {
-    return SCREEN_HEIGHT;
+    return screen->h;
 }
 
 void IO::UpdateScreen()
 {
-
+    SDL_Flip(screen);
 };
 
-int InitGraph();
-
+//keyboard input
 int PollKey()
 {
-};
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
+    {
+        switch (e.type)
+        {
+        case SDL_KEYDOWN:
+            return e.key.keysym.sym;
+        case SDL_QUIT:
+            exit(3);  
+        }
+    }
+    return -1;
+}
 
 int GetKey()
 {
-    queue<SDL_Event> event;
+    SDL_Event e;
+    while(true)
+    {
+        SDL_WaitEvent(&e);
+        if (e.type == SDL_KEYDOWN) break;
+        if (e.type == SDL_QUIT) exit(3);
+    }
+    return e.key.keysym.sym;
 }
 
-int IsKeyDown(int key);
+int IsKeyDown(int key)
+{
+    unsigned int keyTable;
+    int numKeys;
+    SDL_PumpEvents();
+    keyTable = SDL_GetKeyState(&numKeys);
+    return keyTable[key];
+}
+
+int InitGraph();

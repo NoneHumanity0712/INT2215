@@ -327,6 +327,8 @@ struct Piece
         Rotation = _Rotation;
     }
 
+    char nameofTetromino = tetrominoes_name[Shape];
+
     int getBeginXPos = beginPosition[Shape][Rotation][0];
 
     int getBeginYPos = beginPosition[Shape][Rotation][1];

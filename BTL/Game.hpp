@@ -1,9 +1,9 @@
 #ifndef _Game_
 #define _Game_
 
-#include "Board.h"
-#include "Piece.h"
-#include "IO.h"
+#include "Board.hpp"
+#include "Piece.hpp"
+#include "IO.hpp"
 #include <iostream>
 #include <ctime>
 
@@ -31,13 +31,16 @@ struct Game
         mNextPiece->Rotation = getRandom(0, 3);
     }
 
-    int mPosX, mPosY;
+    int mPosX, mPosY; //position of current piece
+
     int mScreenHeight;
-    int mNextPosX, mNextPosY;
+    int mNextPosX, mNextPosY; //position of next piece
+
     Board *mBoard;
     Piece *mPiece, *mNextPiece;
     IO *mIO;
 
+    //random between pA and pB
     int getRandom (int pA, int pB)
     {
         return rand()%(pB - pA + 1) + pA;
@@ -61,6 +64,25 @@ struct Game
     void DrawPiece (int pX, int pY, Piece *tetromino)
     {
         color mColor;
+
+        switch (tetromino->nameofTetromino)
+        {
+            case 'I': mColor = Red;
+                break;
+            case 'J': mColor = Green;
+                break;
+            case 'L': mColor = Blue;
+                break;
+            case 'O': mColor = Cyan;
+                break;
+            case 'S': mColor = Magenta;
+                break;
+            case 'Z': mColor = Yellow;
+                break;
+            case 'T': mColor = Orange;
+                break;
+        }
+
         int pixelsX = mBoard->GetXPosInPixels(pX);
         int pixelsY = mBoard->GetYPosInPixels(pY);
 
@@ -68,13 +90,6 @@ struct Game
         {
             for (int j = 0; j < PieceBlock; j++)
             {
-                switch (tetromino->getTetromino(j, i))
-                {
-                    case 1: mColor = Green;
-                        break;
-                    case 2: mColor = Blue;
-                        break;
-                }
                 if (tetromino->getTetromino(j, i) != 0)
                 {
                     mIO->DrawRectangle(pixelsX + i*BlockSize, pixelsY + j*BlockSize,

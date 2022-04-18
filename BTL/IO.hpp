@@ -5,7 +5,8 @@
 #include "SDL_utils.h"
 #include <time.h>
 
-enum color{Black, Red, Green, Blue, Cyan, Magenta, Yellow, White, Color_Max};
+//colors: Black, Red, Green, Blue, Cyan, Magenta, Yellow, Orange, White
+enum color{Black, Red, Green, Blue, Cyan, Magenta, Yellow, Orange, White, Color_Max};
 
 struct IO
 {

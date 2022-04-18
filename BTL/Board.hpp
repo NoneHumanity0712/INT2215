@@ -1,7 +1,7 @@
 #ifndef _BOARD_
 #define _BOARD_
 
-#include "Piece.h"
+#include "Piece.hpp"
 
 const int BoardLineWidth = 6;
 const int BlockSize = 16;
