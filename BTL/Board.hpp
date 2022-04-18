@@ -1,119 +1,41 @@
-#ifndef _BOARD_
-#define _BOARD_
+#ifndef BOARD
+#define BOARD
 
 #include "Piece.hpp"
+#include <vector>
 
-const int BoardLineWidth = 6;
-const int BlockSize = 16;
-const int BoardPosition = 200;
-const int BoardWidth = 15;
-const int BoardHeight = 20;
-const int minVerMargin = 20;
-const int minHorMargin = 20;
-const int PieceBlock = 5;
+using namespace std;
 
-struct Board
+const int width_to_playfield = 242;     // in pixels
+const int height_to_playfield = 34;     // in pixels
+const int block_size = 16;              // in pixels
+const int playfield_width = 10;         // in blocks
+const int true_playfield_height = 20;   // in blocks
+const int playfield_height = 22;        // The playfield+2 rows directly above it for spawning the Tetrominos
+const int frame_width = 6;              // Frame that surrounds the playfield; in pixels
+const int frame_sprite_size = 8;        // Size of each sprite clip for the playfield frame
+const int board_height = 2;             // distance from botton where the playfield begins; in pixels
+const int matrix_blocks = 5;
+
+class Board
 {
-    enum {PosFree, PosFilled};
-    int board[BoardWidth][BoardHeight];
-    Piece *mPiece;
-    int mScreenHeight;
+    //{'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
+    enum BlockStatus: int{empty, I, J, L, O, S, Z, T};
+    
+private:
+    BlockStatus boardState[playfield_height][playfield_width];
+    vector<Piece> pieces;
 
-    void InitBoard()
-    {
-        for (int i = 0; i < BoardWidth; i++)
-        {
-            for (int j = 0; j < BoardHeight; j++)
-            {
-                board[i][j] = PosFree;
-            }
-        }
-    }
+    void deleteLine (int yPos);
 
-    void DeleteLine(int pY)
-    {
-        for (int j = pY; j > 0; j--)
-        {
-            for (int i = 0; i < BoardWidth; i++)
-            {
-                board[i][j] = board[i][j-1];
-            }
-        }
-    }
-
-    Board(Piece *pPiece, int ScreenHeight);
-
-    int pX, pY;
-
-    int GetXPosInPixels(int pPos)
-    {
-        return ((BoardPosition - (BlockSize * (BoardWidth/2))) + (pPos * BlockSize));
-    } 
-
-    int GetYPosInPixels(int pPos)
-    {
-        return ((mScreenHeight - (BlockSize * BoardHeight)) + (pPos * BlockSize));
-    } 
-
-    bool IsFreeBlock(int posX, int posY)
-    {
-        return (board[pX][pY] == PosFree);
-    } 
-
-    bool IsPossibleMovement (int pPiece, int pRotation)
-    {
-        for (int i1 = pX, i2 = 0; i1 < pX + PieceBlock; i1++, i2++)
-        {
-            for (int j1 = pX, j2 = 0; j1 < pY + PieceBlock; j1++, j2++)
-            {
-                if (i1 < 0 || i1 > BoardWidth - 1 || i1 > BoardHeight - 1)
-                {
-                    if (mPiece->getTetromino(j2, i2) != 0) return 0;
-                }
-
-                if (j1 >= 0)
-                {
-                    if ((mPiece->getTetromino(j2, i2) != 0) && (!IsFreeBlock(i1, j1))) 
-                        return false;
-                }
-                
-            }
-        }
-        return true;
-    }
-
-    void StorePiece(int pPiece, int pRotation)
-    {
-        for (int i1 = pX, i2 = 0; i1 < pX + PieceBlock; i1++, i2++)
-        {
-            for (int j1 = pY, j2 = 0; j1 < pY + PieceBlock; j1++, j2++)
-            {
-                Piece newPiece(pPiece, pRotation);
-                if (newPiece.getTetromino(j2, i2) != 0) board[i1][j1] = PosFilled;
-            }
-        }
-    }
-
-    void DeleteCompleteLine()
-    {
-        for (int j = 0; j < BoardHeight; j++)
-        {
-            int i = 0;
-            while (i < BoardWidth)
-            {
-                if (board[i][j] != PosFilled) break;
-                i++;
-            }
-            if (i == BoardWidth) DeleteLine(j);
-        }
-    }
-
-    bool IsGameOver()
-    {
-        for (int i = 0; i < BoardWidth; i++)
-            if (board[i][0] == PosFilled) return true;
-        return false;
-    }
+public:
+    Board();
+    int getTetromino(int x, int y);
+    bool isBlockFree(int x, int y);
+    bool isMovePossible(Piece piece);
+    void storePiece(Piece piece);
+    void deleteFullLine();
+    bool gameOver();
 };
 
 #endif
