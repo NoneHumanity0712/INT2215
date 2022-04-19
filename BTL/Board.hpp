@@ -15,7 +15,7 @@ const int playfield_height = 22;        // The playfield + 2 rows directly above
 const int frame_width = 6;              // Frame that surrounds the playfield; in pixels
 const int frame_sprite_size = 8;        // Size of each sprite clip for the playfield frame
 const int board_height = 2;             // distance from botton where the playfield begins; in pixels
-const int matrix_blocks = 5;
+const int matrix_blocks = 5;            //5 x 5 matrix for each piece
 
 class Board
 {
