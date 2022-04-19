@@ -4,8 +4,12 @@
 #include <queue>
 #include "board.hpp"
 #include "piece.hpp"
+#include "input.hpp"
 
 using namespace std;
+
+const int x_nextPiece = 400;
+const int y_nextPiece = 10;
 
 class Game
 {
@@ -14,7 +18,7 @@ public:
     void checkState();
     void createNewPiece();
     void drawScene();
-    void event();
+    void event(ACTION a);
     void initializeScene();
     bool gameOver();
     void pieceFalling();

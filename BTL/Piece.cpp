@@ -16,7 +16,7 @@ Piece::Piece (const Piece &piece)
 
 int Piece::getTetromino (int x_index, int y_index);
 {
-    return tetrominoes_type[type][rotation][x][y];
+    return tetrominoes_type[type][rotation][y][x];
 }
 
 int Piece::getBeginXPos()

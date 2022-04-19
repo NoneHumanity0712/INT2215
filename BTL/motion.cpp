@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SDL.h>
-#include "SDL_utils.h"
+#include "SDL_utils.hpp"
 #include <time.h>
 
 using namespace std;
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 
     // Định nghĩa toạ độ ban đầu và kích cỡ hình chữ nhật
     SDL_Rect filled_rect;
-    filled_rect.x = SCREEN_WIDTH / 2;
+    filled_rect.x = 100;
     filled_rect.y = 0;
     filled_rect.w = 20;
     filled_rect.h = 20;

@@ -32,16 +32,16 @@ void Game::createNewPiece()
     //move new normal and null blocks into playfield
     for (int i = 0; i < 2; i++)
     {
-        currentPiece.x++;
+        currentPiece.y++;
         if (!board->isMovePossible(currentPiece))
-            currentPiece.x--;
+            currentPiece.y--;
     }
     //move pivot block into playfield
     if (currentPiece.type > 1)
     {
-        currentPiece.x++;
+        currentPiece.y++;
         if (!board->isMovePossible(currentPiece))
-            currentPiece.x--;
+            currentPiece.y--;
     }
     
     //randomly create new piece
@@ -57,7 +57,89 @@ void Game::drawScene()
     drawNextPiece(nextPiece);
 }
 
-void Game::event()
+//handling event from keyboard
+void Game::event(ACTION a)
 {
-    SDL_Event e;
+    switch (a)
+    {
+        case ACTION::down:
+        {
+            currentPiece.y++;
+            if (!board->isMovePossible(currentPiece))
+            {
+                currentPiece.y--;
+                checkState(); //check if the piece is set
+            }
+            break;
+        }
+        
+        case ACTION::left:
+        {
+            currentPiece.x--;
+            if(!board->isMovePossible(currentPiece))
+                currentPiece.x++;
+            break;
+        }
+
+        case ACTION::right:
+        {
+            currentPiece.x++;
+            if (!board->isMovePossible(currentPiece))
+                currentPiece.x--;
+            break;
+        }
+
+        case ACTION::drop:
+        {
+            while (board->isMovePossible(currentPiece))
+                currentPiece.y++;
+            currentPiece.y--;
+            checkState();
+            break;
+        }
+
+        case ACTION::rotate:
+        {
+            currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
+            if (!board->isMovePossible(currentPiece))
+                currentPiece.rotation = (currentPiece.rotation + 3) % 4;
+            break;
+        }
+    }
+}
+
+void Game::initializeScene()
+{
+    srand(time(0));
+    nextPiece.type = getRandom(0, 6);
+    nextPiece.rotation = 0;
+    createNewPiece();
+    
+    nextPiece.x = x_nextPiece;
+    nextPiece.y = y_nextPiece;
+
+}
+
+bool Game::gameOver()
+{
+    return board->gameOver();
+}
+
+void Game::pieceFalling()
+{
+    currentPiece.y++;
+    if (!board->isMovePossible(currentPiece))
+    {
+        currentPiece.y--;
+        checkState();
+    }
+}
+
+void Game::drawBoard()
+{
+    //draw frame
+    for (int i = 0; i < 2*true_playfield_height; i++)
+    {
+        
+    }
 }
