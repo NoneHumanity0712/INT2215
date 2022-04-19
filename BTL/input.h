@@ -13,7 +13,7 @@ private:
 public:
     void clearQueueEvent();
     ACTION inputAction();
-    bool gameExist();
+    bool ExitGame();
     void pollAction(SDL_Event e);
     void exit();
 };

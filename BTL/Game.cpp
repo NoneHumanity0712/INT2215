@@ -1,16 +1,15 @@
 #include <iostream>
 #include <ctime>
-#include "Game.hpp"
+#include "Game.h"
 #include <SDL.h>
-
-using namespace std;
+#include <cstdlib>
 
 SDL_Renderer* renderer;
 
-Game::Game()
-{
-    board = new Board;
-}
+// Game::Game()
+// {
+//     board = new Board;
+// }
 
 void Game::checkState()
 {

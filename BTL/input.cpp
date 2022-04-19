@@ -1,4 +1,4 @@
-#include "input.hpp"
+#include "input.h"
 
 void input::clearQueueEvent()
 {
@@ -11,7 +11,7 @@ ACTION input::inputAction()
     return action;
 }
 
-bool input::gameExist()
+bool input::ExitGame()
 {
     return quit;
 }

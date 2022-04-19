@@ -4,7 +4,9 @@
 #include <string>
 #include <SDL.h>
 
-using namespace std;
+const int windowWidth = 640;
+const int windowHeight = 360;
+const char title[] = "TETRIS GAME";
 
 class texture
 {
@@ -17,8 +19,8 @@ public:
     ~texture();
     void free();
 
-    void loadImage(string path); //load image from file
-    void loadText(string text, SDL_Color color);
+    void loadImage(std::string path); //load image from file
+    void loadText(std::string text, SDL_Color color);
     void render (int x, int y, SDL_Rect *clip = nullptr); //nullptr: null pointer
     void renderCentered (int x, int y);
     void setAlphaMode (Uint8 alpha);
@@ -26,5 +28,17 @@ public:
     int getWidth();
     int getHeight();
 };
+
+texture::texture()
+{
+    mTexture = nullptr;
+    width = 0;
+    height = 0;
+}
+
+texture::~texture()
+{
+    free();
+}
 
 #endif

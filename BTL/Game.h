@@ -2,12 +2,10 @@
 #define GAME
 
 #include <queue>
-#include "board.hpp"
-#include "piece.hpp"
-#include "input.hpp"
-#include "texture.hpp"
-
-using namespace std;
+#include "board.h"
+#include "piece.h"
+#include "input.h"
+#include "texture.h"
 
 const int x_nextPiece = 400;
 const int y_nextPiece = 10;
@@ -30,7 +28,7 @@ private:
     Piece currentPiece {0, 0};
     Piece ghostPiece {0, 0};
     Piece nextPiece {0, 0};
-    queue<Piece> nextPieces;
+    std::queue<Piece> nextPieces;
     texture tetromino_graphic;
     SDL_Rect tetromino_graphic_boxes[7];
     texture frame;
@@ -42,5 +40,10 @@ private:
     void drawNextPiece (Piece piece);
     int getRandom (int min, int max);
 };
+
+Game::Game()
+{
+    board = new Board;
+}
 
 #endif

@@ -4,7 +4,7 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "texture.hpp"
+#include "texture.h"
 
 SDL_Renderer *renderer;
 TTF_Font *font;

@@ -1,30 +1,24 @@
 #include <iostream>
 #include "SDL.h"
 #include <SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include "texture.hpp"
-
-using namespace std;
-
-const int windowWidth = 640;
-const int windowHeight = 360;
-const char title[] = "TETRIS GAME";
+#include <SDL_ttf.h>
+#include "texture.h"
 
 // SDL_Window *window;
 SDL_Renderer* renderer;
 TTF_Font *font;
 
-texture::texture()
-{
-    mTexture = nullptr;
-    width = 0;
-    height = 0;
-}
+// texture::texture()
+// {
+//     mTexture = nullptr;
+//     width = 0;
+//     height = 0;
+// }
 
-texture::~texture()
-{
-    free();
-}
+// texture::~texture()
+// {
+//     free();
+// }
 
 //free texture
 void texture::free()
@@ -38,14 +32,14 @@ void texture::free()
     }
 }
 
-void texture::loadImage (string path)
+void texture::loadImage (std::string path)
 {
     free();
 
     //temporary surface
-    SDL_Surface *temp = IMG_Load(path);
+    SDL_Surface *temp = IMG_Load(path.c_str());
     if (temp = nullptr)
-        cout << "Texture error: Could not load image from path: " << path << endl;
+        std::cout << "Texture error: Could not load image from path: " << path << std::endl;
     else
     {
         mTexture = SDL_CreateTextureFromSurface(renderer, temp);
@@ -55,22 +49,22 @@ void texture::loadImage (string path)
     }
 }
 
-void texture::loadText(string text, SDL_Color color)
+void texture::loadText(std::string text, SDL_Color color)
 {
     free();
-    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(font, text, color, windowWidth);
+    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, windowWidth);
     if (textSurface = nullptr)
     {
-        cout << "SDL_ttf error: could not create surface from text!" << endl;
-        cout << TTF_GetError() << endl;
+        std::cout << "SDL_ttf error: could not create surface from text!" << std::endl;
+        std::cout << TTF_GetError() << std::endl;
     } 
     else
     {
         mTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
         if (mTexture == nullptr)
         {
-            cout << "SDL error: could not create texture from text! " << endl;
-            cout << SDL_GetError() << endl;
+            std::cout << "SDL error: could not create texture from text! " << std::endl;
+            std::cout << SDL_GetError() << std::endl;
         }
         else
         {

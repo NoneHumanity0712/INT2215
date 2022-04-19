@@ -1,10 +1,8 @@
 #ifndef BOARD
 #define BOARD
 
-#include "Piece.hpp"
+#include "Piece.h"
 #include <vector>
-
-using namespace std;
 
 const int width_to_playfield = 242;     // in pixels
 const int height_to_playfield = 34;     // in pixels
@@ -24,7 +22,7 @@ class Board
     
 private:
     BlockStatus boardState[playfield_height][playfield_width];
-    vector<Piece> pieces;
+    std::vector<Piece> pieces;
 
     void deleteLine (int yPos);
 
@@ -37,5 +35,16 @@ public:
     void deleteFullLine();
     bool gameOver();
 };
+
+Board::Board()
+{
+    for (int row = 0; row < playfield_height; row++)
+    {
+        for (int col = 0; col < playfield_width; col++)
+        {
+            boardState[row][col] = BlockStatus::empty;
+        }
+    }
+}
 
 #endif
