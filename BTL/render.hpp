@@ -7,8 +7,8 @@
 #include <string>
 #include "texture.hpp"
 
-SDL_Renderer *pRenderer = nullptr;
-TTF_Font *pFont = nullptr;
+SDL_Renderer *gRenderer = nullptr;
+TTF_Font *gFont = nullptr;
 
 struct render
 {
@@ -23,8 +23,8 @@ const Uint8 backgroundColor_B = 207; //Blue channel color for background
 
 void render::clearScreen()
 {
-    SDL_SetRenderDrawColor(pRenderer, backgroundColor_R, backgroundColor_G, backgroundColor_B, 255);
-    SDL_RenderClear(pRenderer);
+    SDL_SetRenderDrawColor(gRenderer, backgroundColor_R, backgroundColor_G, backgroundColor_B, 255);
+    SDL_RenderClear(gRenderer);
 }
 
 void render::renderTexture(texture *rTexture, int x, int y)
@@ -34,7 +34,7 @@ void render::renderTexture(texture *rTexture, int x, int y)
 
 void render::updateScreen()
 {
-    SDL_RenderPresent(pRenderer);
+    SDL_RenderPresent(gRenderer);
 }
 
 #endif

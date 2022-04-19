@@ -15,15 +15,14 @@ const int frame_sprite_size = 8;        // Size of each sprite clip for the play
 const int board_height = 2;             // distance from botton where the playfield begins; in pixels
 const int matrix_blocks = 5;            //5 x 5 matrix for each piece
 
+//block status
+enum BlockStatus: int {empty, I, J, L, O, S, Z, T};
+
 class Board
-{
-    //block status
-    enum BlockStatus: int{empty, I, J, L, O, S, Z, T};
-    
+{ 
 private:
     BlockStatus boardState[playfield_height][playfield_width];
     std::vector<Piece> pieces;
-
     void deleteLine (int yPos);
 
 public:

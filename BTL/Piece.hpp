@@ -319,6 +319,9 @@ const int beginPosition[7][4][2] =
 
 struct Piece
 {
+    friend class Board;
+    friend class Game;
+public:
     //Piece(type of piece index, rotation of piece index)
     Piece (int piece_type, int piece_rotation);
 
@@ -332,7 +335,7 @@ struct Piece
 
     //get cell values in a 5x5 matrix
     int getTetromino (int x_index, int y_index);
-
+private:
     int type, rotation, x, y;
 };
 

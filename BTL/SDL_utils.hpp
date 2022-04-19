@@ -7,23 +7,22 @@
 #include <SDL_image.h>
 #include "render.hpp"
 
-SDL_Window *window;
+extern SDL_Window *gWindow;
+extern texture tetromino_graphic;
+SDL_Window *gWindow = nullptr;
 texture tetromino_graphic;
 
-//return true if load all graphics (image, font) successfully
-bool loadGraphic();
-
-//close window, free memory
+//close gWindow, free memory
 void close()
 {
-    TTF_CloseFont(font);
-    font = nullptr;
+    TTF_CloseFont(gFont);
+    gFont = nullptr;
 
-    SDL_DestroyRenderer(renderer);
-    renderer = nullptr;
+    SDL_DestroyRenderer(gRenderer);
+    gRenderer = nullptr;
 
-    SDL_DestroyWindow(window);
-    window = nullptr;
+    SDL_DestroyWindow(gWindow);
+    gWindow = nullptr;
 
     TTF_Quit();
     SDL_Quit();
@@ -40,25 +39,25 @@ bool init()
     }
     else
     {
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, 
+        gWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
-        if (window == nullptr) //error
+        if (gWindow == nullptr) //error
         {
             std::cout << "SDL_Error: " << SDL_GetError() << std::endl;
             success = false;
         }
         else
         {
-            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (renderer == nullptr)
+            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            if (gRenderer == nullptr)
             {
                 std::cout << "SDL_Error: " << SDL_GetError() << std::endl;
                 success = false;
             }
             else
             {
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
-                SDL_RenderClear(renderer);
+                SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255); //white
+                SDL_RenderClear(gRenderer);
                 if (IMG_Init(IMG_INIT_PNG) == 0 || IMG_Init(IMG_INIT_JPG) == 0)
                 {
                     std::cout << "SDL_image error: " << IMG_GetError() << std::endl;
@@ -75,11 +74,12 @@ bool init()
     return success;
 }
 
+//return true if load all graphics (image, gFont) successfully
 bool loadGraphic()
 {
     bool success = true;
-    font = TTF_OpenFont("BTL\\CLASSIQUE-SAIGON_0.TTF", 28);
-    if (font == nullptr)
+    gFont = TTF_OpenFont("BTL/CLASSIQUE-SAIGON_0.TTF", 28);
+    if (gFont == nullptr)
     {
         std::cout << "SDL_tff error: " << TTF_GetError() << std::endl;
         success = false;
