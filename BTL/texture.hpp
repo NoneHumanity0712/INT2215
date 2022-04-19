@@ -1,26 +1,53 @@
+#ifndef TEXTURE
+#define TEXTURE
+
 #include <iostream>
+#include <string>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "texture.h"
+
+const int windowWidth = 640;
+const int windowHeight = 360;
+const char title[] = "TETRIS GAME";
 
 // SDL_Window *window;
 SDL_Renderer* renderer;
 TTF_Font *font;
 
-// texture::texture()
-// {
-//     mTexture = nullptr;
-//     width = 0;
-//     height = 0;
-// }
+class texture
+{
+private:
+    SDL_Texture *mTexture;
+    int width;
+    int height;
+public:
+    texture();
+    ~texture();
+    void free();
 
-// texture::~texture()
-// {
-//     free();
-// }
+    void loadImage(std::string path); //load image from file
+    void loadText(std::string text, SDL_Color color);
+    void render (int x, int y, SDL_Rect *clip = nullptr); //nullptr: null pointer
+    void renderCentered (int x, int y);
+    void setAlphaMode (Uint8 alpha);
 
-//free texture
+    int getWidth();
+    int getHeight();
+};
+
+texture::texture()
+{
+    mTexture = nullptr;
+    width = 0;
+    height = 0;
+}
+
+texture::~texture()
+{
+    free();
+}
+
 void texture::free()
 {
     if(mTexture != nullptr)
@@ -75,6 +102,17 @@ void texture::loadText(std::string text, SDL_Color color)
     SDL_FreeSurface(textSurface);
 }
 
+void texture::render (int x, int y, SDL_Rect *clip)
+{
+    SDL_Rect r = {x, y, width, height};
+    if (clip != nullptr)
+    {
+        r.w = clip->w;
+        r.h = clip->h;
+    }
+    SDL_RenderCopy(renderer, mTexture, clip, &r);
+}
+
 void texture::renderCentered (int x, int y)
 {
     SDL_Rect rect = {x - (width/2), y - (height/2), width, height};
@@ -96,4 +134,4 @@ int texture::getHeight()
     return height;
 }
 
-// int main(int argv, char** args) { }
+#endif

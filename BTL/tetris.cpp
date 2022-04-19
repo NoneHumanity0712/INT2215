@@ -2,12 +2,12 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "board.h"
-#include "game.h"
-#include "SDL_utils.h"
-#include "render.h"
-#include "texture.h"
-#include "input.h"
+#include "board.hpp"
+#include "game.hpp"
+#include "SDL_utils.hpp"
+#include "render.hpp"
+#include "texture.hpp"
+#include "input.hpp"
 
 using namespace std;
 

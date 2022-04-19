@@ -350,4 +350,19 @@ Piece::Piece (const Piece &piece)
     y = piece.y;
 }
 
+int Piece::getTetromino (int x_index, int y_index)
+{
+    return tetrominoes_type[type][rotation][y][x];
+}
+
+int Piece::getBeginXPos()
+{
+    return beginPosition[type][rotation][0];
+}
+
+int Piece::getBeginYPos()
+{
+    return beginPosition[type][rotation][1];
+}
+
 #endif
