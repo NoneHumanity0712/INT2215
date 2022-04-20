@@ -26,7 +26,7 @@ public:
     ~texture();
     void free();
 
-    void loadImage(std::string path); //load image from file
+    bool loadImage(std::string path); //load image from file
     void loadText(std::string text, SDL_Color color);
     void render (int x, int y, SDL_Rect *clip = nullptr); //nullptr: null pointer
     void renderCentered (int x, int y);
@@ -59,24 +59,43 @@ void texture::free()
     }
 }
 
-void texture::loadImage (std::string path)
+bool texture::loadImage (std::string path)
 {
-    bool success = true;
+    //Get rid of preexisting texture
     free();
+
+    //The final texture
+	SDL_Texture* newTexture = NULL;
+
     //temporary surface
     SDL_Surface *temp = IMG_Load(path.c_str());
-    if (temp == nullptr)
+    if (temp == NULL)
     {
-        std::cout << "Texture error: Could not load image from path: " << path << std::endl;
-        success = false;
+        std::cout << "Unable to load image ! SDL_image Error: " << path << IMG_GetError() << std::endl;
     }
     else
     {
+        //Color key image
+		SDL_SetColorKey(temp, SDL_TRUE, SDL_MapRGB( temp->format, 255, 255, 255 ) );
+
         mTexture = SDL_CreateTextureFromSurface(gRenderer, temp);
-        width = temp->w;
-        height = temp->h;
+        if (mTexture == NULL)
+        {
+            std::cout << "Unable to create texture from ! SDL Error: " << path.c_str() << SDL_GetError() << std::endl;
+        }
+        else 
+        { 
+            //Get image dimensions
+            width = temp->w;
+            height = temp->h;
+        }
+
+        //Get rid of old loaded surface
         SDL_FreeSurface(temp);
     }
+    mTexture = newTexture;
+    return (mTexture != NULL);
+
 }
 
 void texture::loadText(std::string text, SDL_Color color)

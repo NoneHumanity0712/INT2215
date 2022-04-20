@@ -90,7 +90,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Open the font
-	gFont = TTF_OpenFont("BTL\\CLASSIQUE-SAIGON_0.TTF", textSize);
+	gFont = TTF_OpenFont("BTL/CLASSIQUE-SAIGON_0.TTF", textSize);
 	if( gFont == NULL )
 	{
 		cout << "Failed to load font! SDL_ttf Error: " << TTF_GetError() << endl;
@@ -104,25 +104,7 @@ bool loadMedia()
 		{
 			cout << "Failed to render text texture!" << endl;
 			success = false;
-		}'
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		'
-	
-	
-	
+		}	
 	}
 
 	return success;

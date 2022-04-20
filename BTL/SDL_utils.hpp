@@ -9,10 +9,10 @@
 
 extern SDL_Window *gWindow;
 extern texture tetromino_graphic;
-SDL_Window *gWindow = nullptr;
-texture tetromino_graphic;
+SDL_Window *gWindow = nullptr; //SDL_utils.hpp
+texture tetromino_graphic; //SDL_utils.hpp
 
-//close gWindow, free memory
+//close gWindow, free memory | SDL_utils.hpp
 void close()
 {
     TTF_CloseFont(gFont);
@@ -28,7 +28,7 @@ void close()
     SDL_Quit();
 }
 
-//return true if initialize game successfully
+//return true if initialize game successfully | SDL_utils.hpp
 bool init()
 {
     bool success = true;
@@ -74,7 +74,7 @@ bool init()
     return success;
 }
 
-//return true if load all graphics (image, gFont) successfully
+//return true if load all graphics (image, gFont) successfully | SDL_utils.hpp
 bool loadGraphic()
 {
     bool success = true;

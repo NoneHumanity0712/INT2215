@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\BTL",
-    "\\mouse-keyboard-event"
+    "\\mouse-keyboard-event",
+    "\\pixeltetris-0.2.0",
+    "\\pixeltetris-0.2.0\\cmake",
+    "\\pixeltetris-0.2.0\\src",
+    "\\tetris_tutorial_sdl"
   ],
-  "SelectedNode": "\\BTL\\tetris.sln",
+  "SelectedNode": "\\pixeltetris-0.2.0\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }
