@@ -64,7 +64,7 @@ bool Board::isMovePossible(Piece piece)
         for (int col = piece.x; col < piece.y + matrix_blocks; col++)
         {
             //if outside of playfield
-            if (col < 0 || col > playfield_width - 1 || row > playfield_height-1)
+            if (col < 0 || col > (playfield_width - 1) || row > (playfield_height - 1))
             {
                 if (piece.getTetromino(row-piece.y, col-piece.x) != 0)
                     return false;

@@ -11,7 +11,7 @@
 #include "input.hpp"
 #include "texture.hpp"
 
-const int x_nextPiece = 400;
+const int x_nextPiece = 410;
 const int y_nextPiece = 10;
 const Uint8 transparency = 100; //set transparency for ghost piece
 
@@ -66,8 +66,8 @@ void Game::createNewPiece()
 {
     currentPiece.type = nextPiece.type;
     currentPiece.rotation = nextPiece.rotation;
-    currentPiece.x = nextPiece.x;
-    currentPiece.y = nextPiece.y;
+    currentPiece.x = currentPiece.getBeginXPos();
+    currentPiece.y = playfield_width/2 + currentPiece.getBeginYPos();
 
     //move new normal and null blocks into playfield
     for (int i = 0; i < 2; i++)

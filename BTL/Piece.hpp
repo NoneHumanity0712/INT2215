@@ -360,12 +360,12 @@ int Piece::getTetromino (int x_index, int y_index)
 
 int Piece::getBeginXPos()
 {
-    return beginPosition[type][rotation][0];
+    return beginPosition[type][rotation][1];
 }
 
 int Piece::getBeginYPos()
 {
-    return beginPosition[type][rotation][1];
+    return beginPosition[type][rotation][0];
 }
 
 #endif

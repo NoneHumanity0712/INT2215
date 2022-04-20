@@ -7,24 +7,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		background.cpp = background.cpp
 		Board.cpp = Board.cpp
-		Board.h = Board.h
 		game.cpp = game.cpp
-		game.exe = game.exe
-		Game.h = Game.h
 		input.cpp = input.cpp
-		input.h = input.h
 		Piece.cpp = Piece.cpp
-		Piece.h = Piece.h
 		render.cpp = render.cpp
-		render.h = render.h
 		SDL_utils.cpp = SDL_utils.cpp
-		SDL_utils.h = SDL_utils.h
 		tetris.cpp = tetris.cpp
 		texture.cpp = texture.cpp
-		texture.h = texture.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Header Files", "Header Files", "{9FC49093-B3E1-4348-8F12-F95BC89BF721}"
+	ProjectSection(SolutionItems) = preProject
+		Board.h = Board.h
+		Game.h = Game.h
+		input.h = input.h
+		Piece.h = Piece.h
+		render.h = render.h
+		SDL_utils.h = SDL_utils.h
+		texture.h = texture.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution

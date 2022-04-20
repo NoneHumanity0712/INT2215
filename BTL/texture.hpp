@@ -26,8 +26,8 @@ public:
     ~texture();
     void free();
 
-    bool loadImage(std::string path); //load image from file
-    bool loadText(std::string text, SDL_Color color);
+    void loadImage(std::string path); //load image from file
+    void loadText(std::string text, SDL_Color color);
     void render (int x, int y, SDL_Rect *clip = nullptr); //nullptr: null pointer
     void renderCentered (int x, int y);
     void setAlphaMode (Uint8 alpha);
@@ -59,7 +59,7 @@ void texture::free()
     }
 }
 
-bool texture::loadImage (std::string path)
+void texture::loadImage (std::string path)
 {
     bool success = true;
     free();
@@ -77,10 +77,9 @@ bool texture::loadImage (std::string path)
         height = temp->h;
         SDL_FreeSurface(temp);
     }
-    return success;
 }
 
-bool texture::loadText(std::string text, SDL_Color color)
+void texture::loadText(std::string text, SDL_Color color)
 {
     bool success = true;
     free();
@@ -105,7 +104,6 @@ bool texture::loadText(std::string text, SDL_Color color)
         }
     }
     SDL_FreeSurface(textSurface);
-    return success;
 }
 
 void texture::render (int x, int y, SDL_Rect *clip)
