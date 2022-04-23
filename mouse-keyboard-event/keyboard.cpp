@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     filled_rect.w = 16;
     filled_rect.h = 12;
     // Bước nhảy mỗi khi dịch chuyển
-    int step = 4;
+    int step = 10;
     // Xoá toàn bộ màn hình và vẽ
     refreshScreen(window, renderer, filled_rect);
 

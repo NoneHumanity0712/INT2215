@@ -9,7 +9,7 @@
 #include "texture.hpp"
 #include "input.hpp"
 
-using namespace std;
+//using namespace std;
 
 const SDL_Color default_text_color = {0, 0, 0, 255}; //black
 const int wait_time = 1000;    //1 second
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
         {
             rRenderer.clearScreen();
             tetrisGame.drawScene();
-            countdown_text.loadText(to_string(countdown), default_text_color);
+            countdown_text.loadText(std::to_string(countdown), default_text_color);
             rRenderer.renderTexture(&countdown_text, windowWidth/2, windowHeight/2);
             rRenderer.updateScreen();
             SDL_Delay(1000);
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
         }
     }
     delete manager;
-    cout << "Exiting" << endl;
+    std::cout << "Exiting" << std::endl;
     close();
     return 0;
 }
