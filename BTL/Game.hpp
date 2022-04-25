@@ -52,6 +52,7 @@ Game::Game()
     board = new Board;
 }
 
+//Game.hpp
 void Game::checkState()
 {
     board->storePiece(currentPiece); //store current block
@@ -62,6 +63,7 @@ void Game::checkState()
     }
 }
 
+//Game.hpp
 void Game::createNewPiece()
 {
     currentPiece.type = nextPiece.type;
@@ -89,6 +91,7 @@ void Game::createNewPiece()
     nextPiece.rotation = 0;
 }
 
+//Game.hpp
 void Game::drawScene()
 {
     drawBoard();
@@ -97,7 +100,7 @@ void Game::drawScene()
     drawNextPiece(nextPiece);
 }
 
-//handling event from keyboard
+//handling event from keyboard | Game.hpp
 void Game::event(ACTION a)
 {
     switch (a)
@@ -148,6 +151,7 @@ void Game::event(ACTION a)
     }
 }
 
+//Game.hpp
 void Game::initializeScene()
 {
     srand(time(0));
@@ -178,6 +182,7 @@ void Game::initializeScene()
     }
 }
 
+//Game.hpp
 bool Game::gameOver()
 {
     return board->gameOver();
@@ -193,6 +198,7 @@ void Game::pieceFalling()
     }
 }
 
+//Game.hpp
 void Game::drawBoard()
 {
     //draw frame
@@ -235,6 +241,7 @@ void Game::drawBoard()
     }
 }
 
+//Game.hpp
 void Game::drawCurrentPiece (Piece piece)
 {
     for (int row = 0; row < matrix_blocks; row++)
@@ -251,6 +258,7 @@ void Game::drawCurrentPiece (Piece piece)
     }
 }
 
+//Game.hpp
 void Game::drawGhostPiece (Piece piece)
 {
     ghostPiece = piece;
@@ -273,6 +281,7 @@ void Game::drawGhostPiece (Piece piece)
     }
 }
 
+//Game.hpp
 void Game::drawNextPiece (Piece piece)
 {
     for (int row = 0; row < matrix_blocks; row++)
@@ -288,6 +297,7 @@ void Game::drawNextPiece (Piece piece)
     }
 }
 
+//Game.hpp
 int Game::getRandom (int min, int max)
 {
     return rand() % (max - min + 1) + min;

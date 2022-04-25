@@ -19,7 +19,8 @@ int main(int argc, char **argv)
     input *manager = new input;
     Game tetrisGame;
     render rRenderer;
-    if (init())
+
+    if(initSDL());
     {
         loadGraphic();
 
