@@ -1,7 +1,7 @@
 #include "Board.h"
 
-// Board::Board()
-// {
+/Board::Board()
+{
 //     for (int row = 0; row < playfield_height; row++)
 //     {
 //         for (int col = 0; col < playfield_width; col++)

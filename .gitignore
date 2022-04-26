@@ -194,3 +194,17 @@ BTL/SDL2_image-2.0.5/lib/x86/LICENSE.zlib.txt
 BTL/SDL2_image-2.0.5/lib/x86/SDL2_image.dll
 BTL/SDL2_image-2.0.5/lib/x86/SDL2_image.lib
 BTL/SDL2_image-2.0.5/lib/x86/zlib1.dll
+BTL/SDL2_ttf-2.0.18/CHANGES.txt
+BTL/SDL2_ttf-2.0.18/COPYING.txt
+BTL/SDL2_ttf-2.0.18/README.txt
+BTL/SDL2_ttf-2.0.18/include/SDL_ttf.h
+BTL/SDL2_ttf-2.0.18/lib/x64/LICENSE.freetype.txt
+BTL/SDL2_ttf-2.0.18/lib/x64/LICENSE.harfbuzz.txt
+BTL/SDL2_ttf-2.0.18/lib/x64/LICENSE.zlib.txt
+BTL/SDL2_ttf-2.0.18/lib/x64/SDL2_ttf.dll
+BTL/SDL2_ttf-2.0.18/lib/x64/SDL2_ttf.lib
+BTL/SDL2_ttf-2.0.18/lib/x86/LICENSE.freetype.txt
+BTL/SDL2_ttf-2.0.18/lib/x86/LICENSE.harfbuzz.txt
+BTL/SDL2_ttf-2.0.18/lib/x86/LICENSE.zlib.txt
+BTL/SDL2_ttf-2.0.18/lib/x86/SDL2_ttf.dll
+BTL/SDL2_ttf-2.0.18/lib/x86/SDL2_ttf.lib
