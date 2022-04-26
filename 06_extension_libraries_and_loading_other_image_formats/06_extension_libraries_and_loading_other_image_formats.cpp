@@ -8,8 +8,10 @@ and may not be redistributed without written permission.*/
 #include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_HEIGHT = 700;
+
+const int step = 20;
 
 //Starts up SDL and creates window
 bool init();
@@ -78,7 +80,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load PNG surface
-	gPNGSurface = loadSurface( "06_extension_libraries_and_loading_other_image_formats/loaded.png" );
+	gPNGSurface = loadSurface( "build/tetrominoSprites.png" );
 	if( gPNGSurface == NULL )
 	{
 		printf( "Failed to load PNG image!\n" );

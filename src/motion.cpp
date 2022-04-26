@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
     filled_rect.w = 20;
     filled_rect.h = 20;
 
-    // Bước nhảy mỗi khi dịch chuyển
+    
     
     // Xoá toàn bộ màn hình và vẽ
     //refreshScreen(window, renderer, filled_rect);
@@ -115,6 +115,8 @@ void refreshScreen(SDL_Window* window, SDL_Renderer* renderer, const SDL_Rect& f
     // Đặt màu vẽ thành xanh lam (blue), xoá màn hình về màu xanh lam.
     SDL_SetRenderDrawColor(renderer, 9, 1, 43, 255);   // blue
     SDL_RenderClear(renderer);
+
+
     
     // Đặt màu vẽ về trắng và vẽ hình chữ nhật
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);   // white

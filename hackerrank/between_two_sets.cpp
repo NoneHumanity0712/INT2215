@@ -115,4 +115,6 @@ int main()
 
     cout << getTotalX(a, b) << endl;
     return 0;
+
+    system("pause");
 }

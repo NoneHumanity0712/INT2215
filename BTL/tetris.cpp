@@ -79,5 +79,7 @@ int main(int argc, char **argv)
     delete manager;
     std::cout << "Exiting" << std::endl;
     close();
+
+    system("pause");
     return 0;
 }

@@ -127,18 +127,25 @@ void texture::loadText(std::string text, SDL_Color color)
 
 void texture::render (int x, int y, SDL_Rect *clip)
 {
+    //Set rendering space and render to screen
     SDL_Rect r = {x, y, width, height};
+
+	//Set clip rendering dimensions
     if (clip != nullptr)
     {
         r.w = clip->w;
         r.h = clip->h;
     }
+    
+	//Render to screen
     SDL_RenderCopy(gRenderer, mTexture, clip, &r);
 }
 
 void texture::renderCentered (int x, int y)
 {
     SDL_Rect rect = {x - (width/2), y - (height/2), width, height};
+
+    
     SDL_RenderCopy(gRenderer, mTexture, nullptr, &rect);
 }
 

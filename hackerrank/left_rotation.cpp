@@ -34,5 +34,6 @@ int main()
         cout << result[i] << " ";
     }
     
+    system("pause");
     return 0;
 }
