@@ -6,7 +6,7 @@
 #include "game.hpp"
 #include "SDL_utils.hpp"
 #include "render.hpp"
-//#include "texture.hpp"
+#include "texture.hpp"
 //#include "input.hpp"
 
 //using namespace std;

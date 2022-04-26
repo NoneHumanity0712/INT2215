@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <cstdlib>
 
-SDL_Renderer* renderer;
+extern SDL_Renderer* gRenderer;
 
 Game::Game()
 {

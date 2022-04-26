@@ -5,8 +5,8 @@
 #include "texture.hpp"
 
 // SDL_Window *window;
-SDL_Renderer* gRenderer;
-TTF_Font *gFont;
+extern SDL_Renderer* gRenderer;
+extern TTF_Font *gFont;
 
 texture::texture()
 {
@@ -37,7 +37,7 @@ bool texture::loadImage (std::string path)
     free();
 
     //The final texture
-	SDL_Texture* newTexture = NULL;
+	SDL_Texture* newTexture = nullptr;
 
     //temporary surface
     SDL_Surface *temp = IMG_Load(path.c_str());
@@ -135,5 +135,3 @@ int texture::getHeight()
 {
     return height;
 }
-
-// int main(int argv, char** args) { }

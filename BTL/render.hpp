@@ -7,8 +7,8 @@
 #include <string>
 #include "texture.hpp"
 
-// SDL_Renderer *gRenderer = nullptr;
-// TTF_Font *gFont = nullptr;
+extern SDL_Renderer* gRenderer;
+extern TTF_Font* gFont;
 
 struct render
 {

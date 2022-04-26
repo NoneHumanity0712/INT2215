@@ -4,8 +4,12 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "render.hpp"
+#include "texture.hpp"
 
-using namespace std;
+SDL_Window* gWindow = nullptr;
+texture tetromino_graphic;
+extern TTF_Font* gFont;
+extern SDL_Renderer* gRenderer;
 
 void logSDLError(std::ostream& os, const std::string &msg, bool fatal)
 {
@@ -34,7 +38,7 @@ void logSDL_image_Error(std::ostream& os, const std::string &msg, bool fatal)
     }
 }
 
-//close gWindow, free memory | SDL_utils.hpp
+//close gWindow, free memory 
 void close()
 {
     TTF_CloseFont(gFont);
@@ -50,7 +54,7 @@ void close()
     SDL_Quit();
 }
 
-//return true if initialize game successfully | SDL_utils.hpp
+//return true if initialize game successfully
 bool initSDL()
 {
     bool success = true;
@@ -98,7 +102,7 @@ bool initSDL()
     return success;
 }
 
-//return true if load all graphics (image, gFont) successfully | SDL_utils.hpp
+//return true if load all graphics (image, gFont) successfully 
 void loadGraphic()
 {
     gFont = TTF_OpenFont("BTL/CLASSIQUE-SAIGON_0.TTF", 28);
