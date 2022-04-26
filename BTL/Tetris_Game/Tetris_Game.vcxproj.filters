@@ -33,7 +33,7 @@
     <ClCompile Include="..\SDL_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\tetris.cpp">
+    <ClCompile Include="..\Tetris_Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\texture.cpp">

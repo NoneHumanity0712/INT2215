@@ -1,15 +1,15 @@
-#include "Board.h"
+#include "Board.hpp"
 
-/Board::Board()
+Board::Board()
 {
-//     for (int row = 0; row < playfield_height; row++)
-//     {
-//         for (int col = 0; col < playfield_width; col++)
-//         {
-//             boardState[row][col] = BlockStatus::empty;
-//         }
-//     }
-// }
+    for (int row = 0; row < playfield_height; row++)
+    {
+        for (int col = 0; col < playfield_width; col++)
+        {
+            boardState[row][col] = BlockStatus::empty;
+        }
+    }
+}
 
 int Board::getTetromino(int x, int y)
 {

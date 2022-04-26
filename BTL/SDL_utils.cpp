@@ -1,66 +1,107 @@
-#include "SDL_utils.h"
+#include "SDL_utils.hpp"
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "render.h"
-#include "texture.h"
+#include "render.hpp"
 
 using namespace std;
 
-bool init()
+void logSDLError(std::ostream& os, const std::string &msg, bool fatal)
+{
+    os << msg << " Error: " << SDL_GetError() << std::endl;
+    if (fatal) {
+        SDL_Quit();
+        exit(1);
+    }
+}
+
+void logSDL_ttf_Error(std::ostream& os, const std::string &msg, bool fatal)
+{
+    os << msg << " Error: " << TTF_GetError() << std::endl;
+    if (fatal) {
+        TTF_Quit();
+        exit(1);
+    }
+}
+
+void logSDL_image_Error(std::ostream& os, const std::string &msg, bool fatal)
+{
+    os << msg << " Error: " << IMG_GetError() << std::endl;
+    if (fatal) {
+        SDL_Quit();
+        exit(1);
+    }
+}
+
+//close gWindow, free memory | SDL_utils.hpp
+void close()
+{
+    TTF_CloseFont(gFont);
+    gFont = nullptr;
+
+    SDL_DestroyRenderer(gRenderer);
+    gRenderer = nullptr;
+
+    SDL_DestroyWindow(gWindow);
+    gWindow = nullptr;
+
+    TTF_Quit();
+    SDL_Quit();
+}
+
+//return true if initialize game successfully | SDL_utils.hpp
+bool initSDL()
 {
     bool success = true;
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        cout << "SDL_Error: " << SDL_GetError() << endl;
+        logSDLError(std::cout, "SDL_Init", true);
         success = false;
     }
     else
     {
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, 
+        gWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
-        if (window == nullptr) //error
-        {
-            cout << "SDL_Error: " << SDL_GetError() << endl;
+        if (gWindow == nullptr) //error
+        {    
+            logSDLError(std::cout, "CreateWindow", true);
             success = false;
         }
         else
         {
-            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (renderer == nullptr)
+            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            if (gRenderer == nullptr)
             {
-                cout << "SDL_Error: " << SDL_GetError() << endl;
+                logSDLError(std::cout, "CreateRenderer", true);
                 success = false;
             }
             else
             {
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
-                SDL_RenderClear(renderer);
+                SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255); //white
+                SDL_RenderClear(gRenderer);
                 if (IMG_Init(IMG_INIT_PNG) == 0 || IMG_Init(IMG_INIT_JPG) == 0)
                 {
-                    cout << "SDL_image error: " << IMG_GetError() << endl;
+                    logSDL_image_Error(std::cout, "Could not initialize SDL_image", true);
                     success = false;
                 }
                 if (TTF_Init() == -1)
                 {
-                    cout << "SDL_ttf error: " << TTF_GetError() << endl;
+                    logSDL_ttf_Error(std::cout, "Could not initialize SDL_ttf", true);
                     success = false;
                 }
+                SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+                SDL_RenderSetLogicalSize(gRenderer, windowWidth, windowHeight);
             }
         }
     }
     return success;
 }
 
-bool loadMedia()
+//return true if load all graphics (image, gFont) successfully | SDL_utils.hpp
+void loadGraphic()
 {
-    bool success = true;
-    font = TTF_OpenFont("BTL\\CLASSIQUE-SAIGON_0.TTF", 28);
-    if (font == nullptr)
-    {
-        cout << "SDL_tff error: " << TTF_GetError() << endl;
-        success = false;
-    }
-    return success;
+    gFont = TTF_OpenFont("BTL/CLASSIQUE-SAIGON_0.TTF", 28);
+    if (gFont == nullptr)
+        logSDL_ttf_Error(std::cout, "Could not load font", true);
 }

@@ -1,20 +1,7 @@
-﻿  background.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\background.cpp(2,10): fatal error C1083: Cannot open include file: 'LTexture.hpp': No such file or directory
-  Board.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Board.cpp(1,10): fatal error C1083: Cannot open include file: 'Board.h': No such file or directory
-  Game.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(3,10): fatal error C1083: Cannot open include file: 'Game.h': No such file or directory
-  input.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\input.cpp(1,10): fatal error C1083: Cannot open include file: 'input.h': No such file or directory
-  Piece.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Piece.cpp(1,10): fatal error C1083: Cannot open include file: 'Piece.h': No such file or directory
-  render.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\render.cpp(1,10): fatal error C1083: Cannot open include file: 'render.h': No such file or directory
-  SDL_utils.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\SDL_utils.cpp(1,10): fatal error C1083: Cannot open include file: 'SDL_utils.h': No such file or directory
-  tetris.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\game.hpp(157,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  tetris.cpp
 C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\tetris.cpp(23,18): warning C4390: ';': empty controlled statement found; is this the intent?
-  texture.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\texture.cpp(5,10): fatal error C1083: Cannot open include file: 'texture.h': No such file or directory
-  Generating Code...
+tetris.obj : error LNK2005: "struct SDL_Window * gWindow" (?gWindow@@3PEAUSDL_Window@@EA) already defined in SDL_utils.obj
+tetris.obj : error LNK2005: "class texture tetromino_graphic" (?tetromino_graphic@@3Vtexture@@A) already defined in SDL_utils.obj
+texture.obj : error LNK2005: "struct SDL_Renderer * gRenderer" (?gRenderer@@3PEAUSDL_Renderer@@EA) already defined in render.obj
+texture.obj : error LNK2005: "struct _TTF_Font * gFont" (?gFont@@3PEAU_TTF_Font@@EA) already defined in render.obj
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Tetris_Game\x64\Debug\Tetris_Game.exe : fatal error LNK1169: one or more multiply defined symbols found

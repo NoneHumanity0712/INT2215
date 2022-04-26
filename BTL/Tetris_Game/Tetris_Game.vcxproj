@@ -148,7 +148,7 @@
     <ClCompile Include="..\Piece.cpp" />
     <ClCompile Include="..\render.cpp" />
     <ClCompile Include="..\SDL_utils.cpp" />
-    <ClCompile Include="..\tetris.cpp" />
+    <ClCompile Include="..\Tetris_Game.cpp" />
     <ClCompile Include="..\texture.cpp" />
   </ItemGroup>
   <ItemGroup>

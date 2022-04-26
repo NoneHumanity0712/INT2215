@@ -2,25 +2,24 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "texture.h"
+#include "texture.hpp"
 
 // SDL_Window *window;
-SDL_Renderer* renderer;
-TTF_Font *font;
+SDL_Renderer* gRenderer;
+TTF_Font *gFont;
 
-// texture::texture()
-// {
-//     mTexture = nullptr;
-//     width = 0;
-//     height = 0;
-// }
+texture::texture()
+{
+    mTexture = nullptr;
+    width = 0;
+    height = 0;
+}
 
-// texture::~texture()
-// {
-//     free();
-// }
+texture::~texture()
+{
+    free();
+}
 
-//free texture
 void texture::free()
 {
     if(mTexture != nullptr)
@@ -32,40 +31,63 @@ void texture::free()
     }
 }
 
-void texture::loadImage (std::string path)
+bool texture::loadImage (std::string path)
 {
+    //Get rid of preexisting texture
     free();
+
+    //The final texture
+	SDL_Texture* newTexture = NULL;
 
     //temporary surface
     SDL_Surface *temp = IMG_Load(path.c_str());
-    if (temp = nullptr)
-        std::cout << "Texture error: Could not load image from path: " << path << std::endl;
+    if (temp == NULL)
+    {
+        std::cout << "Unable to load image ! SDL_image Error: " << path << IMG_GetError() << std::endl;
+    }
     else
     {
-        mTexture = SDL_CreateTextureFromSurface(renderer, temp);
-        width = temp->w;
-        height = temp->h;
+        //Color key image
+		SDL_SetColorKey(temp, SDL_TRUE, SDL_MapRGB( temp->format, 255, 255, 255 ) );
+
+        mTexture = SDL_CreateTextureFromSurface(gRenderer, temp);
+        if (mTexture == NULL)
+        {
+            std::cout << "Unable to create texture from ! SDL Error: " << path.c_str() << SDL_GetError() << std::endl;
+        }
+        else 
+        { 
+            //Get image dimensions
+            width = temp->w;
+            height = temp->h;
+        }
+
+        //Get rid of old loaded surface
         SDL_FreeSurface(temp);
     }
+    mTexture = newTexture;
+    return (mTexture != NULL);
+
 }
 
 void texture::loadText(std::string text, SDL_Color color)
 {
+    bool success = true;
     free();
-    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, windowWidth);
-    if (textSurface = nullptr)
+    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(gFont, text.c_str(), color, windowWidth);
+    if (textSurface == nullptr)
+    {        
+        std::cout << "SDL_ttf error: " << TTF_GetError() << std::endl; 
+        success = false;
+    }   
+     else
     {
-        std::cout << "SDL_ttf error: could not create surface from text!" << std::endl;
-        std::cout << TTF_GetError() << std::endl;
-    } 
-    else
-    {
-        mTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
         if (mTexture == nullptr)
-        {
-            std::cout << "SDL error: could not create texture from text! " << std::endl;
-            std::cout << SDL_GetError() << std::endl;
-        }
+            {
+                std::cout << "SDL error: " << SDL_GetError() << std::endl;
+                success = false;
+            }
         else
         {
             width = textSurface->w;
@@ -75,10 +97,28 @@ void texture::loadText(std::string text, SDL_Color color)
     SDL_FreeSurface(textSurface);
 }
 
+void texture::render (int x, int y, SDL_Rect *clip)
+{
+    //Set rendering space and render to screen
+    SDL_Rect r = {x, y, width, height};
+
+	//Set clip rendering dimensions
+    if (clip != nullptr)
+    {
+        r.w = clip->w;
+        r.h = clip->h;
+    }
+    
+	//Render to screen
+    SDL_RenderCopy(gRenderer, mTexture, clip, &r);
+}
+
 void texture::renderCentered (int x, int y)
 {
     SDL_Rect rect = {x - (width/2), y - (height/2), width, height};
-    SDL_RenderCopy(renderer, mTexture, nullptr, &rect);
+
+    
+    SDL_RenderCopy(gRenderer, mTexture, nullptr, &rect);
 }
 
 void texture::setAlphaMode(Uint8 alpha)
