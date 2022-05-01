@@ -69,7 +69,7 @@ int main(int argc, char **argv)
             {
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
-                std::cout << "get action from keyboard" >> std::endl;
+                std::cout << "get action from keyboard" << std::endl;
             }
 
             unsigned long long time_2 = SDL_GetTicks();

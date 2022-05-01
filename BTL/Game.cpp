@@ -116,7 +116,6 @@ void Game::initializeScene()
     
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
-
 }
 
 bool Game::gameOver()
