@@ -14,7 +14,7 @@ Piece::Piece (const Piece &piece)
     y = piece.y;
 }
 
-int Piece::getTetromino (int x_index, int y_index)
+unsigned int Piece::getTetromino (int x_index, int y_index)
 {
     return tetrominoes_type[type][rotation][y][x];
 }

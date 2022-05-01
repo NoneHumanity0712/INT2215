@@ -11,7 +11,7 @@ s = "12:01:00PM"
 Return '12:01:00'.
 
 s = "12:01:00AM"
-Return '00:01:00'.
+Return '00:01:00'
 */
 
 #include <bits/stdc++.h>

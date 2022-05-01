@@ -17,15 +17,21 @@ const int wait_time = 1000;    //1 second
 int main(int argc, char **argv)
 {
     input *manager = new input;
+    std::cout << "input" << std::endl;
     Game tetrisGame;
     render rRenderer;
 
     if(initSDL());
     {
         loadGraphic();
+        std::cout << "loading graphic" << std::endl;
 
         tetrisGame.initializeScene();
+        std::cout << "initializing scence" << std::endl;
+
         tetrisGame.drawScene();
+        std::cout << "drawing scence" << std::endl;
+
         rRenderer.updateScreen();
 
         int countdown = 3; // 3... 2... 1...
@@ -33,23 +39,37 @@ int main(int argc, char **argv)
         while (countdown > 0)
         {
             rRenderer.clearScreen();
+            std::cout << "clearing screen" << std::endl;
+
             tetrisGame.drawScene();
+            std::cout << "drawing scene" << std::endl;
+
             countdown_text.loadText(std::to_string(countdown), default_text_color);
+            std::cout << "loading text" << std::endl;
+
             rRenderer.renderTexture(&countdown_text, windowWidth/2, windowHeight/2);
+            std::cout << "rendering texture" << std::endl;
+
             rRenderer.updateScreen();
+            std::cout << "updating screen" << std::endl;
+
             SDL_Delay(1000);
             countdown--;
         }
         
         manager->clearQueueEvent();
+        std::cout << "clearing queue event" << std::endl;
+
         SDL_Event e;
         unsigned long long time_1 = SDL_GetTicks();
+
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
             while (SDL_PollEvent(&e) != 0)
             {
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
+                std::cout << "get action from keyboard" >> std::endl;
             }
 
             unsigned long long time_2 = SDL_GetTicks();
@@ -57,11 +77,17 @@ int main(int argc, char **argv)
             {
                 tetrisGame.pieceFalling();
                 time_1 = SDL_GetTicks();
+                std::cout << "piece falling down" << std::endl;
             }
 
             rRenderer.clearScreen();
+            std::cout << "clearing screen" << std::endl;
+
             tetrisGame.drawScene();
+            std::cout << "drawing scene" << std::endl;
+
             rRenderer.updateScreen();
+            std::cout << "updating screen" << std::endl;
         }
 
         texture gameover_text;

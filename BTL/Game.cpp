@@ -195,7 +195,7 @@ void Game::drawCurrentPiece (Piece piece)
 void Game::drawGhostPiece (Piece piece)
 {
     ghostPiece = piece;
-    while (board->isMovePossible(ghostPiece)) ghostPiece.y++;
+    while (board->isMovePossible(ghostPiece) && ghostPiece.y <= height_to_playfield) ghostPiece.y++;
     ghostPiece.y--;
 
     tetromino_graphic.setAlphaMode(transparency); 

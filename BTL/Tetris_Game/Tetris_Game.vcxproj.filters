@@ -80,7 +80,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="..\CLASSIQUE-SAIGON_0.TTF">
+    <Font Include="..\Classique-Saigon_0.ttf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>
