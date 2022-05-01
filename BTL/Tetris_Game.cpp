@@ -92,14 +92,25 @@ int main(int argc, char **argv)
 
         texture gameover_text;
         gameover_text.loadText("GAME OVER!", default_text_color);
+        std::cout << "loading text" << std::endl;
+
         while (!manager->ExitGame())
         {
             while (SDL_PollEvent(&e) != 0)
                 manager->pollAction(e);
+
             rRenderer.clearScreen();
+            std::cout << "clearing screen" << std::endl;
+
             tetrisGame.drawScene();
+            std::cout << "drawing scene" << std::endl;
+
             rRenderer.renderTexture(&gameover_text, windowWidth/2, windowHeight/2);
+            std::cout << "updating screen" << std::endl;
+
             rRenderer.updateScreen();
+            std::cout << "updating screen" << std::endl;
+
         }
     }
     delete manager;
