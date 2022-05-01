@@ -116,6 +116,25 @@ void Game::initializeScene()
     
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
+
+    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/tetrominoSprites.png");
+    frame.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/playfieldFrame.png");
+
+    for (int i = 0; i < 7; i++)
+    {
+        tetromino_graphic_boxes[i].x = 16*i;
+        tetromino_graphic_boxes[i].y = 0;
+        tetromino_graphic_boxes[i].w = 16;
+        tetromino_graphic_boxes[i].h = 16;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        Frames[i].x = frame_sprite_size*i;
+        Frames[i].y = 0;
+        Frames[i].w = frame_sprite_size;
+        Frames[i].h = frame_sprite_size;
+    }
 }
 
 bool Game::gameOver()
