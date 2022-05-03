@@ -10,16 +10,6 @@ const Uint8 backgroundColor_R = 249; //Red channel color for background
 const Uint8 backgroundColor_G = 230; //Green channel color for background
 const Uint8 backgroundColor_B = 207; //Blue channel color for background 
 
-//void render::initialize(SDL_Window* window)
-//{
-//    mediumFont = TTF_OpenFont("CLASSIQUE-SAIGON_0.TTF", 30);
-//     bigFont = TTF_OpenFont("CLASSIQUE-SAIGON_0.TTF", 50);
-//    if (mediumFont == nullptr || bigFont == nullptr)
-//        std::cout << "SDL_ttf error: " << TTF_GetError() << std::endl;
-//    mSDLRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-//     clearScreen();
-//}
-
 render::~render ()
 {
     SDL_DestroyRenderer(mSDLRenderer);

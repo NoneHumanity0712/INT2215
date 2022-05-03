@@ -50,6 +50,7 @@ void Game::createNewPiece()
 
 void Game::drawScene()
 {
+    //drawBackground();
     drawBoard();
     drawCurrentPiece(currentPiece);
     if (!board->gameOver()) drawGhostPiece(currentPiece);
@@ -151,6 +152,12 @@ void Game::pieceFalling()
         checkState();
     }
 }
+
+//void Game::drawBackground()
+//{
+//    SDL_SetRenderDrawColor(gRenderer, 0, 0, 255, 255);   // blue
+//    SDL_RenderClear(gRenderer);
+//}
 
 void Game::drawBoard()
 {

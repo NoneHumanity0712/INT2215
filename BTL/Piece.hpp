@@ -334,7 +334,7 @@ public:
     int getBeginYPos();
 
     //get cell values in a 5x5 matrix
-    unsigned int getTetromino (int x_index, int y_index);
+    unsigned int getTetromino (unsigned int x_index, unsigned int y_index);
 private:
     unsigned int type, rotation, x, y;
 };

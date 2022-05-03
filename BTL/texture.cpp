@@ -48,7 +48,7 @@ bool texture::loadImage (std::string path)
     else
     {
         //Color key image
-		SDL_SetColorKey(temp, SDL_TRUE, SDL_MapRGB( temp->format, 255, 255, 255 ) );
+		//SDL_SetColorKey(temp, SDL_TRUE, SDL_MapRGB( temp->format, 255, 255, 255 ) );
 
         mTexture = SDL_CreateTextureFromSurface(gRenderer, temp);
         if (mTexture == NULL)
@@ -117,7 +117,6 @@ void texture::renderCentered (int x, int y)
 {
     SDL_Rect rect = {x - (width/2), y - (height/2), width, height};
 
-    
     SDL_RenderCopy(gRenderer, mTexture, nullptr, &rect);
 }
 

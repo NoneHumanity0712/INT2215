@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
-            while (SDL_PollEvent(&e) != 0)
+            while (SDL_WaitEvent(&e) != 0)
             {
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
