@@ -19,14 +19,23 @@ void Game::checkState()
     {
         createNewPiece();
     }
+    used_hold_block = false;
+}
+
+void Game::swap(Piece &a, Piece &b)
+{
+    Piece temp = currentPiece;
+    currentPiece = holdPiece;
+    holdPiece = temp;
+
 }
 
 void Game::createNewPiece()
 {
     currentPiece.type = nextPiece.type;
     currentPiece.rotation = nextPiece.rotation;
-    currentPiece.x = nextPiece.x;
-    currentPiece.y = nextPiece.y;
+    currentPiece.y = currentPiece.getBeginYPos();
+    currentPiece.x = playfield_width/2 + currentPiece.getBeginXPos();
 
     //move new normal and null blocks into playfield
     for (int i = 0; i < 2; i++)
@@ -35,6 +44,7 @@ void Game::createNewPiece()
         if (!board->isMovePossible(currentPiece))
             currentPiece.y--;
     }
+
     //move pivot block into playfield
     if (currentPiece.type > 1)
     {
@@ -50,9 +60,9 @@ void Game::createNewPiece()
 
 void Game::drawScene()
 {
-    //drawBackground();
     drawBoard();
     drawCurrentPiece(currentPiece);
+    if (!first_time_hold) drawHoldPiece(holdPiece);
     if (!board->gameOver()) drawGhostPiece(currentPiece);
     drawNextPiece(nextPiece);
 }
@@ -105,12 +115,49 @@ void Game::event(ACTION a)
                 currentPiece.rotation = (currentPiece.rotation + 3) % 4;
             break;
         }
+
+        case ACTION::hold:
+        {
+            if (first_time_hold)
+            {
+                holdPiece = Piece(currentPiece);
+                holdPiece.rotation = 0;
+                createNewPiece();
+                first_time_hold = false;
+                used_hold_block = true;
+            }
+            else if (!used_hold_block)
+            {
+                swap(currentPiece, holdPiece);
+                holdPiece.rotation = 0;
+                currentPiece.y = currentPiece.getBeginYPos();
+                currentPiece.x = playfield_width/2 + currentPiece.getBeginXPos();
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                currentPiece.y++;
+                if (!board->isMovePossible(currentPiece))
+                    currentPiece.y--;
+            }
+
+            if (currentPiece.type > 1)
+            {
+                currentPiece.y++;
+                if (!board->isMovePossible(currentPiece))
+                    currentPiece.y--;
+            }
+
+            used_hold_block = true;
+        }
     }
 }
 
 void Game::initializeScene()
 {
     srand(time(0));
+    first_time_hold = true;
+    used_hold_block = false;
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
     createNewPiece();
@@ -212,6 +259,7 @@ void Game::drawCurrentPiece (Piece piece)
                 tetromino_graphic.render(width_to_playfield +( col + piece.x)*block_size,
                 height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetromino_graphic_boxes[piece.type]);
+                std::cout << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
@@ -234,6 +282,23 @@ void Game::drawGhostPiece (Piece piece)
                 tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
                 height_to_playfield + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetromino_graphic_boxes[ghostPiece.type]);
+                std::cout << piece.type << " " << piece.x << " " << piece.y << std::endl;
+            }
+        }
+    }
+}
+
+void Game::drawHoldPiece (Piece piece)
+{
+    for (int row = 0; row < matrix_blocks; row++)
+    {
+        for (int col = 0; col < matrix_blocks; col++)
+        {
+            if (piece.getTetromino(row, col) != 0)
+            {
+                tetromino_graphic.render(hold_box_x + col+block_size,
+                hold_box_y + row*block_size, &tetromino_graphic_boxes[piece.type]);
+                std::cout << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
@@ -249,6 +314,7 @@ void Game::drawNextPiece (Piece piece)
             {
                 tetromino_graphic.render(x_nextPiece + col*block_size,
                     y_nextPiece + row*block_size, &tetromino_graphic_boxes[piece.type]);
+                std::cout << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }

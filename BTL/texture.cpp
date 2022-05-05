@@ -11,8 +11,6 @@ extern TTF_Font *gFont;
 texture::texture()
 {
     mTexture = nullptr;
-    width = 0;
-    height = 0;
 }
 
 texture::~texture()
@@ -33,17 +31,16 @@ void texture::free()
 
 bool texture::loadImage (std::string path)
 {
+    bool success = true;
     //Get rid of preexisting texture
     free();
-
-    //The final texture
-	SDL_Texture* newTexture = nullptr;
 
     //temporary surface
     SDL_Surface *temp = IMG_Load(path.c_str());
     if (temp == NULL)
     {
         std::cout << "Unable to load image ! SDL_image Error: " << path << IMG_GetError() << std::endl;
+        bool success = true;
     }
     else
     {
@@ -51,7 +48,7 @@ bool texture::loadImage (std::string path)
 		//SDL_SetColorKey(temp, SDL_TRUE, SDL_MapRGB( temp->format, 255, 255, 255 ) );
 
         mTexture = SDL_CreateTextureFromSurface(gRenderer, temp);
-        if (mTexture == NULL)
+        if (mTexture == nullptr)
         {
             std::cout << "Unable to create texture from ! SDL Error: " << path.c_str() << SDL_GetError() << std::endl;
         }
@@ -65,12 +62,12 @@ bool texture::loadImage (std::string path)
         //Get rid of old loaded surface
         SDL_FreeSurface(temp);
     }
-    mTexture = newTexture;
-    return (mTexture != NULL);
+    std::cout << "Load image: " << success << std::endl;
+    return success;
 
 }
 
-void texture::loadText(std::string text, SDL_Color color)
+bool texture::loadText(std::string text, SDL_Color color)
 {
     bool success = true;
     free();
@@ -95,6 +92,8 @@ void texture::loadText(std::string text, SDL_Color color)
         }
     }
     SDL_FreeSurface(textSurface);
+    std::cout << "Load text: " << success << endl;
+    return success;
 }
 
 void texture::render (int x, int y, SDL_Rect *clip)

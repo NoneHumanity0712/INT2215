@@ -17,14 +17,15 @@ private:
     SDL_Texture *mTexture;
     int width;
     int height;
+
 public:
     texture();
     ~texture();
     void free();
 
-    bool loadImage(std::string path); //load image from file
+    bool loadImage(std::string path);
     void loadText(std::string text, SDL_Color color);
-    void render (int x, int y, SDL_Rect *clip = nullptr); //nullptr: null pointer
+    void render (int x, int y, SDL_Rect *clip); 
     void renderCentered (int x, int y);
     void setAlphaMode (Uint8 alpha);
 

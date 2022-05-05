@@ -12,7 +12,7 @@
 //using namespace std;
 
 const SDL_Color default_text_color = {0, 0, 0, 255}; //black
-const int wait_time = 1000;    //1 second
+const int wait_time = 500;    //0.5 second
 
 int main(int argc, char **argv)
 {
@@ -57,6 +57,15 @@ int main(int argc, char **argv)
             countdown--;
         }
         
+        rRenderer.clearScreen();
+        std::cout << "clearing screen" << std::endl;
+
+        tetrisGame.drawScene();
+        std::cout << "drawing scene" << std::endl;
+
+        rRenderer.updateScreen();
+        std::cout << "updating screen" << std::endl;
+
         manager->clearQueueEvent();
         std::cout << "clearing queue event" << std::endl;
 

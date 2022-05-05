@@ -29,6 +29,7 @@ void input::pollAction(SDL_Event e)
     {
         switch (e.key.keysym.sym)
         {
+        case SDLK_F1:
         case SDLK_ESCAPE: quit = true;
             break;
         case SDLK_DOWN: action = ACTION::down;
@@ -40,6 +41,11 @@ void input::pollAction(SDL_Event e)
         case SDLK_UP: action = ACTION::rotate;
             break;
         case SDLK_SPACE: action = ACTION::drop;
+            break;
+        case SDLK_c:
+        case SDLK_LSHIFT:
+        case SDLK_RSHIFT: action = ACTION::hold;
+            break;
         }
     }
     else action = ACTION::stay;

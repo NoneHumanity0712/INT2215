@@ -1,33 +1,6 @@
 #ifndef PIECE
 #define PIECE
 
-/*
-    I:
-        o
-        o
-        o
-        o
-    J:
-        _o
-        _o
-        oo 
-    L:
-        o
-        o
-        oo
-    O:
-        oo
-        oo
-    S:
-        _oo
-        oo
-    Z:
-        oo
-        _oo
-    T:
-        ooo
-        _o
-*/
 const char tetrominoes_name[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
 //shape of tetrominoes in 5x5 matrixes
