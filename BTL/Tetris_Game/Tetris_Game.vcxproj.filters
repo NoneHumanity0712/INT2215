@@ -72,10 +72,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\tetrominoSprites.png">
+    <Image Include="..\minoes-sprite.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\playfieldFrame.png">
+    <Image Include="..\background.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

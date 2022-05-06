@@ -7,8 +7,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-const int windowWidth = 640;
-const int windowHeight = 360;
+const int windowWidth = 960;
+const int windowHeight = 720;
 const char title[] = "TETRIS GAME";
 
 class texture
@@ -24,7 +24,7 @@ public:
     void free();
 
     bool loadImage(std::string path);
-    void loadText(std::string text, SDL_Color color);
+    bool loadText(std::string text, SDL_Color color);
     void render (int x, int y, SDL_Rect *clip); 
     void renderCentered (int x, int y);
     void setAlphaMode (Uint8 alpha);

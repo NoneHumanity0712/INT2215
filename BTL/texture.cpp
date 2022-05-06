@@ -11,6 +11,8 @@ extern TTF_Font *gFont;
 texture::texture()
 {
     mTexture = nullptr;
+    width = 0;
+    height = 0;
 }
 
 texture::~texture()
@@ -92,7 +94,7 @@ bool texture::loadText(std::string text, SDL_Color color)
         }
     }
     SDL_FreeSurface(textSurface);
-    std::cout << "Load text: " << success << endl;
+    std::cout << "Load text: " << success << std::endl;
     return success;
 }
 

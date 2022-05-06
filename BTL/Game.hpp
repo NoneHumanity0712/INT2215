@@ -11,12 +11,12 @@
 #include "input.hpp"
 #include "texture.hpp"
 
-const int x_nextPiece = 410;
-const int y_nextPiece = 10;
+const int x_nextPiece = 700;
+const int y_nextPiece = 100;
 const Uint8 transparency = 100; //set transparency for ghost piece
 
 const int hold_box_x = 150;                                     // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 10;                                      // Vertical distance from top left corner; in pixels
+const int hold_box_y = 100;                                      // Vertical distance from top left corner; in pixels
 
 extern SDL_Renderer *gRenderer; 
 
@@ -44,10 +44,10 @@ private:
     std::queue<Piece> nextPieces;
     texture tetromino_graphic;
     SDL_Rect tetromino_graphic_boxes[7];
-    texture frame;
-    SDL_Rect Frames[4];
+    texture background;
+    SDL_Rect background_pic;
 
-    void drawBoard();
+    void drawBackground();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
     void drawHoldPiece(Piece piece);

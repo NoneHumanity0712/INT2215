@@ -166,8 +166,8 @@
     <ClInclude Include="..\texture.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\playfieldFrame.png" />
-    <Image Include="..\tetrominoSprites.png" />
+    <Image Include="..\background.png" />
+    <Image Include="..\minoes-sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Classique-Saigon_0.ttf" />

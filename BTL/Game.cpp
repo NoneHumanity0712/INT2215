@@ -60,7 +60,7 @@ void Game::createNewPiece()
 
 void Game::drawScene()
 {
-    drawBoard();
+    drawBackground();
     drawCurrentPiece(currentPiece);
     if (!first_time_hold) drawHoldPiece(holdPiece);
     if (!board->gameOver()) drawGhostPiece(currentPiece);
@@ -165,24 +165,21 @@ void Game::initializeScene()
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
 
-    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/tetrominoSprites.png");
-    frame.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/playfieldFrame.png");
+    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-sprite.png");
 
     for (int i = 0; i < 7; i++)
     {
-        tetromino_graphic_boxes[i].x = 16*i;
+        tetromino_graphic_boxes[i].x = 28*i;
         tetromino_graphic_boxes[i].y = 0;
-        tetromino_graphic_boxes[i].w = 16;
-        tetromino_graphic_boxes[i].h = 16;
+        tetromino_graphic_boxes[i].w = 28;
+        tetromino_graphic_boxes[i].h = 28;
     }
 
-    for (int i = 0; i < 4; i++)
-    {
-        Frames[i].x = frame_sprite_size*i;
-        Frames[i].y = 0;
-        Frames[i].w = frame_sprite_size;
-        Frames[i].h = frame_sprite_size;
-    }
+    background.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background.png");
+    background_pic.x = 0;
+    background_pic.y = 0;
+    background_pic.w = windowWidth;
+    background_pic.h = windowHeight;
 }
 
 bool Game::gameOver()
@@ -200,52 +197,9 @@ void Game::pieceFalling()
     }
 }
 
-//void Game::drawBackground()
-//{
-//    SDL_SetRenderDrawColor(gRenderer, 0, 0, 255, 255);   // blue
-//    SDL_RenderClear(gRenderer);
-//}
-
-void Game::drawBoard()
+void Game::drawBackground()
 {
-    //draw frame
-    for (int i = 0; i < 2*true_playfield_height; i++)
-    {
-        //left
-        frame.render(width_to_playfield - frame_sprite_size,
-            height_to_playfield + i*frame_sprite_size, &Frames[0]);
-
-        //right
-        frame.render(width_to_playfield + block_size*playfield_width - (frame_sprite_size -frame_width), 
-            height_to_playfield + i*frame_sprite_size, &Frames[0]);
-    }
-
-    //draw corners
-    frame.render(width_to_playfield - frame_sprite_size, height_to_playfield + 
-        block_size*true_playfield_height - (frame_sprite_size - frame_width), &Frames[2]);
-    frame.render(width_to_playfield + block_size * playfield_width, height_to_playfield + 
-        block_size*true_playfield_height - (frame_sprite_size - frame_width), &Frames[3]);
-    
-    //draw bottom frame
-    for (int i = 0; i < 2*playfield_width; i++)
-    {
-        frame.render(width_to_playfield + i*frame_sprite_size, height_to_playfield +
-            block_size*true_playfield_height, &Frames[1]);
-    }
-
-    //draw placed blocks
-    for (int row = 0; row < playfield_height; row++)
-    {
-        for (int col = 0; col < playfield_width; col++)
-        {
-            if (!board->isBlockFree(row, col))
-            {
-                tetromino_graphic.render(width_to_playfield + col*block_size,
-                    height_to_playfield + (row - (playfield_height - true_playfield_height))*block_size,
-                    &tetromino_graphic_boxes[board->getTetromino(row, col)]);
-            }
-        }
-    }
+    background.render(0, 0, &background_pic);
 }
 
 void Game::drawCurrentPiece (Piece piece)
@@ -254,9 +208,9 @@ void Game::drawCurrentPiece (Piece piece)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
-            if (piece.getTetromino(row, col) != 0)
+            if (piece.getTetromino(col, row) > 0)
             {
-                tetromino_graphic.render(width_to_playfield +( col + piece.x)*block_size,
+                tetromino_graphic.render(width_to_playfield + (col + piece.x)*block_size,
                 height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetromino_graphic_boxes[piece.type]);
                 std::cout << piece.type << " " << piece.x << " " << piece.y << std::endl;

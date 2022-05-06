@@ -11,7 +11,7 @@
 
 //using namespace std;
 
-const SDL_Color default_text_color = {0, 0, 0, 255}; //black
+const SDL_Color default_text_color = {8, 28, 42, 255}; //black
 const int wait_time = 500;    //0.5 second
 
 int main(int argc, char **argv)
