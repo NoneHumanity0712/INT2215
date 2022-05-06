@@ -61,6 +61,7 @@ void Game::createNewPiece()
 void Game::drawScene()
 {
     drawBackground();
+    drawBoard();
     drawCurrentPiece(currentPiece);
     if (!first_time_hold) drawHoldPiece(holdPiece);
     if (!board->gameOver()) drawGhostPiece(currentPiece);
@@ -202,13 +203,31 @@ void Game::drawBackground()
     background.render(0, 0, &background_pic);
 }
 
+void Game::drawBoard()
+{
+    for (int row = 0; row < playfield_height; row++)
+    {
+        for (int col = 0; col < playfield_width; col++)
+        {
+            if (!board->isBlockFree(row, col))
+            {
+                tetromino_graphic.render(width_to_playfield + col*block_size,
+                height_to_playfield + (row -(playfield_height-true_playfield_height))*block_size,
+                &tetromino_graphic_boxes[board->getTetromino(row,col)]);
+            }
+        }
+    }
+}
+
 void Game::drawCurrentPiece (Piece piece)
 {
+    tetromino_graphic.setAlphaMode(255);
+
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
-            if (piece.getTetromino(col, row) > 0)
+            if (piece.getTetromino(row, col) > 0)
             {
                 tetromino_graphic.render(width_to_playfield + (col + piece.x)*block_size,
                 height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
@@ -244,6 +263,8 @@ void Game::drawGhostPiece (Piece piece)
 
 void Game::drawHoldPiece (Piece piece)
 {
+    tetromino_graphic.setAlphaMode(255);
+
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)
@@ -260,6 +281,8 @@ void Game::drawHoldPiece (Piece piece)
 
 void Game::drawNextPiece (Piece piece)
 {
+    tetromino_graphic.setAlphaMode(255);
+    
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)

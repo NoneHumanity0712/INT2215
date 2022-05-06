@@ -11,12 +11,12 @@
 #include "input.hpp"
 #include "texture.hpp"
 
-const int x_nextPiece = 700;
-const int y_nextPiece = 100;
+const int x_nextPiece = 704;
+const int y_nextPiece = 124;
 const Uint8 transparency = 100; //set transparency for ghost piece
 
-const int hold_box_x = 150;                                     // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 100;                                      // Vertical distance from top left corner; in pixels
+const int hold_box_x = 104;                                     // Horizontal distance from top left corner; in pixels
+const int hold_box_y = 124;                                      // Vertical distance from top left corner; in pixels
 
 extern SDL_Renderer *gRenderer; 
 
@@ -48,6 +48,7 @@ private:
     SDL_Rect background_pic;
 
     void drawBackground();
+    void drawBoard();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
     void drawHoldPiece(Piece piece);

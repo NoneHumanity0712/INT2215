@@ -11,13 +11,13 @@ Board::Board()
     }
 }
 
-int Board::getTetromino(int x, int y)
+int Board::getTetromino(int y, int x)
 {
     return int(boardState[y][x]) - 1;
 }
 
 //return true if the block is empty
-bool Board::isBlockFree(int x, int y)
+bool Board::isBlockFree(int y, int x)
 {
     return (boardState[y][x] == BlockStatus::empty) ? true : false;
 }
@@ -26,7 +26,7 @@ bool Board::isMovePossible(Piece piece)
 {
     for (int row = piece.y; row < piece.x+matrix_blocks; row++)
     {
-        for (int col = piece.x; col < piece.y + matrix_blocks; col++)
+        for (int col = piece.x; col < piece.x + matrix_blocks; col++)
         {
             //if outside of playfield
             if (col < 0 || col > playfield_width - 1 || row > playfield_height-1)

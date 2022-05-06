@@ -28,3 +28,6 @@ Game Design Details:
 - matrix (playfield) color: #eeeeee (HEX); (238, 238, 238) (RGB)
 - text color: #081d2a (HEX); (8, 28, 42) (RGB)
 - text font: ClassiqueSaigon
+- board: (x, y) = (340, 124)
+- hold piece box: (x, y) = (104, 124)
+- next piece box: (x, y) = (704, 124)

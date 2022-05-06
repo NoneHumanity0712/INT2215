@@ -12,25 +12,18 @@
 //using namespace std;
 
 const SDL_Color default_text_color = {8, 28, 42, 255}; //black
-const int wait_time = 500;    //0.5 second
+const int wait_time = 200;    //0.2 second
 
 int main(int argc, char **argv)
 {
     input *manager = new input;
     std::cout << "input" << std::endl;
-    Game tetrisGame;
     render rRenderer;
 
     if(initSDL());
     {
         loadGraphic();
         std::cout << "loading graphic" << std::endl;
-
-        tetrisGame.initializeScene();
-        std::cout << "initializing scence" << std::endl;
-
-        tetrisGame.drawScene();
-        std::cout << "drawing scence" << std::endl;
 
         rRenderer.updateScreen();
 
@@ -40,9 +33,6 @@ int main(int argc, char **argv)
         {
             rRenderer.clearScreen();
             std::cout << "clearing screen" << std::endl;
-
-            tetrisGame.drawScene();
-            std::cout << "drawing scene" << std::endl;
 
             countdown_text.loadText(std::to_string(countdown), default_text_color);
             std::cout << "loading text" << std::endl;
@@ -56,12 +46,16 @@ int main(int argc, char **argv)
             SDL_Delay(1000);
             countdown--;
         }
-        
         rRenderer.clearScreen();
         std::cout << "clearing screen" << std::endl;
 
+        Game tetrisGame;
+
+        tetrisGame.initializeScene();
+        std::cout << "initializing scence" << std::endl;
+
         tetrisGame.drawScene();
-        std::cout << "drawing scene" << std::endl;
+        std::cout << "drawing scence" << std::endl;
 
         rRenderer.updateScreen();
         std::cout << "updating screen" << std::endl;
