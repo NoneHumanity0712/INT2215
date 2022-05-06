@@ -54,7 +54,7 @@ void Board::storePiece (Piece piece)
         {
             if (piece.getTetromino(row - piece.y, col - piece.x) != 0)
             {
-                boardState[row][col] = static_cast<BlockStatus>(1+piece.type); 
+                boardState[row][col] = static_cast<BlockStatus>(1 + piece.type); 
             }
         }
     }
@@ -80,7 +80,7 @@ bool Board::gameOver()
 
     //if the first two lines have filled block, game over
     for (int col = 0; col < playfield_width; col++)
-    {
+    { 
         if (boardState[0][col] != BlockStatus::empty ||
             boardState[1][col] != BlockStatus::empty)
         {

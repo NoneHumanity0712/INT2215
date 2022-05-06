@@ -8,9 +8,9 @@ const int width_to_playfield = 340;     // in pixels
 const int height_to_playfield = 124;     // in pixels
 const int block_size = 28;              // in pixels
 const int playfield_width = 10;         // in blocks
-const int true_playfield_height = 20;   // in blocks
-const int playfield_height = 22;       // The playfield + 2 rows directly above it for spawning the Tetrominos
-const int board_height = 2;             // distance from botton where the playfield begins; in pixels
+const int true_playfield_height = 15;   // in blocks
+const int playfield_height = 17;       // The playfield + 2 rows directly above it for spawning the Tetrominos
+const int board_height = 4;             // distance from botton where the playfield begins; in pixels
 const int matrix_blocks = 5;            //5 x 5 matrix for each piece
 
 //block status
