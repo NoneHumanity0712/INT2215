@@ -54,7 +54,6 @@ private:
     void drawHoldPiece(Piece piece);
     void drawNextPiece(Piece piece);
     int getRandom(int min, int max);
-
 };
 
 #endif

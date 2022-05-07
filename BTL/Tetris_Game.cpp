@@ -11,8 +11,8 @@
 
 //using namespace std;
 
-const SDL_Color default_text_color = {8, 28, 42, 255}; //black
-const int wait_time = 200;    //0.2 second
+const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
+const int wait_time = 100;    //0.1 second
 
 int main(int argc, char **argv)
 {
@@ -68,6 +68,7 @@ int main(int argc, char **argv)
 
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
+            unsigned long long time_2 = SDL_GetTicks();
             while (SDL_WaitEvent(&e) != 0)
             {
                 manager->pollAction(e);
@@ -75,7 +76,6 @@ int main(int argc, char **argv)
                 std::cout << "get action from keyboard" << std::endl;
             }
 
-            unsigned long long time_2 = SDL_GetTicks();
             if (time_2 - time_1 >= wait_time)
             {
                 tetrisGame.pieceFalling();
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
             std::cout << "drawing scene" << std::endl;
 
             rRenderer.renderTexture(&gameover_text, windowWidth/2, windowHeight/2);
-            std::cout << "updating screen" << std::endl;
+            std::cout << "rendering texture" << std::endl;
 
             rRenderer.updateScreen();
             std::cout << "updating screen" << std::endl;

@@ -1,4 +1,4 @@
-#include "Board.hpp"
+b#include "Board.hpp"
 
 Board::Board()
 {
@@ -11,6 +11,7 @@ Board::Board()
     }
 }
 
+//return type of mino of the block
 int Board::getTetromino(int y, int x)
 {
     return int(boardState[y][x]) - 1;
@@ -24,23 +25,23 @@ bool Board::isBlockFree(int y, int x)
 
 bool Board::isMovePossible(Piece piece)
 {
-    for (int row = piece.y; row < piece.x+matrix_blocks; row++)
+    for (int row = piece.y; row < piece.y + matrix_blocks; row++)
     {
         for (int col = piece.x; col < piece.x + matrix_blocks; col++)
         {
             //if outside of playfield
-            if (col < 0 || col > playfield_width - 1 || row > playfield_height-1)
+            if (col < 0 || col > playfield_width - 1 || row > playfield_height - 1)
             {
-                if (piece.getTetromino(row-piece.y, col-piece.x) != 0)
+                if (piece.getTetromino(row - piece.y, col - piece.x) != 0)
                     return false;
             }
 
             //if the block is already filled
-            //if (row >= 0)
-            //{
-                if (piece.getTetromino(row-piece.y, col-piece.x) != 0 && !isBlockFree(row, col))
+            if (row >= 0)
+            {
+                if (piece.getTetromino(row - piece.y, col - piece.x) != 0 && !isBlockFree(row, col))
                     return false;
-            //}
+            }
         }
     }
     return true;

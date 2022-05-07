@@ -1,9 +1,9 @@
 #include "Piece.hpp"
 
-Piece::Piece(int piece_type, int piece_rotation)
+Piece::Piece(unsigned int piece_type, unsigned int piece_rotation)
 {
-    piece_type = type;
-    piece_rotation = rotation;
+    type = piece_type;
+    rotation = piece_rotation;
 }
 
 Piece::Piece (const Piece &piece)
