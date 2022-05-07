@@ -200,6 +200,7 @@ void Game::pieceFalling()
 void Game::drawBackground()
 {
     background.render(0, 0, &background_pic);
+    //std::cout << "drawing background" << std::endl;
 }
 
 void Game::drawBoard()
@@ -216,6 +217,7 @@ void Game::drawBoard()
             }
         }
     }
+    //std::cout << "drawing board" << std::endl;
 }
 
 void Game::drawCurrentPiece (Piece piece)
@@ -226,15 +228,15 @@ void Game::drawCurrentPiece (Piece piece)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
-            if (piece.getTetromino(row, col) > 0)
+            if (piece.getTetromino(row, col) != 0 && (row + piece.y + 1) > (playfield_height - true_playfield_height))
             {
                 tetromino_graphic.render(width_to_playfield + (col + piece.x)*block_size,
                 height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetromino_graphic_boxes[piece.type]);
-                std::cout << "current: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
+    //std::cout << "current: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
 }
 
 void Game::drawGhostPiece (Piece piece)
@@ -254,10 +256,11 @@ void Game::drawGhostPiece (Piece piece)
                 tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
                 height_to_playfield + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetromino_graphic_boxes[ghostPiece.type]);
-                std::cout << "ghost: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
+    //std::cout << "ghost: " << ghostPiece.type << " " << ghostPiece.x << " " << ghostPiece.y << std::endl;
+
 }
 
 void Game::drawHoldPiece (Piece piece)
@@ -272,10 +275,11 @@ void Game::drawHoldPiece (Piece piece)
             {
                 tetromino_graphic.render(hold_box_x + col*block_size,
                 hold_box_y + row*block_size, &tetromino_graphic_boxes[piece.type]);
-                std::cout << "hold: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
+
+    //std::cout << "hold: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
 }
 
 void Game::drawNextPiece (Piece piece)
@@ -290,10 +294,10 @@ void Game::drawNextPiece (Piece piece)
             {
                 tetromino_graphic.render(x_nextPiece + col*block_size,
                     y_nextPiece + row*block_size, &tetromino_graphic_boxes[piece.type]);
-                std::cout << "next: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
             }
         }
     }
+    //std::cout << "next: " << piece.type << " " << piece.x << " " << piece.y << std::endl;
 }
 
 int Game::getRandom (int min, int max)

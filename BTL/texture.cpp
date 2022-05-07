@@ -64,7 +64,7 @@ bool texture::loadImage (std::string path)
         //Get rid of old loaded surface
         SDL_FreeSurface(temp);
     }
-    std::cout << "Load image: " << success << std::endl;
+    //std::cout << "Load image: " << success << std::endl;
     return success;
 
 }
@@ -94,7 +94,7 @@ bool texture::loadText(std::string text, SDL_Color color)
         }
     }
     SDL_FreeSurface(textSurface);
-    std::cout << "Load text: " << success << std::endl;
+    //std::cout << "Load text: " << success << std::endl;
     return success;
 }
 
