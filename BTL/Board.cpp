@@ -36,11 +36,11 @@ bool Board::isMovePossible(Piece piece)
             }
 
             //if the block is already filled
-            if (row >= 0)
-            {
+            //if (row >= 0)
+            //{
                 if (piece.getTetromino(row-piece.y, col-piece.x) != 0 && !isBlockFree(row, col))
                     return false;
-            }
+            //}
         }
     }
     return true;
