@@ -14,7 +14,7 @@ Game::Game()
 void Game::checkState()
 {
     board->storePiece(currentPiece); //store current block
-    board->deleteFullLine(); //delete filled line
+    board->deleteFullLine(); //delete full line
     if (!board->gameOver())
     {
         createNewPiece();
@@ -41,16 +41,14 @@ void Game::createNewPiece()
     for (int i = 0; i < 2; i++)
     {
         currentPiece.y++;
-        if (!board->isMovePossible(currentPiece))
-            currentPiece.y--;
+        if (!board->isMovePossible(currentPiece)) currentPiece.y--;
     }
 
     //move pivot block into playfield
     if (currentPiece.type > 1)
     {
         currentPiece.y++;
-        if (!board->isMovePossible(currentPiece))
-            currentPiece.y--;
+        if (!board->isMovePossible(currentPiece)) currentPiece.y--;
     }
     
     //randomly create new piece
@@ -79,7 +77,7 @@ void Game::event(ACTION a)
             if (!board->isMovePossible(currentPiece))
             {
                 currentPiece.y--;
-                checkState(); //check if the piece is set
+                checkState();
             }
             break;
         }
