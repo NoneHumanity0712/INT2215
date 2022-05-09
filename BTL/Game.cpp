@@ -30,6 +30,11 @@ void Game::swap(Piece &a, Piece &b)
 
 }
 
+int Game::clearedLines()
+{
+    return board->line_cleared;
+}
+
 void Game::createNewPiece()
 {
     currentPiece.type = nextPiece.type;
@@ -52,7 +57,7 @@ void Game::createNewPiece()
     }
     
     //randomly create new piece
-    nextPiece.type = getRandom(0, 6);
+    while (nextPiece.type == currentPiece.type) nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
 }
 
@@ -79,6 +84,7 @@ void Game::event(ACTION a)
                 currentPiece.y--;
                 checkState();
             }
+            std::cout << "Action: Soft Drop" << std::endl;
             break;
         }
         
@@ -87,6 +93,7 @@ void Game::event(ACTION a)
             currentPiece.x--;
             if(!board->isMovePossible(currentPiece))
                 currentPiece.x++;
+            std::cout << "Action: Move Left" << std::endl;
             break;
         }
 
@@ -95,6 +102,7 @@ void Game::event(ACTION a)
             currentPiece.x++;
             if (!board->isMovePossible(currentPiece))
                 currentPiece.x--;
+            std::cout << "Action: Move Right" << std::endl;
             break;
         }
 
@@ -104,6 +112,7 @@ void Game::event(ACTION a)
                 currentPiece.y++;
             currentPiece.y--;
             checkState();
+            std::cout << "Action: Hard Drop" << std::endl;
             break;
         }
 
@@ -112,6 +121,7 @@ void Game::event(ACTION a)
             currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
             if (!board->isMovePossible(currentPiece))
                 currentPiece.rotation = (currentPiece.rotation + 3) % 4;
+            std::cout << "Action: Rotate" << std::endl;
             break;
         }
 
@@ -148,6 +158,8 @@ void Game::event(ACTION a)
             }
 
             used_hold_block = true;
+            std::cout << "Action: Hold" << std::endl;
+            break;
         }
     }
 }
@@ -200,6 +212,7 @@ void Game::pieceFalling()
 void Game::drawBackground()
 {
     background.render(0, 0, &background_pic);
+    //texture line_count;
     //std::cout << "drawing background" << std::endl;
 }
 

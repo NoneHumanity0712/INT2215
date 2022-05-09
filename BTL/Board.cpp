@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include <iostream>
 
 Board::Board()
 {
@@ -71,7 +72,12 @@ void Board::deleteFullLine()
         {
             if (isBlockFree(row, col)) isFilled = false;
         }
-        if (isFilled) deleteLine(row);
+        if (isFilled)
+        {
+            deleteLine(row);
+            line_cleared++;
+            std::cout << "Lines: " << line_cleared << std::endl;
+        }
     }
 }
 

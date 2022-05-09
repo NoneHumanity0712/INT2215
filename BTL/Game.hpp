@@ -32,6 +32,7 @@ public:
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
+    int clearedLines();
 
 private:
     bool first_time_hold;

@@ -30,6 +30,7 @@ public:
     bool isMovePossible(Piece piece);
     void storePiece(Piece piece);
     void deleteFullLine();
+    unsigned int line_cleared = 0;
     bool gameOver();
 };
 

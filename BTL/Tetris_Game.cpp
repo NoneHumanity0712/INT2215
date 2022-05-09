@@ -2,66 +2,48 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-//#include "board.hpp"
 #include "game.hpp"
 #include "SDL_utils.hpp"
 #include "render.hpp"
-#include "texture.hpp"
-//#include "input.hpp"
 
 //using namespace std;
 
 const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
-const int wait_time = 500;    //0.1 second
 
 int main(int argc, char **argv)
 {
     input *manager = new input;
-    //std::cout << "input" << std::endl;
     render rRenderer;
 
     if(initSDL());
     {
         loadGraphic();
-        //std::cout << "loading graphic" << std::endl;
-
-        //rRenderer.updateScreen();
 
         int countdown = 3; // 3... 2... 1...
         texture countdown_text;
         while (countdown > 0)
         {
             rRenderer.clearScreen();
-            //std::cout << "clearing screen" << std::endl;
 
             countdown_text.loadText(std::to_string(countdown), default_text_color);
-            //std::cout << "loading text" << std::endl;
 
             rRenderer.renderTexture(&countdown_text, windowWidth/2, windowHeight/2);
-            //std::cout << "rendering texture" << std::endl;
 
             rRenderer.updateScreen();
-            //std::cout << "updating screen" << std::endl;
 
             SDL_Delay(1000);
             countdown--;
         }
         rRenderer.clearScreen();
-        //std::cout << "clearing screen" << std::endl;`
 
         Game tetrisGame;
 
         tetrisGame.initializeScene();
-        //std::cout << "initializing scence" << std::endl;
-
         tetrisGame.drawScene();
-        //std::cout << "drawing scence" << std::endl;
-
         rRenderer.updateScreen();
-        //std::cout << "updating screen" << std::endl;
-
         manager->clearQueueEvent();
-        //std::cout << "clearing queue event" << std::endl;
+
+        int wait_time = 1000;  //1 second
 
         SDL_Event e;
         unsigned long long time_1 = SDL_GetTicks();
@@ -69,28 +51,23 @@ int main(int argc, char **argv)
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
             unsigned long long time_2 = SDL_GetTicks();
+            //wait_time -= (tetrisGame.clearedLines() / 10) * 100;
+
             while (SDL_PollEvent(&e) != 0)
             {
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
-                //std::cout << "get action from keyboard" << std::endl;
             }
 
             if (time_2 - time_1 >= wait_time)
             {
                 tetrisGame.pieceFalling();
                 time_1 = SDL_GetTicks();
-                //std::cout << "piece falling down" << std::endl;
             }
 
             rRenderer.clearScreen();
-            //std::cout << "clearing screen" << std::endl;
-
             tetrisGame.drawScene();
-            //std::cout << "drawing scene" << std::endl;
-
             rRenderer.updateScreen();
-            //std::cout << "updating screen" << std::endl;
         }
         SDL_Color gameover_text_color = {156, 2, 2, 255};
         texture gameover_text;
@@ -117,7 +94,7 @@ int main(int argc, char **argv)
         }
     }
     delete manager;
-    std::cout << "Exiting" << std::endl;
+    //std::cout << "Exiting" << std::endl;
     close();
 
     system("pause");
