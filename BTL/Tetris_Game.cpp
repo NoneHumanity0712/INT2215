@@ -6,9 +6,9 @@
 #include "SDL_utils.hpp"
 #include "render.hpp"
 
-//using namespace std;
-
 const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
+
+//using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -50,6 +50,10 @@ int main(int argc, char **argv)
 
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
+            texture cleared_line;
+            std::string lines = tetrisGame.clearedLines();
+            cleared_line.loadText(lines, default_text_color);
+
             unsigned long long time_2 = SDL_GetTicks();
             //wait_time -= (tetrisGame.clearedLines() / 10) * 100;
 
@@ -67,6 +71,7 @@ int main(int argc, char **argv)
 
             rRenderer.clearScreen();
             tetrisGame.drawScene();
+            rRenderer.renderTexture(&cleared_line, 174, 560);
             rRenderer.updateScreen();
         }
         SDL_Color gameover_text_color = {156, 2, 2, 255};

@@ -2,6 +2,7 @@
 #define GAME
 
 #include <iostream>
+#include <string>
 #include <ctime>
 #include <SDL.h>
 #include <cstdlib>
@@ -10,15 +11,16 @@
 #include "piece.hpp"
 #include "input.hpp"
 #include "texture.hpp"
+#include "render.hpp"
 
 const int x_nextPiece = 704;
 const int y_nextPiece = 124;
 const Uint8 transparency = 100; //set transparency for ghost piece
 
-const int hold_box_x = 104;                                     // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 124;                                      // Vertical distance from top left corner; in pixels
+const int hold_box_x = 104;            // Horizontal distance from top left corner; in pixels
+const int hold_box_y = 124;            // Vertical distance from top left corner; in pixels
 
-extern SDL_Renderer *gRenderer; 
+extern SDL_Renderer *gRenderer;
 
 class Game
 {
@@ -32,7 +34,7 @@ public:
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
-    int clearedLines();
+    std::string clearedLines();
 
 private:
     bool first_time_hold;

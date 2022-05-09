@@ -30,9 +30,10 @@ void Game::swap(Piece &a, Piece &b)
 
 }
 
-int Game::clearedLines()
+std::string Game::clearedLines()
 {
-    return board->line_cleared;
+    std::string temp = "Lines: " + std::to_string(board->line_cleared);
+    return temp;
 }
 
 void Game::createNewPiece()
@@ -230,7 +231,6 @@ void Game::drawBoard()
             }
         }
     }
-    //std::cout << "drawing board" << std::endl;
 }
 
 void Game::drawCurrentPiece (Piece piece)
