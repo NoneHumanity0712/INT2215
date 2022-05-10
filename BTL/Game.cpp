@@ -121,7 +121,11 @@ void Game::event(ACTION a)
         {
             currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
             if (!board->isMovePossible(currentPiece))
+            {
+                //if (currentPiece.x < 0) currentPiece.x++;
+                //else if (currentPiece.x >= playfield_width - 1) currentPiece.x--;
                 currentPiece.rotation = (currentPiece.rotation + 3) % 4;
+            }
             std::cout << "Action: Rotate" << std::endl;
             break;
         }

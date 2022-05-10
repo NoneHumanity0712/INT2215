@@ -1,6 +1,3 @@
 ﻿  Game.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(170,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Tetris_Game.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Tetris_Game.cpp(18,18): warning C4390: ';': empty controlled statement found; is this the intent?
-  Generating Code...
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(174,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Tetris_Game.vcxproj -> C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Tetris_Game\x64\Debug\Tetris_Game.exe
