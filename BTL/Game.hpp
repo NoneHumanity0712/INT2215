@@ -35,6 +35,7 @@ public:
     void pieceFalling();
     void swap(Piece &a, Piece &b);
     std::string clearedLines();
+    bool pause_game;
 
 private:
     bool first_time_hold;
@@ -49,6 +50,8 @@ private:
     SDL_Rect tetromino_graphic_boxes[7];
     texture background;
     SDL_Rect background_pic;
+    texture button_graphic;
+    SDL_Rect buttons[TOTAL_BUTTONS][BUTTON_SPRITE_TOTAL];
 
     void drawBackground();
     void drawBoard();

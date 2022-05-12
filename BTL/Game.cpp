@@ -166,6 +166,18 @@ void Game::event(ACTION a)
             std::cout << "Action: Hold" << std::endl;
             break;
         }
+
+        case ACTION::pause
+        {
+            pause_game = pause;
+            if (pause_game)
+            {
+                //swap the pause icon and continue icon on menu button
+                SDL_Rect temp = buttons[0][0];
+                buttons[0][0] = buttons[0][2];
+                buttons[0][2] = temp;
+            }
+        }
     }
 }
 
@@ -197,6 +209,18 @@ void Game::initializeScene()
     background_pic.y = 0;
     background_pic.w = windowWidth;
     background_pic.h = windowHeight;
+
+    button_graphic.loadImage("");
+    for (int i = 0; i < TOTAL_BUTTONS; i++)
+    {
+        for (int j = 0; j < BUTTON_SPRITE_TOTAL; j++)
+        {
+            buttons[i][j].x = BUTTON_WIDTH*j;
+            buttons[i][j].y = BUTTON_HEIGHT*i;
+            buttons[i][j].w = BUTTON_WIDTH;
+            buttons[i][j].h = BUTTON_HEIGHT;
+        }
+    }
 }
 
 bool Game::gameOver()
@@ -219,6 +243,9 @@ void Game::drawBackground()
     background.render(0, 0, &background_pic);
     //texture line_count;
     //std::cout << "drawing background" << std::endl;
+
+    button_graphic.render(780, 50, &buttons[0][input::Buttons[0].CurrentSprite]); //render pause button
+    button_graphic.render(820, 50, &buttons[1][input::Buttons[1].CurrentSprite]); //render menu button
 }
 
 void Game::drawBoard()

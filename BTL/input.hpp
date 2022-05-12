@@ -2,20 +2,25 @@
 #define INPUT
 
 #include <SDL.h>
+#include "button.hpp"
 
-enum class ACTION{stay, down, left, right, drop, rotate, hold}; //input.hpp
+enum ACTION{stay, down, left, right, drop, rotate, hold, pause, menu};
 
 class input
 {
 private:
     bool quit = false;
-    ACTION action = ACTION::stay; 
+    ACTION action = ACTION::stay;
+    void setButtonPos();
+
 public:
-    void clearQueueEvent(); //input.hpp
-    ACTION inputAction(); //input.hpp
-    bool ExitGame(); //input.hpp
-    void pollAction(SDL_Event e); //input.hpp
-    void exit(); //input.hpp
+    bool pause = false;
+    button Buttons[TOTAL_BUTTONS];
+    void clearQueueEvent();
+    ACTION inputAction();
+    bool ExitGame();
+    void pollAction(SDL_Event e);
+    void exit(); 
 };
 
 #endif

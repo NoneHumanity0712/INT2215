@@ -63,7 +63,7 @@ int main(int argc, char **argv)
                 tetrisGame.event(manager->inputAction());
             }
 
-            if (time_2 - time_1 >= wait_time)
+            if (time_2 - time_1 >= wait_time && !tetrisGame.pause_game)
             {
                 tetrisGame.pieceFalling();
                 time_1 = SDL_GetTicks();

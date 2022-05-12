@@ -329,7 +329,7 @@ void LButton::handleEvent( SDL_Event* e )
 				case SDL_MOUSEBUTTONDOWN:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
 				break;
-				
+
 				case SDL_MOUSEBUTTONUP:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
 				break;
