@@ -201,7 +201,7 @@ void Game::initializeScene()
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
 
-    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism.png");
+    tetromino_graphic.loadImage(minoes_path_neu);
     for (int i = 0; i < 7; i++)
     {
         tetrominoes[i].x = 28*i;
@@ -210,7 +210,7 @@ void Game::initializeScene()
         tetrominoes[i].h = 28;
     }
 
-    background.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background_Neumorphism.png");
+    background.loadImage(background_path_neu);
     background_pic.x = 0;
     background_pic.y = 0;
     background_pic.w = windowWidth;

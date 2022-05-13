@@ -330,4 +330,8 @@ const int hold_box_y = 120;            // Vertical distance from top left corner
 
 const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
 
+std::string minoes_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism.png";
+std::string background_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background_Neumorphism.png";
+
+std::string font_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf";
 #endif
