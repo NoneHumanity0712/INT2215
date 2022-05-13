@@ -10,14 +10,6 @@ button::button()
     CurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
-button::button()
-{
-	Position.x = 0;
-	Position.y = 0;
-
-	CurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
-}
-
 void button::handleEvent(SDL_Event *e)
 {
     //If mouse event happened
@@ -54,7 +46,7 @@ void button::handleEvent(SDL_Event *e)
 		//Mouse is outside button
 		if( !inside )
 		{
-			mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
+			CurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 		}
 		//Mouse is inside button
 		else

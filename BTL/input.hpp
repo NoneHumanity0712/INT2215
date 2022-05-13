@@ -6,16 +6,21 @@
 
 enum ACTION{stay, down, left, right, drop, rotate, hold, pause, menu};
 
+const int menu_x = 820;
+const int pause_x = 720;
+const int button_y = 50;
+
+//button pauseButton, menuButton;
+
 class input
 {
 private:
     bool quit = false;
     ACTION action = ACTION::stay;
-    void setButtonPos();
+    //void setButtonPos();
 
 public:
-    bool pause = false;
-    button Buttons[TOTAL_BUTTONS];
+    bool isPause = false;
     void clearQueueEvent();
     ACTION inputAction();
     bool ExitGame();

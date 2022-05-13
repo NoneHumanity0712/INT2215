@@ -11,11 +11,13 @@ ACTION input::inputAction()
     return action;
 }
 
+/*
 void input::setButtonPos()
 {
-    Buttons[0].setPosition(780, 50); //pause button
-    Buttons[1].setPosition(820, 50); //menu button
+    pauseButton.setPosition(pause_x, button_y); //pause button
+    menuButton.setPosition(menu_x, button_y); //menu button
 }
+*/
 
 bool input::ExitGame()
 {
@@ -60,29 +62,33 @@ void input::pollAction(SDL_Event e)
             break;
         }
     }
+    /*
     else if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
     {
         int x, y;
         SDL_GetMouseState(&x, &y);
-        for (int i = 0; i < TOTAL_BUTTONS; i++)
+        if (x >= pauseButton.Position.x && x <= pauseButton.Position.x + BUTTON_WIDTH
+            && y >= pauseButton.Position.y && y <= pauseButton.Position.y + BUTTON_HEIGHT)
         {
-            if (x >= Buttons[i].Position.x && x <= Buttons[0].Position.x + BUTTON_WIDTH
-                && y >= Buttons[i].Position.y && y << Buttons[i].Position.y + BUTTON_HEIGHT)
+            //click
+            if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                switch (e.type)
-                {
-                    case SDL_MOUSEBUTTONDOWN:
-                    case SDL_MOUSEBUTTONUP:
-                    {
-                        action = static_cast<ACTION>(ACTION::pause + i);
-                        if (!pause) pause = true;
-                        else pause = false;
-                        break;
-                    }
-                }
+                action = ACTION::pause;
+                if (isPause) isPause = false;
+                else isPause = true;
+            }
+        }
+        else if (x >= menuButton.Position.x && x <= menuButton.Position.x + BUTTON_WIDTH
+            && y >= menuButton.Position.y && y <= menuButton.Position.y + BUTTON_HEIGHT)
+        {
+            //click
+            if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                action = ACTION::menu;
             }
         }
     }
+    */
     else action = ACTION::stay;
 }
 

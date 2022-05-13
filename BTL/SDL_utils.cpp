@@ -105,7 +105,7 @@ bool initSDL()
 //return true if load all graphics (image, gFont) successfully 
 void loadGraphic()
 {
-    gFont = TTF_OpenFont("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Classique-Saigon_0.ttf", 42);
+    gFont = TTF_OpenFont("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf", 28);
     if (gFont == nullptr)
         logSDL_ttf_Error(std::cout, "Could not load font", true);
 }
