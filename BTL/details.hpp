@@ -1,6 +1,9 @@
 #ifndef DETAILS
 #define DETAILS
 
+#include <iostream>
+#include <SDL.h>
+
 /* PIECE */
 
 const char tetrominoes_name[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
