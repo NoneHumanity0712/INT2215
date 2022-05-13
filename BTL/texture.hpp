@@ -6,10 +6,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
-const int windowWidth = 960;
-const int windowHeight = 720;
-const char title[] = "TETRIS GAME";
+#include "details.hpp"
 
 class texture
 {

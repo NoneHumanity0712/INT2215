@@ -12,13 +12,7 @@
 #include "input.hpp"
 #include "texture.hpp"
 #include "render.hpp"
-
-const int x_nextPiece = 720;
-const int y_nextPiece = 120;
-const Uint8 transparency = 100; //set transparency for ghost piece
-
-const int hold_box_x = 100;            // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 120;            // Vertical distance from top left corner; in pixels
+#include "details.hpp"
 
 extern SDL_Renderer *gRenderer;
 

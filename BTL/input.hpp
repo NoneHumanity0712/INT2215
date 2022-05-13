@@ -6,10 +6,6 @@
 
 enum ACTION{stay, down, left, right, drop, rotate, hold, pause, menu};
 
-const int menu_x = 820;
-const int pause_x = 720;
-const int button_y = 50;
-
 //button pauseButton, menuButton;
 
 class input

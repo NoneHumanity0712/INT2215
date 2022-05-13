@@ -2,10 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_ttf.h>
-
-const Uint8 backgroundColor_R = 216; //Red channel color for background
-const Uint8 backgroundColor_G = 236; //Green channel color for background
-const Uint8 backgroundColor_B = 233; //Blue channel color for background 
+#include "details.hpp"
 
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;
