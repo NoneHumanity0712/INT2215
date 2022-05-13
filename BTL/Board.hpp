@@ -5,7 +5,7 @@
 #include <vector>
 
 const int width_to_playfield = 340;     // in pixels
-const int height_to_playfield = 124;     // in pixels
+const int height_to_playfield = 120;     // in pixels
 const int block_size = 28;              // in pixels
 const int playfield_width = 10;         // in blocks
 const int true_playfield_height = 20;   // in blocks
