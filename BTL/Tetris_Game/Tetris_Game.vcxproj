@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="..\Board.hpp" />
     <ClInclude Include="..\button.hpp" />
+    <ClInclude Include="..\details.hpp" />
     <ClInclude Include="..\Game.hpp" />
     <ClInclude Include="..\input.hpp" />
     <ClInclude Include="..\Piece.hpp" />
