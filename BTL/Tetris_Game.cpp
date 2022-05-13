@@ -6,8 +6,6 @@
 #include "SDL_utils.hpp"
 #include "render.hpp"
 
-const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
-
 //using namespace std;
 
 int main(int argc, char **argv)
