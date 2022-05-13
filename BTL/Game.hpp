@@ -13,12 +13,12 @@
 #include "texture.hpp"
 #include "render.hpp"
 
-const int x_nextPiece = 704;
-const int y_nextPiece = 124;
+const int x_nextPiece = 720;
+const int y_nextPiece = 120;
 const Uint8 transparency = 100; //set transparency for ghost piece
 
-const int hold_box_x = 104;            // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 124;            // Vertical distance from top left corner; in pixels
+const int hold_box_x = 100;            // Horizontal distance from top left corner; in pixels
+const int hold_box_y = 120;            // Vertical distance from top left corner; in pixels
 
 extern SDL_Renderer *gRenderer;
 
@@ -36,6 +36,7 @@ public:
     void swap(Piece &a, Piece &b);
     std::string clearedLines();
     bool pause_game;
+    int falling_speed();
 
 private:
     bool first_time_hold;
@@ -46,15 +47,23 @@ private:
     Piece holdPiece {0, 0};
     Piece nextPiece {0, 0};
     std::queue<Piece> nextPieces;
+
     texture tetromino_graphic;
-    SDL_Rect tetromino_graphic_boxes[7];
+    SDL_Rect tetrominoes[7];
+
     texture background;
     SDL_Rect background_pic;
-    texture button_graphic;
-    SDL_Rect buttons[TOTAL_BUTTONS][BUTTON_SPRITE_TOTAL];
+
+    /*
+    texture pause_button_graphic;
+    SDL_Rect pause_button[6];
+    texture menu_button_graphic;
+    SDL_Rect menu_button[4];
+    */
 
     void drawBackground();
     void drawBoard();
+    //void drawButton();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
     void drawHoldPiece(Piece piece);

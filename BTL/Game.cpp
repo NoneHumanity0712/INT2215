@@ -36,6 +36,13 @@ std::string Game::clearedLines()
     return temp;
 }
 
+int Game::falling_speed()
+{
+    int speed = 1000 - (board->line_cleared/10)*100;
+    if (speed < 100) speed = 50;
+    return speed;
+}
+
 void Game::createNewPiece()
 {
     currentPiece.type = nextPiece.type;
@@ -167,17 +174,17 @@ void Game::event(ACTION a)
             break;
         }
 
-        case ACTION::pause
-        {
-            pause_game = pause;
-            if (pause_game)
-            {
+        //case ACTION::pause:
+        //{
+          //  pause_game = pause;
+          //  if (pause_game)
+           // {
                 //swap the pause icon and continue icon on menu button
-                SDL_Rect temp = buttons[0][0];
-                buttons[0][0] = buttons[0][2];
-                buttons[0][2] = temp;
-            }
-        }
+         //       SDL_Rect temp = buttons[0][0];
+         //       buttons[0][0] = buttons[0][2];
+          //      buttons[0][2] = temp;
+          //  }
+        //}
     }
 }
 
@@ -194,33 +201,40 @@ void Game::initializeScene()
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
 
-    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-sprite.png");
-
+    tetromino_graphic.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism.png");
     for (int i = 0; i < 7; i++)
     {
-        tetromino_graphic_boxes[i].x = 28*i;
-        tetromino_graphic_boxes[i].y = 0;
-        tetromino_graphic_boxes[i].w = 28;
-        tetromino_graphic_boxes[i].h = 28;
+        tetrominoes[i].x = 28*i;
+        tetrominoes[i].y = 0;
+        tetrominoes[i].w = 28;
+        tetrominoes[i].h = 28;
     }
 
-    background.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background.png");
+    background.loadImage("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background_Neumorphism.png");
     background_pic.x = 0;
     background_pic.y = 0;
     background_pic.w = windowWidth;
     background_pic.h = windowHeight;
 
-    button_graphic.loadImage("");
-    for (int i = 0; i < TOTAL_BUTTONS; i++)
+    /*
+    pause_button_graphic.loadImage("");
+    for (int i = 0; i < 6; i++)
     {
-        for (int j = 0; j < BUTTON_SPRITE_TOTAL; j++)
-        {
-            buttons[i][j].x = BUTTON_WIDTH*j;
-            buttons[i][j].y = BUTTON_HEIGHT*i;
-            buttons[i][j].w = BUTTON_WIDTH;
-            buttons[i][j].h = BUTTON_HEIGHT;
-        }
+        pause_button[i].x = BUTTON_WIDTH*i;
+        pause_button[i].y = 0;
+        pause_button[i].w = BUTTON_WIDTH;
+        pause_button[i].h = BUTTON_HEIGHT;
     }
+
+    menu_button_graphic.loadImage("");
+    for (int i = 0; i < 4; i++)
+    {
+        menu_button[i].x = BUTTON_WIDTH*i;
+        menu_button[i].y = 0;
+        menu_button[i].w = BUTTON_WIDTH;
+        menu_button[i].h = BUTTON_HEIGHT;
+    }
+    */
 }
 
 bool Game::gameOver()
@@ -241,16 +255,11 @@ void Game::pieceFalling()
 void Game::drawBackground()
 {
     background.render(0, 0, &background_pic);
-    //texture line_count;
-    //std::cout << "drawing background" << std::endl;
-
-    button_graphic.render(780, 50, &buttons[0][input::Buttons[0].CurrentSprite]); //render pause button
-    button_graphic.render(820, 50, &buttons[1][input::Buttons[1].CurrentSprite]); //render menu button
 }
 
 void Game::drawBoard()
 {
-    for (int row = 0; row < playfield_height; row++)
+    for (int row = playfield_height - true_playfield_height; row < playfield_height; row++)
     {
         for (int col = 0; col < playfield_width; col++)
         {
@@ -258,11 +267,29 @@ void Game::drawBoard()
             {
                 tetromino_graphic.render(width_to_playfield + col*block_size,
                 height_to_playfield + (row -(playfield_height-true_playfield_height))*block_size,
-                &tetromino_graphic_boxes[board->getTetromino(row,col)]);
+                &tetrominoes[board->getTetromino(row,col)]);
             }
         }
     }
 }
+
+/*
+void Game::drawButton()
+{
+    //draw menu button
+    menu_button_graphic.render(menu_x, button_y, &menu_button[menuButton.CurrentSprite]);
+
+    //draw pause button
+    if (!pause_game) //game is not pausing
+        pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
+    else if (pause_game)
+    {
+        if (pauseButton.CurrentSprite == 3) //mouse down
+            pause_button_graphic.render(pause_x, button_y, &pause_button[0]);
+        else pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite + 3]);
+    }
+}
+*/
 
 void Game::drawCurrentPiece (Piece piece)
 {
@@ -276,7 +303,7 @@ void Game::drawCurrentPiece (Piece piece)
             {
                 tetromino_graphic.render(width_to_playfield + (col + piece.x)*block_size,
                 height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
-                &tetromino_graphic_boxes[piece.type]);
+                &tetrominoes[piece.type]);
             }
         }
     }
@@ -295,11 +322,11 @@ void Game::drawGhostPiece (Piece piece)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
-            if (ghostPiece.getTetromino(row, col) != 0)
+            if (ghostPiece.getTetromino(row, col) != 0 && (row + ghostPiece.y + 1) > (playfield_height - true_playfield_height))
             {
                 tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
                 height_to_playfield + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
-                &tetromino_graphic_boxes[ghostPiece.type]);
+                &tetrominoes[ghostPiece.type]);
             }
         }
     }
@@ -318,7 +345,7 @@ void Game::drawHoldPiece (Piece piece)
             if (piece.getTetromino(row, col) != 0)
             {
                 tetromino_graphic.render(hold_box_x + col*block_size,
-                hold_box_y + row*block_size, &tetromino_graphic_boxes[piece.type]);
+                hold_box_y + row*block_size, &tetrominoes[piece.type]);
             }
         }
     }
@@ -337,7 +364,7 @@ void Game::drawNextPiece (Piece piece)
             if (piece.getTetromino(row, col) != 0)
             {
                 tetromino_graphic.render(x_nextPiece + col*block_size,
-                    y_nextPiece + row*block_size, &tetromino_graphic_boxes[piece.type]);
+                    y_nextPiece + row*block_size, &tetrominoes[piece.type]);
             }
         }
     }
