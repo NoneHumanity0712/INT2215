@@ -172,9 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\background.png" />
+    <Image Include="..\background_Neumorphism.png" />
+    <Image Include="..\minoes-neumorphism.png" />
     <Image Include="..\minoes-sprite.png" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="..\Quicksand-Bold.ttf" />
     <Font Include="..\Classique-Saigon_0.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

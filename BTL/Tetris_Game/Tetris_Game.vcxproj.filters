@@ -84,9 +84,18 @@
     <Image Include="..\background.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\background_Neumorphism.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\minoes-neumorphism.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Classique-Saigon_0.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="..\Quicksand-Bold.ttf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>
