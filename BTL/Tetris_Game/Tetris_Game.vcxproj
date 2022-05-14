@@ -173,9 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\background.png" />
-    <Image Include="..\background_Neumorphism.png" />
-    <Image Include="..\minoes-neumorphism.png" />
+    <Image Include="..\minoes-neumorphism_dark.png" />
+    <Image Include="..\minoes-neumorphism_light.png" />
     <Image Include="..\minoes-sprite.png" />
+    <Image Include="..\Neumorphism_dark.png" />
+    <Image Include="..\Neumorphism_light.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf" />

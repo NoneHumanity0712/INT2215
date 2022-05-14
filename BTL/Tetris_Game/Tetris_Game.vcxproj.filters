@@ -87,10 +87,16 @@
     <Image Include="..\background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\background_Neumorphism.png">
+    <Image Include="..\minoes-neumorphism_dark.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\minoes-neumorphism.png">
+    <Image Include="..\minoes-neumorphism_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Neumorphism_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Neumorphism_light.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
