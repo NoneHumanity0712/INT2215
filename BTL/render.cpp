@@ -2,7 +2,6 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "details.hpp"
 
 SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gFont = nullptr;

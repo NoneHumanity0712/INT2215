@@ -193,6 +193,7 @@ void Game::initializeScene()
     srand(time(0));
     first_time_hold = true;
     used_hold_block = false;
+    isLightMode = false;
 
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
@@ -201,7 +202,21 @@ void Game::initializeScene()
     nextPiece.x = x_nextPiece;
     nextPiece.y = y_nextPiece;
 
-    tetromino_graphic.loadImage(minoes_path_neu);
+
+    if (isLightMode)
+    {
+        minoes_path = minoes_path_light;
+        background_path = background_path_light;
+        text_color = text_color_light;
+    }
+    else
+    {
+        minoes_path = minoes_path_dark;
+        background_path = background_path_dark;
+        text_color = text_color_dark;
+    }
+
+    tetromino_graphic.loadImage(minoes_path);
     for (int i = 0; i < 7; i++)
     {
         tetrominoes[i].x = 28*i;
@@ -210,7 +225,7 @@ void Game::initializeScene()
         tetrominoes[i].h = 28;
     }
 
-    background.loadImage(background_path_neu);
+    background.loadImage(background_path);
     background_pic.x = 0;
     background_pic.y = 0;
     background_pic.w = windowWidth;

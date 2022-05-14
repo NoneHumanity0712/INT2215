@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 
             tetrisGame.drawScene();
 
-            countdown_text.loadText(std::to_string(countdown), default_text_color);
+            countdown_text.loadText(std::to_string(countdown), tetrisGame.text_color);
 
             rRenderer.renderTexture(&countdown_text, windowWidth/2, windowHeight/2);
 
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
 
             texture cleared_line;
             std::string lines = tetrisGame.clearedLines();
-            cleared_line.loadText(lines, default_text_color);
+            cleared_line.loadText(lines, tetrisGame.text_color);
 
             texture speed;
             std::string Speed = "Speed: " + std::to_string((1000 - wait_time) / 100);
-            speed.loadText(Speed, default_text_color);
+            speed.loadText(Speed, tetrisGame.text_color);
 
             unsigned long long time_2 = SDL_GetTicks();
 

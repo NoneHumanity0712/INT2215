@@ -2,6 +2,7 @@
 #define DETAILS
 
 #include <iostream>
+#include <string>
 #include <SDL.h>
 
 /* PIECE */
@@ -328,10 +329,15 @@ const Uint8 transparency = 100; //set transparency for ghost piece
 const int hold_box_x = 100;            // Horizontal distance from top left corner; in pixels
 const int hold_box_y = 120;            // Vertical distance from top left corner; in pixels
 
-const SDL_Color default_text_color = {8, 28, 42, 255}; //dark blue
+const SDL_Color text_color_light = {8, 29, 42, 255}; //dark blue
+const SDL_Color text_color_dark = { 255, 240, 238, 255 }; //light blue
 
-std::string minoes_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism.png";
-std::string background_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background_Neumorphism.png";
+static std::string minoes_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_light.png";
+static std::string background_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Neumorphism_light.png";
 
-std::string font_path_neu = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf";
+static std::string minoes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_dark.png";
+static std::string background_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Neumorphism_dark.png";
+
+const char font_path_neu[] = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf";
+
 #endif

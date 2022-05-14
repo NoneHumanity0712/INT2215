@@ -2,7 +2,6 @@
 #define BOARD
 
 #include "Piece.hpp"
-#include "details.hpp"
 #include <vector>
 
 //block status

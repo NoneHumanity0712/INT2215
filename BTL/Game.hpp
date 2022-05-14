@@ -12,7 +12,6 @@
 #include "input.hpp"
 #include "texture.hpp"
 #include "render.hpp"
-#include "details.hpp"
 
 extern SDL_Renderer *gRenderer;
 
@@ -32,7 +31,12 @@ public:
     bool pause_game;
     int falling_speed();
 
+    std::string minoes_path;
+    std::string background_path;
+    SDL_Color text_color;
+
 private:
+    bool isLightMode;
     bool first_time_hold;
     bool used_hold_block;
     Board* board;

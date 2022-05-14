@@ -4,7 +4,6 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "render.hpp"
-#include "texture.hpp"
 
 SDL_Window* gWindow = nullptr;
 texture tetromino_graphic;
