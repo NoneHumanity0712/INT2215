@@ -5,6 +5,7 @@
 #include <cstdlib>
 
 extern SDL_Renderer* gRenderer;
+button pauseButton(pause_x, button_y);
 
 Game::Game()
 {
@@ -73,9 +74,9 @@ void Game::drawScene()
 {
     drawBackground();
     drawBoard();
-    drawCurrentPiece(currentPiece);
     if (!first_time_hold) drawHoldPiece(holdPiece);
     if (!board->gameOver()) drawGhostPiece(currentPiece);
+    drawCurrentPiece(currentPiece);
     drawNextPiece(nextPiece);
 }
 
@@ -86,105 +87,122 @@ void Game::event(ACTION a)
     {
         case ACTION::down:
         {
-            currentPiece.y++;
-            if (!board->isMovePossible(currentPiece))
+            if (!pause_game)
             {
-                currentPiece.y--;
-                checkState();
+                currentPiece.y++;
+                if (!board->isMovePossible(currentPiece))
+                {
+                    currentPiece.y--;
+                    checkState();
+                }
+                std::cout << "Action: Soft Drop" << std::endl;
             }
-            std::cout << "Action: Soft Drop" << std::endl;
             break;
         }
         
         case ACTION::left:
         {
-            currentPiece.x--;
-            if(!board->isMovePossible(currentPiece))
-                currentPiece.x++;
-            std::cout << "Action: Move Left" << std::endl;
+            if (!pause_game)
+            {
+                currentPiece.x--;
+                if(!board->isMovePossible(currentPiece))
+                    currentPiece.x++;
+                std::cout << "Action: Move Left" << std::endl;
+
+            }
             break;
         }
 
         case ACTION::right:
         {
-            currentPiece.x++;
-            if (!board->isMovePossible(currentPiece))
-                currentPiece.x--;
-            std::cout << "Action: Move Right" << std::endl;
+            if (!pause_game)
+            {
+                currentPiece.x++;
+                if (!board->isMovePossible(currentPiece))
+                    currentPiece.x--;
+                std::cout << "Action: Move Right" << std::endl;
+            }
             break;
         }
 
         case ACTION::drop:
         {
-            while (board->isMovePossible(currentPiece))
-                currentPiece.y++;
-            currentPiece.y--;
-            checkState();
-            std::cout << "Action: Hard Drop" << std::endl;
+            if (!pause_game)
+            {
+                while (board->isMovePossible(currentPiece))
+                    currentPiece.y++;
+                currentPiece.y--;
+                checkState();
+                std::cout << "Action: Hard Drop" << std::endl;
+            }
             break;
         }
 
         case ACTION::rotate:
         {
-            currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
-            if (!board->isMovePossible(currentPiece))
+            if (!pause_game)
             {
-                //if (currentPiece.x < 0) currentPiece.x++;
-                //else if (currentPiece.x >= playfield_width - 1) currentPiece.x--;
-                currentPiece.rotation = (currentPiece.rotation + 3) % 4;
+                currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
+                if (!board->isMovePossible(currentPiece))
+                {
+                    //if (currentPiece.x < 0) currentPiece.x++;
+                    //else if (currentPiece.x >= playfield_width - 1) currentPiece.x--;
+                    currentPiece.rotation = (currentPiece.rotation + 3) % 4;
+                }
+                std::cout << "Action: Rotate" << std::endl;
             }
-            std::cout << "Action: Rotate" << std::endl;
             break;
         }
 
         case ACTION::hold:
         {
-            if (first_time_hold)
+            if (!pause_game)
             {
-                holdPiece = Piece(currentPiece);
-                holdPiece.rotation = 0;
-                createNewPiece();
-                first_time_hold = false;
+                if (first_time_hold)
+                {
+                    holdPiece = Piece(currentPiece);
+                    holdPiece.rotation = 0;
+                    createNewPiece();
+                    first_time_hold = false;
+                    used_hold_block = true;
+                }
+                else if (!used_hold_block)
+                {
+                    swap(currentPiece, holdPiece);
+                    holdPiece.rotation = 0;
+                    currentPiece.y = currentPiece.getBeginYPos();
+                    currentPiece.x = playfield_width/2 + currentPiece.getBeginXPos();
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    currentPiece.y++;
+                    if (!board->isMovePossible(currentPiece))
+                        currentPiece.y--;
+                }
+
+                if (currentPiece.type > 1)
+                {
+                    currentPiece.y++;
+                    if (!board->isMovePossible(currentPiece))
+                        currentPiece.y--;
+                }
+
                 used_hold_block = true;
+                std::cout << "Action: Hold" << std::endl;
             }
-            else if (!used_hold_block)
-            {
-                swap(currentPiece, holdPiece);
-                holdPiece.rotation = 0;
-                currentPiece.y = currentPiece.getBeginYPos();
-                currentPiece.x = playfield_width/2 + currentPiece.getBeginXPos();
-            }
-
-            for (int i = 0; i < 2; i++)
-            {
-                currentPiece.y++;
-                if (!board->isMovePossible(currentPiece))
-                    currentPiece.y--;
-            }
-
-            if (currentPiece.type > 1)
-            {
-                currentPiece.y++;
-                if (!board->isMovePossible(currentPiece))
-                    currentPiece.y--;
-            }
-
-            used_hold_block = true;
-            std::cout << "Action: Hold" << std::endl;
             break;
         }
 
-        //case ACTION::pause:
-        //{
-          //  pause_game = pause;
-          //  if (pause_game)
-           // {
-                //swap the pause icon and continue icon on menu button
-         //       SDL_Rect temp = buttons[0][0];
-         //       buttons[0][0] = buttons[0][2];
-          //      buttons[0][2] = temp;
-          //  }
-        //}
+        case ACTION::pause:
+        {
+           if (!pause_game)
+           {
+               pause_game = true;
+           } else pause_game = false;
+           std::cout << "Action: Pause/Unpause" << std::endl;
+           break;
+        }
     }
 }
 
@@ -193,7 +211,8 @@ void Game::initializeScene()
     srand(time(0));
     first_time_hold = true;
     used_hold_block = false;
-    isLightMode = false;
+    isLightMode = true;
+    pause_game = false;
 
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
@@ -208,21 +227,32 @@ void Game::initializeScene()
         minoes_path = minoes_path_light;
         background_path = background_path_light;
         text_color = text_color_light;
+        ghost_minoes_path = ghost_minoes_path_light;
     }
     else
     {
         minoes_path = minoes_path_dark;
         background_path = background_path_dark;
         text_color = text_color_dark;
+        ghost_minoes_path = ghost_minoes_path_dark;
     }
 
     tetromino_graphic.loadImage(minoes_path);
     for (int i = 0; i < 7; i++)
     {
-        tetrominoes[i].x = 28*i;
+        tetrominoes[i].x = block_size*i;
         tetrominoes[i].y = 0;
-        tetrominoes[i].w = 28;
-        tetrominoes[i].h = 28;
+        tetrominoes[i].w = block_size;
+        tetrominoes[i].h = block_size;
+    }
+
+    ghost_tetromino_graphic.loadImage(ghost_minoes_path);
+    for (int i = 0; i < 7; i++)
+    {
+        ghost_tetrominoes[i].x = block_size*i;
+        ghost_tetrominoes[i].y = 0;
+        ghost_tetrominoes[i].w = block_size;
+        ghost_tetrominoes[i].h = block_size;
     }
 
     background.loadImage(background_path);
@@ -231,25 +261,15 @@ void Game::initializeScene()
     background_pic.w = windowWidth;
     background_pic.h = windowHeight;
 
-    /*
-    pause_button_graphic.loadImage("");
+    
+    pause_button_graphic.loadImage(button_path_light);
     for (int i = 0; i < 6; i++)
     {
-        pause_button[i].x = BUTTON_WIDTH*i;
+        pause_button[i].x = button_sprite_size*i;
         pause_button[i].y = 0;
-        pause_button[i].w = BUTTON_WIDTH;
-        pause_button[i].h = BUTTON_HEIGHT;
+        pause_button[i].w = button_sprite_size;
+        pause_button[i].h = button_sprite_size;
     }
-
-    menu_button_graphic.loadImage("");
-    for (int i = 0; i < 4; i++)
-    {
-        menu_button[i].x = BUTTON_WIDTH*i;
-        menu_button[i].y = 0;
-        menu_button[i].w = BUTTON_WIDTH;
-        menu_button[i].h = BUTTON_HEIGHT;
-    }
-    */
 }
 
 bool Game::gameOver()
@@ -288,23 +308,16 @@ void Game::drawBoard()
     }
 }
 
-/*
 void Game::drawButton()
 {
-    //draw menu button
-    menu_button_graphic.render(menu_x, button_y, &menu_button[menuButton.CurrentSprite]);
-
-    //draw pause button
-    if (!pause_game) //game is not pausing
-        pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
-    else if (pause_game)
+    if (!pause_game) pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
+    else
     {
         if (pauseButton.CurrentSprite == 3) //mouse down
             pause_button_graphic.render(pause_x, button_y, &pause_button[0]);
         else pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite + 3]);
     }
 }
-*/
 
 void Game::drawCurrentPiece (Piece piece)
 {
@@ -339,9 +352,9 @@ void Game::drawGhostPiece (Piece piece)
         {
             if (ghostPiece.getTetromino(row, col) != 0 && (row + ghostPiece.y + 1) > (playfield_height - true_playfield_height))
             {
-                tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
+                ghost_tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
                 height_to_playfield + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
-                &tetrominoes[ghostPiece.type]);
+                &ghost_tetrominoes[ghostPiece.type]);
             }
         }
     }

@@ -1,3 +1,6 @@
 ﻿  Game.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(193,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(211,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  button.cpp
+  input.cpp
+  Generating Code...
   Tetris_Game.vcxproj -> C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Tetris_Game\x64\Debug\Tetris_Game.exe

@@ -21,9 +21,18 @@ int main(int argc, char **argv)
         //set up game
         tetrisGame.initializeScene();
         
+        texture cleared_line;
+        std::string lines = tetrisGame.clearedLines();
+        cleared_line.loadText(lines, tetrisGame.text_color);
+
+        texture speed;
+        std::string Speed = "Speed: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
+        speed.loadText(Speed, tetrisGame.text_color);
 
         int countdown = 3; // 3... 2... 1...
         texture countdown_text;
+
+        SDL_Event e;
 
         while (countdown > 0)
         {
@@ -31,9 +40,15 @@ int main(int argc, char **argv)
 
             tetrisGame.drawScene();
 
+            pauseButton.handleEvent(&e);
+            tetrisGame.drawButton();
+
+            rRenderer.renderTexture(&cleared_line, 174, 560);
+            rRenderer.renderTexture(&speed, 174, 600);
+
             countdown_text.loadText(std::to_string(countdown), tetrisGame.text_color);
 
-            rRenderer.renderTexture(&countdown_text, windowWidth/2, windowHeight/2);
+            rRenderer.renderTexture(&countdown_text, windowWidth / 2, windowHeight / 2);
 
             rRenderer.updateScreen();
 
@@ -42,22 +57,19 @@ int main(int argc, char **argv)
         }
         rRenderer.clearScreen();
 
-        rRenderer.updateScreen();
+        //rRenderer.updateScreen();
         manager->clearQueueEvent();
 
-        SDL_Event e;
         unsigned long long time_1 = SDL_GetTicks();
 
         while (!manager->ExitGame() && !tetrisGame.gameOver())
         {
             int wait_time = tetrisGame.falling_speed();
 
-            texture cleared_line;
-            std::string lines = tetrisGame.clearedLines();
+            lines = tetrisGame.clearedLines();
             cleared_line.loadText(lines, tetrisGame.text_color);
 
-            texture speed;
-            std::string Speed = "Speed: " + std::to_string((1000 - wait_time) / 100);
+            Speed = "Speed: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
             speed.loadText(Speed, tetrisGame.text_color);
 
             unsigned long long time_2 = SDL_GetTicks();
@@ -68,7 +80,7 @@ int main(int argc, char **argv)
                 tetrisGame.event(manager->inputAction());
             }
 
-            if (time_2 - time_1 >= wait_time)
+            if (time_2 - time_1 >= wait_time && !tetrisGame.pause_game)
             {
                 tetrisGame.pieceFalling();
                 time_1 = SDL_GetTicks();
@@ -76,8 +88,13 @@ int main(int argc, char **argv)
 
             rRenderer.clearScreen();
             tetrisGame.drawScene();
+
+            pauseButton.handleEvent(&e);
+            tetrisGame.drawButton();
+
             rRenderer.renderTexture(&cleared_line, 174, 560);
             rRenderer.renderTexture(&speed, 174, 600);
+
             rRenderer.updateScreen();
         }
         SDL_Color gameover_text_color = {156, 2, 2, 255};
@@ -92,6 +109,7 @@ int main(int argc, char **argv)
             rRenderer.clearScreen();
 
             tetrisGame.drawScene();
+            tetrisGame.drawButton();
 
             rRenderer.renderTexture(&gameover_text, windowWidth/2, windowHeight/2);
 

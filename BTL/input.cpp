@@ -1,4 +1,5 @@
 #include "input.hpp"
+#include "details.hpp"
 
 void input::clearQueueEvent()
 {
@@ -10,14 +11,6 @@ ACTION input::inputAction()
 {
     return action;
 }
-
-/*
-void input::setButtonPos()
-{
-    pauseButton.setPosition(pause_x, button_y); //pause button
-    menuButton.setPosition(menu_x, button_y); //menu button
-}
-*/
 
 bool input::ExitGame()
 {
@@ -62,33 +55,19 @@ void input::pollAction(SDL_Event e)
             break;
         }
     }
-    /*
-    else if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
+    
+    else if (e.type == SDL_MOUSEBUTTONDOWN)
     {
         int x, y;
         SDL_GetMouseState(&x, &y);
-        if (x >= pauseButton.Position.x && x <= pauseButton.Position.x + BUTTON_WIDTH
-            && y >= pauseButton.Position.y && y <= pauseButton.Position.y + BUTTON_HEIGHT)
+
+        if (x >= (pauseButton.Position.x + button_border) && x <= (pauseButton.Position.x + button_border + button_size)
+            && y >= (pauseButton.Position.y + button_border)  && y <= (pauseButton.Position.y + button_border + button_size))
         {
-            //click
-            if (e.type == SDL_MOUSEBUTTONDOWN)
-            {
-                action = ACTION::pause;
-                if (isPause) isPause = false;
-                else isPause = true;
-            }
-        }
-        else if (x >= menuButton.Position.x && x <= menuButton.Position.x + BUTTON_WIDTH
-            && y >= menuButton.Position.y && y <= menuButton.Position.y + BUTTON_HEIGHT)
-        {
-            //click
-            if (e.type == SDL_MOUSEBUTTONDOWN)
-            {
-                action = ACTION::menu;
-            }
+            action = ACTION::pause;
         }
     }
-    */
+    
     else action = ACTION::stay;
 }
 

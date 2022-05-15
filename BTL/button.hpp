@@ -5,10 +5,6 @@
 #include <stdio.h>
 #include <string>
 
-const int BUTTON_WIDTH = 28;
-const int BUTTON_HEIGHT = 28;
-const int TOTAL_BUTTONS = 2;
-
 enum ButtonSprite
 {
 	BUTTON_SPRITE_MOUSE_OUT = 0,
@@ -25,8 +21,7 @@ class button
     public:
         button();
 
-		//Sets top left position
-		void setPosition( int x, int y );
+		button(int x, int y);
 
 		//Handles mouse event
 		void handleEvent( SDL_Event* e );

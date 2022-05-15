@@ -306,10 +306,18 @@ const int playfield_height = 22;       // The playfield + 2 rows directly above 
 const int board_height = 32;             // distance from botton where the playfield begins; in pixels
 const int matrix_blocks = 5;            //5 x 5 matrix for each piece
 
+
+/* BUTTON */
+
+const int button_sprite_size = 68; // in pixels
+const int button_size = 28;
+const int button_border = (button_sprite_size - button_size)/2;
+static std::string button_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/pause_light.png";
+
 /* INPUT */
-const int menu_x = 820;
-const int pause_x = 720;
-const int button_y = 50;
+//const int menu_x = 820;
+const int pause_x = 800;
+const int button_y = 30;
 
 /* TEXTURE */
 const int windowWidth = 960;
@@ -334,9 +342,11 @@ const SDL_Color text_color_dark = { 255, 240, 238, 255 }; //light blue
 
 static std::string minoes_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_light.png";
 static std::string background_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Neumorphism_light.png";
+static std::string ghost_minoes_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_ghost_light.png";
 
 static std::string minoes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_dark.png";
 static std::string background_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Neumorphism_dark.png";
+static std::string ghost_minoes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_ghost_dark.png";
 
 const char font_path_neu[] = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf";
 

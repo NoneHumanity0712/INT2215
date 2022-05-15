@@ -174,10 +174,13 @@
   <ItemGroup>
     <Image Include="..\background.png" />
     <Image Include="..\minoes-neumorphism_dark.png" />
+    <Image Include="..\minoes-neumorphism_ghost_dark.png" />
+    <Image Include="..\minoes-neumorphism_ghost_light.png" />
     <Image Include="..\minoes-neumorphism_light.png" />
     <Image Include="..\minoes-sprite.png" />
     <Image Include="..\Neumorphism_dark.png" />
     <Image Include="..\Neumorphism_light.png" />
+    <Image Include="..\pause_light.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf" />

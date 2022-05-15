@@ -4,19 +4,18 @@
 #include <SDL.h>
 #include "button.hpp"
 
-enum ACTION{stay, down, left, right, drop, rotate, hold, pause, menu};
+enum ACTION{stay, down, left, right, drop, rotate, hold, pause};
 
-//button pauseButton, menuButton;
+extern button pauseButton;
 
 class input
 {
 private:
     bool quit = false;
     ACTION action = ACTION::stay;
-    //void setButtonPos();
 
 public:
-    bool isPause = false;
+    //bool isPause = false;
     void clearQueueEvent();
     ACTION inputAction();
     bool ExitGame();

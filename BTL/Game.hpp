@@ -27,12 +27,14 @@ public:
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
+    void drawButton();
     std::string clearedLines();
     bool pause_game;
     int falling_speed();
 
     std::string minoes_path;
     std::string background_path;
+    std::string ghost_minoes_path;
     SDL_Color text_color;
 
 private:
@@ -49,19 +51,19 @@ private:
     texture tetromino_graphic;
     SDL_Rect tetrominoes[7];
 
+    texture ghost_tetromino_graphic;
+    SDL_Rect ghost_tetrominoes[7];
+
     texture background;
     SDL_Rect background_pic;
-
-    /*
+    
     texture pause_button_graphic;
     SDL_Rect pause_button[6];
-    texture menu_button_graphic;
-    SDL_Rect menu_button[4];
-    */
+    // texture menu_button_graphic;
+    // SDL_Rect menu_button[4];
 
     void drawBackground();
     void drawBoard();
-    //void drawButton();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
     void drawHoldPiece(Piece piece);

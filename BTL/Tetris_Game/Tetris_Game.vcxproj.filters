@@ -99,6 +99,15 @@
     <Image Include="..\Neumorphism_light.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\minoes-neumorphism_ghost_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\minoes-neumorphism_ghost_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\pause_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Classique-Saigon_0.ttf">
