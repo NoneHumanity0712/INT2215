@@ -297,8 +297,7 @@ const int beginPosition[7][4][2] =
 
 /* BOARD */
 
-const int width_to_playfield = 340;     // in pixels
-const int height_to_playfield = 120;     // in pixels
+const SDL_Point playfield = {340, 120};
 const int block_size = 28;              // in pixels
 const int playfield_width = 10;         // in blocks
 const int true_playfield_height = 20;   // in blocks
@@ -313,11 +312,15 @@ const int button_sprite_size = 68; // in pixels
 const int button_size = 36;
 const int button_border = (button_sprite_size - button_size)/2;
 static std::string button_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/pause_light.png";
+static std::string button_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/pause_dark.png";
+
+/* SWITCH */
+const SDL_Rect themeSwitchRect = {724, 46, 80, 36};
+static std::string switch_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/theme_switch_light.png";
+static std::string switch_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/theme_switch_dark.png";
 
 /* INPUT */
-//const int menu_x = 820;
-const int pause_x = 808;
-const int button_y = 30;
+const SDL_Point pauseButtonPos = {808, 30};
 
 /* TEXTURE */
 const int windowWidth = 960;
@@ -325,17 +328,12 @@ const int windowHeight = 720;
 const char title[] = "TETRIS GAME";
 
 /* RENDER */
-const Uint8 backgroundColor_R = 216; //Red channel color for background
-const Uint8 backgroundColor_G = 236; //Green channel color for background
-const Uint8 backgroundColor_B = 233; //Blue channel color for background 
+const SDL_Color backgroundColorLight = {216, 236, 233, 255};
 
 /* GAME */
-const int x_nextPiece = 720;
-const int y_nextPiece = 120;
-const Uint8 transparency = 100; //set transparency for ghost piece
+const SDL_Point nextPiecePos = {720, 120};
 
-const int hold_box_x = 100;            // Horizontal distance from top left corner; in pixels
-const int hold_box_y = 120;            // Vertical distance from top left corner; in pixels
+const SDL_Point holdBoxPos = {100, 120};
 
 const SDL_Color text_color_light = {8, 29, 42, 255}; //dark blue
 const SDL_Color text_color_dark = { 255, 240, 238, 255 }; //light blue

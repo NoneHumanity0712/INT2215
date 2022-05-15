@@ -121,11 +121,6 @@ void texture::renderCentered (int x, int y)
     SDL_RenderCopy(gRenderer, mTexture, nullptr, &rect);
 }
 
-void texture::setAlphaMode(Uint8 alpha)
-{
-    SDL_SetTextureAlphaMod (mTexture, alpha);
-}
-
 int texture::getWidth()
 {
     return width;

@@ -75,6 +75,7 @@ int main(int argc, char **argv)
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
                 tetrisGame.PauseButton(e);
+                tetrisGame.ThemeSwitch(e);
             }
 
             if (time_2 - time_1 >= wait_time && !tetrisGame.isPause)
@@ -97,8 +98,10 @@ int main(int argc, char **argv)
         while (!manager->ExitGame())
         {
             while (SDL_PollEvent(&e) != 0)
+            {
                 manager->pollAction(e);
-
+                tetrisGame.ThemeSwitch(e);
+            }
             rRenderer.clearScreen();
 
             tetrisGame.drawScene();

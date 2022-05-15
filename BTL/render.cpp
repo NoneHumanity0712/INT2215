@@ -14,7 +14,7 @@ render::~render()
 
 void render::clearScreen()
 {
-    SDL_SetRenderDrawColor(gRenderer, backgroundColor_R, backgroundColor_G, backgroundColor_B, 255);
+    SDL_SetRenderDrawColor(gRenderer, backgroundColorLight.r, backgroundColorLight.g, backgroundColorLight.b, backgroundColorLight.a);
     SDL_RenderClear(gRenderer);
 }
 

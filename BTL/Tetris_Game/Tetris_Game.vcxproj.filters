@@ -42,6 +42,9 @@
     <ClCompile Include="..\pause.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\theme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -79,6 +82,9 @@
     <ClInclude Include="..\pause.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\theme.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\minoes-sprite.png">
@@ -106,6 +112,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\pause_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\theme_switch_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\theme_switch_light.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

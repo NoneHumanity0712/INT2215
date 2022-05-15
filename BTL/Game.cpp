@@ -6,7 +6,8 @@
 
 extern SDL_Renderer* gRenderer;
 
-Pause pauseButton(pause_x, button_y);
+Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
+theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
 
 Game::Game()
 {
@@ -73,6 +74,25 @@ void Game::createNewPiece()
 
 void Game::drawScene()
 {
+    if (isLightMode)
+    {
+        tetromino_graphic = tetromino_graphic_light;
+        background = background_light;
+        text_color = text_color_light;
+        ghost_tetromino_graphic = ghost_tetromino_graphic_light;
+        pause_button_graphic= pause_button_graphic_light;
+        theme_switch_graphic = theme_switch_graphic_light;
+    }
+    else
+    {
+        tetromino_graphic = tetromino_graphic_dark;
+        background = background_dark;
+        text_color = text_color_dark;
+        ghost_tetromino_graphic = ghost_tetromino_graphic_dark;
+        pause_button_graphic = pause_button_graphic_dark;
+        theme_switch_graphic = theme_switch_graphic_dark;
+    }
+
     drawBackground();
     drawBoard();
     if (!first_time_hold) drawHoldPiece(holdPiece);
@@ -202,9 +222,13 @@ void Game::PauseButton(SDL_Event e)
     pauseButton.handleEvent(&e);
 
     isPause = pauseButton.pause_game;
+}
 
-    //draw pause button
-    //SDL_RenderPresent( gRenderer );
+void Game::ThemeSwitch(SDL_Event e)
+{
+    themeSwitch.handleEvent(&e);
+
+    isLightMode = themeSwitch.lightMode;
 }
 
 void Game::initializeScene()
@@ -218,26 +242,11 @@ void Game::initializeScene()
     nextPiece.rotation = 0;
     createNewPiece();
     
-    nextPiece.x = x_nextPiece;
-    nextPiece.y = y_nextPiece;
+    nextPiece.x = nextPiecePos.x;
+    nextPiece.y = nextPiecePos.y;
 
-
-    if (isLightMode)
-    {
-        minoes_path = minoes_path_light;
-        background_path = background_path_light;
-        text_color = text_color_light;
-        ghost_minoes_path = ghost_minoes_path_light;
-    }
-    else
-    {
-        minoes_path = minoes_path_dark;
-        background_path = background_path_dark;
-        text_color = text_color_dark;
-        ghost_minoes_path = ghost_minoes_path_dark;
-    }
-
-    tetromino_graphic.loadImage(minoes_path);
+    tetromino_graphic_light.loadImage(minoes_path_light);
+    tetromino_graphic_dark.loadImage(minoes_path_dark);
     for (int i = 0; i < 7; i++)
     {
         tetrominoes[i].x = block_size*i;
@@ -246,7 +255,8 @@ void Game::initializeScene()
         tetrominoes[i].h = block_size;
     }
 
-    ghost_tetromino_graphic.loadImage(ghost_minoes_path);
+    ghost_tetromino_graphic_light.loadImage(ghost_minoes_path_light);
+    ghost_tetromino_graphic_dark.loadImage(ghost_minoes_path_dark);
     for (int i = 0; i < 7; i++)
     {
         ghost_tetrominoes[i].x = block_size*i;
@@ -255,14 +265,12 @@ void Game::initializeScene()
         ghost_tetrominoes[i].h = block_size;
     }
 
-    background.loadImage(background_path);
-    background_pic.x = 0;
-    background_pic.y = 0;
-    background_pic.w = windowWidth;
-    background_pic.h = windowHeight;
-
+    background_light.loadImage(background_path_light);
+    background_dark.loadImage(background_path_dark);
+    background_pic = {0, 0, windowWidth, windowHeight};
     
-    pause_button_graphic.loadImage(button_path_light);
+    pause_button_graphic_light.loadImage(button_path_light);
+    pause_button_graphic_dark.loadImage(button_path_dark);
     for (int i = 0; i < 6; i++)
     {
         pause_button[i].x = button_sprite_size*i;
@@ -270,6 +278,10 @@ void Game::initializeScene()
         pause_button[i].w = button_sprite_size;
         pause_button[i].h = button_sprite_size;
     }
+
+    theme_switch_graphic_light.loadImage(switch_path_light);
+    theme_switch_graphic_dark.loadImage(switch_path_dark);
+    theme_switch = {0, 0, themeSwitchRect.w, themeSwitchRect.h};
 }
 
 bool Game::gameOver()
@@ -290,7 +302,8 @@ void Game::pieceFalling()
 void Game::drawBackground()
 {
     background.render(0, 0, &background_pic);
-    pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
+    pause_button_graphic.render(pauseButtonPos.x, pauseButtonPos.y, &pause_button[pauseButton.CurrentSprite]);
+    theme_switch_graphic.render(themeSwitchRect.x, themeSwitchRect.y, &theme_switch);
 }
 
 void Game::drawBoard()
@@ -301,8 +314,8 @@ void Game::drawBoard()
         {
             if (!board->isBlockFree(row, col))
             {
-                tetromino_graphic.render(width_to_playfield + col*block_size,
-                height_to_playfield + (row -(playfield_height-true_playfield_height))*block_size,
+                tetromino_graphic.render(playfield.x + col*block_size,
+                playfield.y + (row -(playfield_height-true_playfield_height))*block_size,
                 &tetrominoes[board->getTetromino(row,col)]);
             }
         }
@@ -311,16 +324,14 @@ void Game::drawBoard()
 
 void Game::drawCurrentPiece (Piece piece)
 {
-    tetromino_graphic.setAlphaMode(255);
-
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
             if (piece.getTetromino(row, col) != 0 && (row + piece.y + 1) > (playfield_height - true_playfield_height))
             {
-                tetromino_graphic.render(width_to_playfield + (col + piece.x)*block_size,
-                height_to_playfield + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
+                tetromino_graphic.render(playfield.x + (col + piece.x)*block_size,
+                playfield.y + (row + piece.y - (playfield_height - true_playfield_height))*block_size,
                 &tetrominoes[piece.type]);
             }
         }
@@ -331,10 +342,8 @@ void Game::drawCurrentPiece (Piece piece)
 void Game::drawGhostPiece (Piece piece)
 {
     ghostPiece = piece;
-    while (board->isMovePossible(ghostPiece) && ghostPiece.y <= height_to_playfield) ghostPiece.y++;
+    while (board->isMovePossible(ghostPiece) && ghostPiece.y <= playfield.y) ghostPiece.y++;
     ghostPiece.y--;
-
-    tetromino_graphic.setAlphaMode(transparency); 
 
     for (int row = 0; row < matrix_blocks; row++)
     {
@@ -342,8 +351,8 @@ void Game::drawGhostPiece (Piece piece)
         {
             if (ghostPiece.getTetromino(row, col) != 0 && (row + ghostPiece.y + 1) > (playfield_height - true_playfield_height))
             {
-                ghost_tetromino_graphic.render(width_to_playfield + (col + ghostPiece.x)*block_size,
-                height_to_playfield + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
+                ghost_tetromino_graphic.render(playfield.x + (col + ghostPiece.x)*block_size,
+                playfield.y + (row + ghostPiece.y - (playfield_height - true_playfield_height))*block_size,
                 &ghost_tetrominoes[ghostPiece.type]);
             }
         }
@@ -354,16 +363,14 @@ void Game::drawGhostPiece (Piece piece)
 
 void Game::drawHoldPiece (Piece piece)
 {
-    tetromino_graphic.setAlphaMode(255);
-
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
             if (piece.getTetromino(row, col) != 0)
             {
-                tetromino_graphic.render(hold_box_x + col*block_size,
-                hold_box_y + row*block_size, &tetrominoes[piece.type]);
+                tetromino_graphic.render(holdBoxPos.x + col*block_size,
+                holdBoxPos.y + row*block_size, &tetrominoes[piece.type]);
             }
         }
     }
@@ -373,16 +380,14 @@ void Game::drawHoldPiece (Piece piece)
 
 void Game::drawNextPiece (Piece piece)
 {
-    tetromino_graphic.setAlphaMode(255);
-    
     for (int row = 0; row < matrix_blocks; row++)
     {
         for (int col = 0; col < matrix_blocks; col++)
         {
             if (piece.getTetromino(row, col) != 0)
             {
-                tetromino_graphic.render(x_nextPiece + col*block_size,
-                    y_nextPiece + row*block_size, &tetrominoes[piece.type]);
+                tetromino_graphic.render(nextPiecePos.x + col*block_size,
+                    nextPiecePos.y + row*block_size, &tetrominoes[piece.type]);
             }
         }
     }

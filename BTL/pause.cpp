@@ -30,19 +30,8 @@ void Pause::handleEvent(SDL_Event *e)
 
 		bool inside = true;
 
-		if( x < Position.x + button_border)
-		{
-			inside = false;
-		}
-		else if( x > Position.x + button_border + button_size)
-		{
-			inside = false;
-		}
-		else if( y < Position.y + button_border)
-		{
-			inside = false;
-		}
-		else if( y > Position.y + button_border + button_size)
+		if( x < Position.x + button_border || x > Position.x + button_border + button_size
+		|| y < Position.y + button_border || y > Position.y + button_border + button_size)
 		{
 			inside = false;
 		}

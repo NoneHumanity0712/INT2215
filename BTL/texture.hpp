@@ -24,7 +24,6 @@ public:
     bool loadText(std::string text, SDL_Color color);
     void render (int x, int y, SDL_Rect *clip); 
     void renderCentered (int x, int y);
-    void setAlphaMode (Uint8 alpha);
 
     int getWidth();
     int getHeight();

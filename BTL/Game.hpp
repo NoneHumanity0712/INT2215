@@ -12,6 +12,7 @@
 #include "input.hpp"
 #include "texture.hpp"
 #include "render.hpp"
+#include "theme.hpp"
 
 extern SDL_Renderer *gRenderer;
 
@@ -25,6 +26,7 @@ public:
     void event(ACTION a);
     void initializeScene();
     void PauseButton(SDL_Event e);
+    void ThemeSwitch(SDL_Event e);
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
@@ -49,16 +51,29 @@ private:
     std::queue<Piece> nextPieces;
 
     texture tetromino_graphic;
+    texture tetromino_graphic_light;
+    texture tetromino_graphic_dark;
     SDL_Rect tetrominoes[7];
 
     texture ghost_tetromino_graphic;
+    texture ghost_tetromino_graphic_light;
+    texture ghost_tetromino_graphic_dark;
     SDL_Rect ghost_tetrominoes[7];
 
     texture background;
+    texture background_light;
+    texture background_dark;
     SDL_Rect background_pic;
     
     texture pause_button_graphic;
+    texture pause_button_graphic_light;
+    texture pause_button_graphic_dark;
     SDL_Rect pause_button[6];
+
+    texture theme_switch_graphic;
+    texture theme_switch_graphic_light;
+    texture theme_switch_graphic_dark;
+    SDL_Rect theme_switch;
 
     void drawBackground();
     void drawBoard();

@@ -155,6 +155,7 @@
     <ClCompile Include="..\SDL_utils.cpp" />
     <ClCompile Include="..\Tetris_Game.cpp" />
     <ClCompile Include="..\texture.cpp" />
+    <ClCompile Include="..\theme.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\render.hpp" />
     <ClInclude Include="..\SDL_utils.hpp" />
     <ClInclude Include="..\texture.hpp" />
+    <ClInclude Include="..\theme.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\background.png" />
@@ -181,6 +183,8 @@
     <Image Include="..\Neumorphism_dark.png" />
     <Image Include="..\Neumorphism_light.png" />
     <Image Include="..\pause_light.png" />
+    <Image Include="..\theme_switch_dark.png" />
+    <Image Include="..\theme_switch_light.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf" />
