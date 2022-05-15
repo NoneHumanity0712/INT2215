@@ -24,12 +24,12 @@ public:
     void drawScene();
     void event(ACTION a);
     void initializeScene();
+    void PauseButton(SDL_Event e);
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
-    void drawButton();
     std::string clearedLines();
-    bool pause_game;
+    bool isPause;
     int falling_speed();
 
     std::string minoes_path;
@@ -59,8 +59,6 @@ private:
     
     texture pause_button_graphic;
     SDL_Rect pause_button[6];
-    // texture menu_button_graphic;
-    // SDL_Rect menu_button[4];
 
     void drawBackground();
     void drawBoard();

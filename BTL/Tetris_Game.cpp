@@ -5,8 +5,7 @@
 #include "game.hpp"
 #include "SDL_utils.hpp"
 #include "render.hpp"
-
-//using namespace std;
+#include "pause.hpp"
 
 int main(int argc, char **argv)
 {
@@ -20,7 +19,7 @@ int main(int argc, char **argv)
 
         //set up game
         tetrisGame.initializeScene();
-        
+
         texture cleared_line;
         std::string lines = tetrisGame.clearedLines();
         cleared_line.loadText(lines, tetrisGame.text_color);
@@ -32,16 +31,11 @@ int main(int argc, char **argv)
         int countdown = 3; // 3... 2... 1...
         texture countdown_text;
 
-        SDL_Event e;
-
         while (countdown > 0)
         {
             rRenderer.clearScreen();
 
             tetrisGame.drawScene();
-
-            pauseButton.handleEvent(&e);
-            tetrisGame.drawButton();
 
             rRenderer.renderTexture(&cleared_line, 174, 560);
             rRenderer.renderTexture(&speed, 174, 600);
@@ -56,6 +50,8 @@ int main(int argc, char **argv)
             countdown--;
         }
         rRenderer.clearScreen();
+
+        SDL_Event e;
 
         //rRenderer.updateScreen();
         manager->clearQueueEvent();
@@ -78,9 +74,10 @@ int main(int argc, char **argv)
             {
                 manager->pollAction(e);
                 tetrisGame.event(manager->inputAction());
+                tetrisGame.PauseButton(e);
             }
 
-            if (time_2 - time_1 >= wait_time && !tetrisGame.pause_game)
+            if (time_2 - time_1 >= wait_time && !tetrisGame.isPause)
             {
                 tetrisGame.pieceFalling();
                 time_1 = SDL_GetTicks();
@@ -88,10 +85,6 @@ int main(int argc, char **argv)
 
             rRenderer.clearScreen();
             tetrisGame.drawScene();
-
-            pauseButton.handleEvent(&e);
-            tetrisGame.drawButton();
-
             rRenderer.renderTexture(&cleared_line, 174, 560);
             rRenderer.renderTexture(&speed, 174, 600);
 
@@ -109,7 +102,7 @@ int main(int argc, char **argv)
             rRenderer.clearScreen();
 
             tetrisGame.drawScene();
-            tetrisGame.drawButton();
+            tetrisGame.PauseButton(e);
 
             rRenderer.renderTexture(&gameover_text, windowWidth/2, windowHeight/2);
 

@@ -2,11 +2,9 @@
 #define INPUT
 
 #include <SDL.h>
-#include "button.hpp"
+#include "pause.hpp"
 
 enum ACTION{stay, down, left, right, drop, rotate, hold, pause};
-
-extern button pauseButton;
 
 class input
 {

@@ -5,7 +5,8 @@
 #include <cstdlib>
 
 extern SDL_Renderer* gRenderer;
-button pauseButton(pause_x, button_y);
+
+Pause pauseButton(pause_x, button_y);
 
 Game::Game()
 {
@@ -87,7 +88,7 @@ void Game::event(ACTION a)
     {
         case ACTION::down:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 currentPiece.y++;
                 if (!board->isMovePossible(currentPiece))
@@ -102,7 +103,7 @@ void Game::event(ACTION a)
         
         case ACTION::left:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 currentPiece.x--;
                 if(!board->isMovePossible(currentPiece))
@@ -115,7 +116,7 @@ void Game::event(ACTION a)
 
         case ACTION::right:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 currentPiece.x++;
                 if (!board->isMovePossible(currentPiece))
@@ -127,7 +128,7 @@ void Game::event(ACTION a)
 
         case ACTION::drop:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 while (board->isMovePossible(currentPiece))
                     currentPiece.y++;
@@ -140,7 +141,7 @@ void Game::event(ACTION a)
 
         case ACTION::rotate:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
                 if (!board->isMovePossible(currentPiece))
@@ -156,7 +157,7 @@ void Game::event(ACTION a)
 
         case ACTION::hold:
         {
-            if (!pause_game)
+            if (!isPause)
             {
                 if (first_time_hold)
                 {
@@ -193,17 +194,17 @@ void Game::event(ACTION a)
             }
             break;
         }
-
-        case ACTION::pause:
-        {
-           if (!pause_game)
-           {
-               pause_game = true;
-           } else pause_game = false;
-           std::cout << "Action: Pause/Unpause" << std::endl;
-           break;
-        }
     }
+}
+
+void Game::PauseButton(SDL_Event e)
+{
+    pauseButton.handleEvent(&e);
+
+    isPause = pauseButton.pause_game;
+
+    //draw pause button
+    //SDL_RenderPresent( gRenderer );
 }
 
 void Game::initializeScene()
@@ -212,7 +213,6 @@ void Game::initializeScene()
     first_time_hold = true;
     used_hold_block = false;
     isLightMode = true;
-    pause_game = false;
 
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
@@ -290,6 +290,7 @@ void Game::pieceFalling()
 void Game::drawBackground()
 {
     background.render(0, 0, &background_pic);
+    pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
 }
 
 void Game::drawBoard()
@@ -305,17 +306,6 @@ void Game::drawBoard()
                 &tetrominoes[board->getTetromino(row,col)]);
             }
         }
-    }
-}
-
-void Game::drawButton()
-{
-    if (!pause_game) pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite]);
-    else
-    {
-        if (pauseButton.CurrentSprite == 3) //mouse down
-            pause_button_graphic.render(pause_x, button_y, &pause_button[0]);
-        else pause_button_graphic.render(pause_x, button_y, &pause_button[pauseButton.CurrentSprite + 3]);
     }
 }
 

@@ -55,19 +55,6 @@ void input::pollAction(SDL_Event e)
             break;
         }
     }
-    
-    else if (e.type == SDL_MOUSEBUTTONDOWN)
-    {
-        int x, y;
-        SDL_GetMouseState(&x, &y);
-
-        if (x >= (pauseButton.Position.x + button_border) && x <= (pauseButton.Position.x + button_border + button_size)
-            && y >= (pauseButton.Position.y + button_border)  && y <= (pauseButton.Position.y + button_border + button_size))
-        {
-            action = ACTION::pause;
-        }
-    }
-    
     else action = ACTION::stay;
 }
 

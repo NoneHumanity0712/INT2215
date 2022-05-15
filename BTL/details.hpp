@@ -310,13 +310,13 @@ const int matrix_blocks = 5;            //5 x 5 matrix for each piece
 /* BUTTON */
 
 const int button_sprite_size = 68; // in pixels
-const int button_size = 28;
+const int button_size = 36;
 const int button_border = (button_sprite_size - button_size)/2;
 static std::string button_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/pause_light.png";
 
 /* INPUT */
 //const int menu_x = 820;
-const int pause_x = 800;
+const int pause_x = 808;
 const int button_y = 30;
 
 /* TEXTURE */
