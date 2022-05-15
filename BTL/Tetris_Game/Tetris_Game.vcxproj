@@ -147,9 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Board.cpp" />
-    <ClCompile Include="..\button.cpp" />
     <ClCompile Include="..\Game.cpp" />
     <ClCompile Include="..\input.cpp" />
+    <ClCompile Include="..\pause.cpp" />
     <ClCompile Include="..\Piece.cpp" />
     <ClCompile Include="..\render.cpp" />
     <ClCompile Include="..\SDL_utils.cpp" />
@@ -162,10 +162,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Board.hpp" />
-    <ClInclude Include="..\button.hpp" />
     <ClInclude Include="..\details.hpp" />
     <ClInclude Include="..\Game.hpp" />
     <ClInclude Include="..\input.hpp" />
+    <ClInclude Include="..\pause.hpp" />
     <ClInclude Include="..\Piece.hpp" />
     <ClInclude Include="..\render.hpp" />
     <ClInclude Include="..\SDL_utils.hpp" />

@@ -39,7 +39,7 @@
     <ClCompile Include="..\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\button.cpp">
+    <ClCompile Include="..\pause.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -73,10 +73,10 @@
     <ClInclude Include="..\texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\button.hpp">
+    <ClInclude Include="..\details.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\details.hpp">
+    <ClInclude Include="..\pause.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
