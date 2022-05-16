@@ -41,7 +41,7 @@ bool texture::loadImage (std::string path)
     SDL_Surface *temp = IMG_Load(path.c_str());
     if (temp == NULL)
     {
-        std::cout << "Unable to load image ! SDL_image Error: " << path << IMG_GetError() << std::endl;
+        std::cout << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
         bool success = true;
     }
     else
@@ -52,7 +52,7 @@ bool texture::loadImage (std::string path)
         mTexture = SDL_CreateTextureFromSurface(gRenderer, temp);
         if (mTexture == nullptr)
         {
-            std::cout << "Unable to create texture from ! SDL Error: " << path.c_str() << SDL_GetError() << std::endl;
+            std::cout << "Unable to create texture from "  << path.c_str() << "! SDL Error: " << SDL_GetError() << std::endl;
         }
         else 
         { 

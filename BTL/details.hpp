@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
 
 /* PIECE */
 
@@ -347,5 +348,19 @@ static std::string background_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET
 static std::string ghost_minoes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/minoes-neumorphism_ghost_dark.png";
 
 const char font_path_neu[] = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/Quicksand-Bold.ttf";
+
+/* GAMEOVER */
+
+static std::string gameover_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/gameover_light.png";
+static std::string gameover_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/gameover_dark.png";
+
+
+static std::string yes_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/yes_button_light.png";
+static std::string yes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/yes_button_dark.png";
+const SDL_Rect yesButtonPos = {380, 380, 70, 40};
+
+static std::string no_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_light.png";
+static std::string no_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_dark.png";
+const SDL_Rect noButtonPos = {500, 380, 70, 40};
 
 #endif

@@ -8,6 +8,8 @@ extern SDL_Renderer* gRenderer;
 
 Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
+button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
+button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
 
 Game::Game()
 {
@@ -30,7 +32,6 @@ void Game::swap(Piece &a, Piece &b)
     Piece temp = currentPiece;
     currentPiece = holdPiece;
     holdPiece = temp;
-
 }
 
 std::string Game::clearedLines()
@@ -72,6 +73,46 @@ void Game::createNewPiece()
     nextPiece.rotation = 0;
 }
 
+void Game::gameoverDraw()
+{
+    if (isLightMode)
+    {
+        gameover = gameover_light;
+        yes = yes_light;
+        no = no_light;
+    } else
+    {
+        gameover = gameover_dark;
+        yes = yes_dark;
+        no = no_dark;
+    }
+
+    gameover.render(340, 300, &gameoverRect);
+    yes.render(yesButtonPos.x, yesButtonPos.y, &yesButtonRect[restartYes.CurrentSprite]);
+    no.render(noButtonPos.x, noButtonPos.y, &noButtonRect[restartNo.CurrentSprite]);
+}
+
+void Game::YesButton(SDL_Event e)
+{
+    restartYes.handleEvent(&e);
+    if (restartYes.click)
+    {
+        isRestart = true;
+        std::cout << "Action: Restart" << std::endl;
+    }
+}
+
+void Game::NoButton(SDL_Event e, input *manager)
+{
+    restartNo.handleEvent(&e);
+    if (restartNo.click)
+    {
+        isRestart = false;
+        manager->exit();
+        std::cout << "Action: Quit" << std::endl;
+    }
+}
+
 void Game::drawScene()
 {
     if (isLightMode)
@@ -99,6 +140,8 @@ void Game::drawScene()
     if (!board->gameOver()) drawGhostPiece(currentPiece);
     drawCurrentPiece(currentPiece);
     drawNextPiece(nextPiece);
+
+    if (gameOver()) gameoverDraw();
 }
 
 //handling event from keyboard
@@ -214,6 +257,7 @@ void Game::event(ACTION a)
             }
             break;
         }
+
     }
 }
 
@@ -237,6 +281,12 @@ void Game::initializeScene()
     first_time_hold = true;
     used_hold_block = false;
     isLightMode = true;
+    isRestart = false;
+
+    themeSwitch.lightMode = true;
+    pauseButton.pause_game = false;
+    restartNo.click = false;
+    restartYes.click = false;
 
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
@@ -282,6 +332,30 @@ void Game::initializeScene()
     theme_switch_graphic_light.loadImage(switch_path_light);
     theme_switch_graphic_dark.loadImage(switch_path_dark);
     theme_switch = {0, 0, themeSwitchRect.w, themeSwitchRect.h};
+
+    gameover_light.loadImage(gameover_path_light);
+    gameover_dark.loadImage(gameover_path_dark);
+    gameoverRect = {0, 0, 278, 130};
+
+    yes_light.loadImage(yes_path_light);
+    yes_dark.loadImage(yes_path_dark);
+    for (int i = 0; i < 2; i++)
+    {
+        yesButtonRect[i].x = yesButtonPos.w*i;
+        yesButtonRect[i].y = 0;
+        yesButtonRect[i].w = yesButtonPos.w;
+        yesButtonRect[i].h = yesButtonPos.h;
+    }
+
+    no_light.loadImage(no_path_light);
+    no_dark.loadImage(no_path_dark);
+    for (int i = 0; i < 2; i++)
+    {
+        noButtonRect[i].x = noButtonPos.w*i;
+        noButtonRect[i].y = 0;
+        noButtonRect[i].w = noButtonPos.w;
+        noButtonRect[i].h = noButtonPos.h;
+    }
 }
 
 bool Game::gameOver()

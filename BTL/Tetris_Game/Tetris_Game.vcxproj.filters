@@ -45,6 +45,9 @@
     <ClCompile Include="..\theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -85,14 +88,11 @@
     <ClInclude Include="..\theme.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\button.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\minoes-sprite.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="..\minoes-neumorphism_dark.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -120,11 +120,26 @@
     <Image Include="..\theme_switch_light.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\no_button_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\no_button_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\yes_button_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\yes_button_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\gameover_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\gameover_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="..\Classique-Saigon_0.ttf">
-      <Filter>Resource Files</Filter>
-    </Font>
     <Font Include="..\Quicksand-Bold.ttf">
       <Filter>Resource Files</Filter>
     </Font>

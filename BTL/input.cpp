@@ -30,7 +30,6 @@ void input::pollAction(SDL_Event e)
     {
         switch (e.key.keysym.sym)
         {
-        case SDLK_F1:
         case SDLK_ESCAPE: quit = true;
             break;
 

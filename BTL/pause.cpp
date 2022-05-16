@@ -4,17 +4,12 @@
 #include <iostream>
 #include "details.hpp"
 
-Pause::Pause() 
-{
-	pause_game = false;
-}
+Pause::Pause() {}
 
 Pause::Pause(int x, int y)
 {
 	Position.x = x;
 	Position.y = y;
-
-	pause_game = false;
 
 	CurrentSprite = BUTTON_SPRITE_MOUSE_OUT_UNPAUSE;
 }

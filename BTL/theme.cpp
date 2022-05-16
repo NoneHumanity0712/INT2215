@@ -4,17 +4,12 @@
 #include <iostream>
 #include "details.hpp"
 
-theme::theme()
-{
-    lightMode = true;
-}
+theme::theme() {}
 
 theme::theme(int x, int y)
 {
     Position.x = x;
 	Position.y = y;
-
-    lightMode = true;
 }
 
 void theme::handleEvent(SDL_Event *e)

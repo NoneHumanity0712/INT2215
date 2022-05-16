@@ -9,6 +9,7 @@ enum BlockStatus: int {empty, I, J, L, O, S, Z, T};
 
 class Board
 { 
+    friend class Game;
 private:
     BlockStatus boardState[playfield_height][playfield_width];
     std::vector<Piece> pieces;

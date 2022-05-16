@@ -13,6 +13,7 @@
 #include "texture.hpp"
 #include "render.hpp"
 #include "theme.hpp"
+#include "button.hpp"
 
 extern SDL_Renderer *gRenderer;
 
@@ -32,15 +33,16 @@ public:
     void swap(Piece &a, Piece &b);
     std::string clearedLines();
     bool isPause;
+    bool isLightMode;
+    bool isRestart;
     int falling_speed();
 
-    std::string minoes_path;
-    std::string background_path;
-    std::string ghost_minoes_path;
+    void YesButton(SDL_Event e);
+    void NoButton(SDL_Event e, input *manager);
+
     SDL_Color text_color;
 
 private:
-    bool isLightMode;
     bool first_time_hold;
     bool used_hold_block;
     Board* board;
@@ -75,6 +77,21 @@ private:
     texture theme_switch_graphic_dark;
     SDL_Rect theme_switch;
 
+    texture gameover;
+    texture gameover_light;
+    texture gameover_dark;
+    SDL_Rect gameoverRect;
+
+    texture yes;
+    texture yes_light;
+    texture yes_dark;
+    SDL_Rect yesButtonRect[2];
+
+    texture no;
+    texture no_light;
+    texture no_dark;
+    SDL_Rect noButtonRect[2];
+
     void drawBackground();
     void drawBoard();
     void drawCurrentPiece(Piece piece);
@@ -82,6 +99,7 @@ private:
     void drawHoldPiece(Piece piece);
     void drawNextPiece(Piece piece);
     int getRandom(int min, int max);
+    void gameoverDraw();
 };
 
 #endif
