@@ -14,6 +14,7 @@
 #include "render.hpp"
 #include "theme.hpp"
 #include "button.hpp"
+#include "sound.hpp"
 
 extern SDL_Renderer *gRenderer;
 
@@ -21,6 +22,7 @@ class Game
 {
 public:
     Game();
+    ~Game();
     void checkState();
     void createNewPiece();
     void drawScene();
@@ -92,6 +94,7 @@ private:
     texture no_dark;
     SDL_Rect noButtonRect[2];
 
+    void soundLoad();
     void drawBackground();
     void drawBoard();
     void drawCurrentPiece(Piece piece);
@@ -100,6 +103,11 @@ private:
     void drawNextPiece(Piece piece);
     int getRandom(int min, int max);
     void gameoverDraw();
+
+    sound MovePiece;
+    sound ClearLine;
+    sound Switch;
+    sound DropPiece;
 };
 
 #endif

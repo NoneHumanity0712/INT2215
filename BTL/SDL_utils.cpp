@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include "render.hpp"
 
 SDL_Window* gWindow = nullptr;
@@ -49,6 +50,8 @@ void close()
     SDL_DestroyWindow(gWindow);
     gWindow = nullptr;
 
+    Mix_Quit();
+    IMG_Quit();
     TTF_Quit();
     SDL_Quit();
 }
@@ -91,6 +94,11 @@ bool initSDL()
                 if (TTF_Init() == -1)
                 {
                     logSDL_ttf_Error(std::cout, "Could not initialize SDL_ttf", true);
+                    success = false;
+                }
+                if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+                {
+                    printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
                     success = false;
                 }
                 SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");

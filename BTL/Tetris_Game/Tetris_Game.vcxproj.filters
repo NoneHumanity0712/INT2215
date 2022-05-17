@@ -48,6 +48,9 @@
     <ClCompile Include="..\button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -89,6 +92,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\button.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sound.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,5 +149,25 @@
     <Font Include="..\Quicksand-Bold.ttf">
       <Filter>Resource Files</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\movepiece.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\droppiece.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\switch.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\clearline.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\countdown0.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\countdown1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 #include "render.hpp"
 #include "pause.hpp"
 #include "button.hpp"
+#include "sound.hpp"
 
 void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 {
@@ -23,6 +24,13 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
     int countdown = 3; // 3... 2... 1...
     texture countdown_text;
+
+    sound count_down_sound[2];
+    for (int i = 0; i < 2; i++)
+    {
+        std::string sound_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/countdown" + std::to_string(i) + ".wav";
+        count_down_sound[i].loadSound(sound_path);
+    }
 
     manager->clearQueueEvent();
 
@@ -41,6 +49,8 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
         rRenderer.updateScreen();
 
+        count_down_sound[0].playSound();
+
         SDL_Delay(1000);
         countdown--;
     }
@@ -51,7 +61,9 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
     unsigned long long time_1 = SDL_GetTicks();
 
-    while (!tetrisGame.gameOver())
+    count_down_sound[1].playSound();
+
+    while (!tetrisGame.gameOver() && !manager->ExitGame())
     {
         int wait_time = tetrisGame.falling_speed();
 
@@ -83,6 +95,10 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
         rRenderer.renderTexture(&speed, 174, 600);
 
         rRenderer.updateScreen();
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        count_down_sound[i].~sound();
     }
 }
 
@@ -125,6 +141,7 @@ int main(int argc, char **argv)
 
             }
             startgame = tetrisGame.isRestart;
+            tetrisGame.~Game();
             delete manager;
         }
         close();

@@ -31,7 +31,10 @@ void input::pollAction(SDL_Event e)
         switch (e.key.keysym.sym)
         {
         case SDLK_ESCAPE: quit = true;
+        {
+            std::cout << "Action: Quit" << std::endl;
             break;
+        }
 
         case SDLK_DOWN: action = ACTION::down;
             break;

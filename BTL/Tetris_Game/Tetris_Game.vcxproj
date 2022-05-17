@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\SDL2\SDL2-2.0.20\include;C:\SDL2\SDL2_image-2.0.5\include;C:\SDL2\SDL2_ttf-2.0.18\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2\SDL2-2.0.20\lib\x64;C:\SDL2\SDL2_image-2.0.5\lib\x64;C:\SDL2\SDL2_ttf-2.0.18\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2\SDL2-2.0.20\include;C:\SDL2\SDL2_image-2.0.5\include;C:\SDL2\SDL2_ttf-2.0.18\include;C:\SDL2\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2\SDL2-2.0.20\lib\x64;C:\SDL2\SDL2_image-2.0.5\lib\x64;C:\SDL2\SDL2_ttf-2.0.18\lib\x64;C:\SDL2\SDL2_mixer-2.0.4\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -124,7 +124,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\SDL2\SDL2-2.0.20\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -154,6 +154,7 @@
     <ClCompile Include="..\Piece.cpp" />
     <ClCompile Include="..\render.cpp" />
     <ClCompile Include="..\SDL_utils.cpp" />
+    <ClCompile Include="..\sound.cpp" />
     <ClCompile Include="..\Tetris_Game.cpp" />
     <ClCompile Include="..\texture.cpp" />
     <ClCompile Include="..\theme.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\Piece.hpp" />
     <ClInclude Include="..\render.hpp" />
     <ClInclude Include="..\SDL_utils.hpp" />
+    <ClInclude Include="..\sound.hpp" />
     <ClInclude Include="..\texture.hpp" />
     <ClInclude Include="..\theme.hpp" />
   </ItemGroup>
@@ -194,6 +196,14 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\clearline.wav" />
+    <Media Include="..\countdown0.wav" />
+    <Media Include="..\countdown1.wav" />
+    <Media Include="..\droppiece.wav" />
+    <Media Include="..\movepiece.wav" />
+    <Media Include="..\switch.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

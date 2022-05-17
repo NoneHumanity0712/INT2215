@@ -16,10 +16,29 @@ Game::Game()
     board = new Board;
 }
 
+Game::~Game()
+{
+    tetromino_graphic.free();
+    ghost_tetromino_graphic.free();
+    background.free();
+    pause_button_graphic.free();
+    theme_switch_graphic.free();
+    gameover.free();
+    yes.free();
+    no.free();
+
+    MovePiece.~sound();
+    ClearLine.~sound();
+    Switch.~sound();
+    DropPiece.~sound();
+}
+
 void Game::checkState()
 {
     board->storePiece(currentPiece); //store current block
+    int prevLines = board->line_cleared;
     board->deleteFullLine(); //delete full line
+    if (board->line_cleared != prevLines) ClearLine.playSound();
     if (!board->gameOver())
     {
         createNewPiece();
@@ -153,6 +172,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
+                MovePiece.playSound();
                 currentPiece.y++;
                 if (!board->isMovePossible(currentPiece))
                 {
@@ -172,7 +192,7 @@ void Game::event(ACTION a)
                 if(!board->isMovePossible(currentPiece))
                     currentPiece.x++;
                 std::cout << "Action: Move Left" << std::endl;
-
+                MovePiece.playSound();
             }
             break;
         }
@@ -181,6 +201,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
+                MovePiece.playSound();
                 currentPiece.x++;
                 if (!board->isMovePossible(currentPiece))
                     currentPiece.x--;
@@ -193,6 +214,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
+                DropPiece.playSound();
                 while (board->isMovePossible(currentPiece))
                     currentPiece.y++;
                 currentPiece.y--;
@@ -206,6 +228,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
+                MovePiece.playSound();
                 currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
                 if (!board->isMovePossible(currentPiece))
                 {
@@ -222,6 +245,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
+                MovePiece.playSound();
                 if (first_time_hold)
                 {
                     holdPiece = Piece(currentPiece);
@@ -271,7 +295,7 @@ void Game::PauseButton(SDL_Event e)
 void Game::ThemeSwitch(SDL_Event e)
 {
     themeSwitch.handleEvent(&e);
-
+    if (isLightMode != themeSwitch.lightMode) Switch.playSound();
     isLightMode = themeSwitch.lightMode;
 }
 
@@ -356,6 +380,8 @@ void Game::initializeScene()
         noButtonRect[i].w = noButtonPos.w;
         noButtonRect[i].h = noButtonPos.h;
     }
+
+    soundLoad();
 }
 
 bool Game::gameOver()
@@ -371,6 +397,14 @@ void Game::pieceFalling()
         currentPiece.y--;
         checkState();
     }
+}
+
+void Game::soundLoad()
+{
+    MovePiece.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/movepiece.wav");
+    ClearLine.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/clearline.wav");
+    Switch.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/switch.wav");
+    DropPiece.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/droppiece.wav");
 }
 
 void Game::drawBackground()
