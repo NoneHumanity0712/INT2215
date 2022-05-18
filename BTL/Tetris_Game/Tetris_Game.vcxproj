@@ -189,6 +189,8 @@
     <Image Include="..\no_button_dark.png" />
     <Image Include="..\no_button_light.png" />
     <Image Include="..\pause_light.png" />
+    <Image Include="..\sound_dark.png" />
+    <Image Include="..\sound_light.png" />
     <Image Include="..\theme_switch_dark.png" />
     <Image Include="..\theme_switch_light.png" />
     <Image Include="..\yes_button_dark.png" />

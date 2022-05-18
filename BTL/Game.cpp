@@ -7,6 +7,7 @@
 extern SDL_Renderer* gRenderer;
 
 Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
+Pause SoundButton(holdBoxPos.x, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
 button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
 button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
@@ -26,11 +27,6 @@ Game::~Game()
     gameover.free();
     yes.free();
     no.free();
-
-    MovePiece.~sound();
-    ClearLine.~sound();
-    Switch.~sound();
-    DropPiece.~sound();
 }
 
 void Game::checkState()
@@ -38,7 +34,7 @@ void Game::checkState()
     board->storePiece(currentPiece); //store current block
     int prevLines = board->line_cleared;
     board->deleteFullLine(); //delete full line
-    if (board->line_cleared != prevLines) ClearLine.playSound();
+    if (board->line_cleared != prevLines && !isMuteSound) ClearLine.playSound();
     if (!board->gameOver())
     {
         createNewPiece();
@@ -142,6 +138,7 @@ void Game::drawScene()
         ghost_tetromino_graphic = ghost_tetromino_graphic_light;
         pause_button_graphic= pause_button_graphic_light;
         theme_switch_graphic = theme_switch_graphic_light;
+        sound_button = sound_button_light;
     }
     else
     {
@@ -151,6 +148,7 @@ void Game::drawScene()
         ghost_tetromino_graphic = ghost_tetromino_graphic_dark;
         pause_button_graphic = pause_button_graphic_dark;
         theme_switch_graphic = theme_switch_graphic_dark;
+        sound_button = sound_button_dark;
     }
 
     drawBackground();
@@ -172,7 +170,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
-                MovePiece.playSound();
+                if (!isMuteSound) MovePiece.playSound();
                 currentPiece.y++;
                 if (!board->isMovePossible(currentPiece))
                 {
@@ -192,7 +190,7 @@ void Game::event(ACTION a)
                 if(!board->isMovePossible(currentPiece))
                     currentPiece.x++;
                 std::cout << "Action: Move Left" << std::endl;
-                MovePiece.playSound();
+                if (!isMuteSound) MovePiece.playSound();
             }
             break;
         }
@@ -201,7 +199,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
-                MovePiece.playSound();
+                if (!isMuteSound) MovePiece.playSound();
                 currentPiece.x++;
                 if (!board->isMovePossible(currentPiece))
                     currentPiece.x--;
@@ -214,7 +212,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
-                DropPiece.playSound();
+                if (!isMuteSound) DropPiece.playSound();
                 while (board->isMovePossible(currentPiece))
                     currentPiece.y++;
                 currentPiece.y--;
@@ -228,7 +226,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
-                MovePiece.playSound();
+                if (!isMuteSound) MovePiece.playSound();
                 currentPiece.rotation = (currentPiece.rotation + 1) % 4; //(0, 3)
                 if (!board->isMovePossible(currentPiece))
                 {
@@ -245,7 +243,7 @@ void Game::event(ACTION a)
         {
             if (!isPause)
             {
-                MovePiece.playSound();
+                if (!isMuteSound) MovePiece.playSound();
                 if (first_time_hold)
                 {
                     holdPiece = Piece(currentPiece);
@@ -295,8 +293,15 @@ void Game::PauseButton(SDL_Event e)
 void Game::ThemeSwitch(SDL_Event e)
 {
     themeSwitch.handleEvent(&e);
-    if (isLightMode != themeSwitch.lightMode) Switch.playSound();
+    if (isLightMode != themeSwitch.lightMode && !isMuteSound) Switch.playSound();
     isLightMode = themeSwitch.lightMode;
+}
+
+void Game::MuteSound(SDL_Event e)
+{
+    SoundButton.handleEvent(&e);
+
+    isMuteSound = SoundButton.pause_game;
 }
 
 void Game::initializeScene()
@@ -305,6 +310,7 @@ void Game::initializeScene()
     first_time_hold = true;
     used_hold_block = false;
     isLightMode = true;
+    isMuteSound = false;
     isRestart = false;
 
     themeSwitch.lightMode = true;
@@ -345,12 +351,20 @@ void Game::initializeScene()
     
     pause_button_graphic_light.loadImage(button_path_light);
     pause_button_graphic_dark.loadImage(button_path_dark);
+
+    sound_button_light.loadImage(sound_path_light);
+    sound_button_dark.loadImage(sound_path_dark);
     for (int i = 0; i < 6; i++)
     {
-        pause_button[i].x = button_sprite_size*i;
+        pause_button[i].x = button_sprite_size * i;
         pause_button[i].y = 0;
         pause_button[i].w = button_sprite_size;
         pause_button[i].h = button_sprite_size;
+
+        soundButtonRect[i].x = button_sprite_size * i;
+        soundButtonRect[i].y = 0;
+        soundButtonRect[i].w = button_sprite_size;
+        soundButtonRect[i].h = button_sprite_size;
     }
 
     theme_switch_graphic_light.loadImage(switch_path_light);
@@ -412,6 +426,7 @@ void Game::drawBackground()
     background.render(0, 0, &background_pic);
     pause_button_graphic.render(pauseButtonPos.x, pauseButtonPos.y, &pause_button[pauseButton.CurrentSprite]);
     theme_switch_graphic.render(themeSwitchRect.x, themeSwitchRect.y, &theme_switch);
+    sound_button.render(SoundButton.Position.x, SoundButton.Position.y, &soundButtonRect[SoundButton.CurrentSprite]);
 }
 
 void Game::drawBoard()

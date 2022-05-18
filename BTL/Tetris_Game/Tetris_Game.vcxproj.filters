@@ -144,6 +144,12 @@
     <Image Include="..\gameover_light.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\sound_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\sound_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf">

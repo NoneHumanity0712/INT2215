@@ -332,9 +332,9 @@ const char title[] = "TETRIS GAME";
 const SDL_Color backgroundColorLight = {216, 236, 233, 255};
 
 /* GAME */
-const SDL_Point nextPiecePos = {720, 120};
+const SDL_Point nextPiecePos = {706, 120};
 
-const SDL_Point holdBoxPos = {100, 120};
+const SDL_Point holdBoxPos = {86, 120};
 
 const SDL_Color text_color_light = {8, 29, 42, 255}; //dark blue
 const SDL_Color text_color_dark = { 255, 240, 238, 255 }; //light blue
@@ -362,5 +362,10 @@ const SDL_Rect yesButtonPos = {380, 380, 70, 40};
 static std::string no_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_light.png";
 static std::string no_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_dark.png";
 const SDL_Rect noButtonPos = {500, 380, 70, 40};
+
+/* SOUND */
+
+static std::string sound_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/sound_light.png";
+static std::string sound_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/sound_dark.png";
 
 #endif

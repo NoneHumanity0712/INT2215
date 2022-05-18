@@ -28,8 +28,11 @@ public:
     void drawScene();
     void event(ACTION a);
     void initializeScene();
+
     void PauseButton(SDL_Event e);
     void ThemeSwitch(SDL_Event e);
+    void MuteSound(SDL_Event e);
+
     bool gameOver();
     void pieceFalling();
     void swap(Piece &a, Piece &b);
@@ -37,6 +40,7 @@ public:
     bool isPause;
     bool isLightMode;
     bool isRestart;
+    bool isMuteSound;
     int falling_speed();
 
     void YesButton(SDL_Event e);
@@ -93,6 +97,11 @@ private:
     texture no_light;
     texture no_dark;
     SDL_Rect noButtonRect[2];
+
+    texture sound_button;
+    texture sound_button_light;
+    texture sound_button_dark;
+    SDL_Rect soundButtonRect[6];
 
     void soundLoad();
     void drawBackground();

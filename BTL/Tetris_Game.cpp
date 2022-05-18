@@ -81,6 +81,7 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
             tetrisGame.event(manager->inputAction());
             tetrisGame.PauseButton(e);
             tetrisGame.ThemeSwitch(e);
+            tetrisGame.MuteSound(e);
         }
 
         if (time_2 - time_1 >= wait_time && !tetrisGame.isPause)
