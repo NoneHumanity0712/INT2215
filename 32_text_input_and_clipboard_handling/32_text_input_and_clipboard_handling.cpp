@@ -306,7 +306,7 @@ bool loadMedia()
 	{
 		//Render the prompt
 		SDL_Color textColor = { 0, 0, 0, 0xFF };
-		if( !gPromptTextTexture.loadFromRenderedText( "Enter Text:", textColor ) )
+		if( !gPromptTextTexture.loadFromRenderedText( "Enter Name:", textColor ) )
 		{
 			printf( "Failed to render prompt text!\n" );
 			success = false;
@@ -364,7 +364,7 @@ int main( int argc, char* args[] )
 			SDL_Color textColor = { 0, 0, 0, 0xFF };
 
 			//The current input text.
-			std::string inputText = "Some Text";
+			std::string inputText = "";
 			gInputTextTexture.loadFromRenderedText( inputText.c_str(), textColor );
 
 			//Enable text input
