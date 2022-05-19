@@ -149,6 +149,7 @@
     <ClCompile Include="..\Board.cpp" />
     <ClCompile Include="..\button.cpp" />
     <ClCompile Include="..\Game.cpp" />
+    <ClCompile Include="..\highscores.cpp" />
     <ClCompile Include="..\input.cpp" />
     <ClCompile Include="..\pause.cpp" />
     <ClCompile Include="..\Piece.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="..\button.hpp" />
     <ClInclude Include="..\details.hpp" />
     <ClInclude Include="..\Game.hpp" />
+    <ClInclude Include="..\highscores.hpp" />
     <ClInclude Include="..\input.hpp" />
     <ClInclude Include="..\pause.hpp" />
     <ClInclude Include="..\Piece.hpp" />
@@ -206,6 +208,9 @@
     <Media Include="..\droppiece.wav" />
     <Media Include="..\movepiece.wav" />
     <Media Include="..\switch.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\highscores.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

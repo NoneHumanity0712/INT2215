@@ -1,39 +1,23 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "highscores.hpp"
 
 using namespace std;
 
-struct player
+void inputNew(int n, player newGamer, player gamers[], string path)
 {
-    string name;
-    double score;
-};
-
-
-int main()
-{
-    player newGamer;
-    newGamer.score = 15500;
-    newGamer.name = "Chi";
-    ifstream fin("highscores.txt");
-    if (fin.is_open())
+    ofstream fout(path);
+    if (fout.is_open())
     {
-        int n;
-        fin >> n;
-        if (n > 0)
+        if (n == 0)
         {
-            player gamers[n];
-            for (int i = 0; i < n; i++)
-            {
-                fin >> gamers[i].score;
-
-                fin.ignore();
-                string temp;
-                getline(fin, temp);
-                gamers[i].name = temp;
-            }
-
+            fout << 1 << endl;
+            fout << newGamer.score << endl << newGamer.name << endl;
+            cout << "HIGHSCORES" << endl;
+            cout << 1 << " " << newGamer.name << " " << newGamer.score << endl;
+        } else
+        {
             int index = n;
 
             for (int i = n - 1; i >= 0; i--)
@@ -53,7 +37,6 @@ int main()
                     gamers[i] = temp;
                 }
             }
-            ofstream fout("highscores.txt");
             cout << "HIGHSCORES" << endl;
             if (n + 1 < 5) fout << n + 1 << endl;
             else fout << 5 << endl;
@@ -68,15 +51,40 @@ int main()
                 cout << n+1 << " " << newGamer.name << " " << newGamer.score << endl;
             }
         }
-        else
+        fout.close();
+    }
+}
+
+void loadScore(string path, const string name, const double score)
+{
+    player newGamer;
+    newGamer.score = score;
+    newGamer.name = name;
+    //path = "highscores.txt";
+    ifstream fin(path);
+    if (fin.is_open())
+    {
+        int n;
+        fin >> n;
+        if (n > 0)
         {
-            ofstream fout("highscores.txt");
-            fout << 1 << endl;
-            fout << newGamer.score << endl << newGamer.name << endl;
-            cout << "HIGHSCORES" << endl;
-            cout << 1 << " " << newGamer.name << " " << newGamer.score << endl;
+            player gamers[5];
+            for (int i = 0; i < n; i++)
+            {
+                fin >> gamers[i].score;
+
+                fin.ignore();
+                string temp;
+                getline(fin, temp);
+                gamers[i].name = temp;
+            }
+            inputNew(n, newGamer, gamers, path);
+        }
+        else 
+        {
+            player gamers[1];
+            inputNew(n, newGamer, gamers, path);
         }
         fin.close();
     }
-    return 0;
 }

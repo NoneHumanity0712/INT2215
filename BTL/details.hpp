@@ -332,9 +332,9 @@ const char title[] = "TETRIS GAME";
 const SDL_Color backgroundColorLight = {216, 236, 233, 255};
 
 /* GAME */
-const SDL_Point nextPiecePos = {706, 120};
+const SDL_Point nextPiecePos = {720, 120};
 
-const SDL_Point holdBoxPos = {86, 120};
+const SDL_Point holdBoxPos = {100, 120};
 
 const SDL_Color text_color_light = {8, 29, 42, 255}; //dark blue
 const SDL_Color text_color_dark = { 255, 240, 238, 255 }; //light blue

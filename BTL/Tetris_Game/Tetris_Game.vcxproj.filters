@@ -51,13 +51,16 @@
     <ClCompile Include="..\sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\highscores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\.gitignore">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="..\README.md">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\.gitignore">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +98,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\sound.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\highscores.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -175,5 +181,10 @@
     <Media Include="..\countdown1.wav">
       <Filter>Resource Files</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\highscores.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

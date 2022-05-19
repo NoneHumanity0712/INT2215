@@ -9,8 +9,9 @@
 #include "pause.hpp"
 #include "button.hpp"
 #include "sound.hpp"
+#include "highscores.hpp"
 
-void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
+void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
 {
     //set up game
     tetrisGame.initializeScene();
@@ -127,7 +128,9 @@ int main(int argc, char **argv)
             {
                 game(tetrisGame, manager, rRenderer, e);
             }
-
+            string newName;
+            getline(cin, newName);
+            loadScore("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/highscores.txt", newName, tetrisGame.score);
             while (!manager->ExitGame() && !tetrisGame.isRestart)
             {
                 while (SDL_PollEvent(&e) != 0 )

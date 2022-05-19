@@ -1,14 +1,14 @@
 ﻿  Board.cpp
-  button.cpp
   Game.cpp
 C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(324,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Piece.cpp
+  SDL_utils.cpp
+  Tetris_Game.cpp
+  button.cpp
   input.cpp
   pause.cpp
-  Piece.cpp
   render.cpp
-  SDL_utils.cpp
   sound.cpp
-  Tetris_Game.cpp
   texture.cpp
   theme.cpp
   Generating Code...

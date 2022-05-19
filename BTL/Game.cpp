@@ -71,7 +71,7 @@ std::string Game::clearedLines()
 int Game::level()
 {
     int speed = board->line_cleared/10;
-    if (speed > 9) speed = 10;
+    if (speed > 9) speed = 9;
     return speed + 1;
 }
 
