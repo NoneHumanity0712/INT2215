@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -14,12 +15,12 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
     //set up game
     tetrisGame.initializeScene();
 
-    texture cleared_line;
-    std::string lines = tetrisGame.clearedLines();
-    cleared_line.loadText(lines, tetrisGame.text_color);
+    texture score;
+    std::string currentScore = "Score: " + std::to_string(tetrisGame.score);
+    score.loadText(currentScore, tetrisGame.text_color);
 
     texture speed;
-    std::string Level = "Level: " + std::to_string(tetrisGame.level();
+    std::string Level = "Level: " + std::to_string(tetrisGame.level());
     speed.loadText(Level, tetrisGame.text_color);
 
     int countdown = 3; // 3... 2... 1...
@@ -40,7 +41,7 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
         tetrisGame.drawScene();
 
-        rRenderer.renderTexture(&cleared_line, 174, 560);
+        rRenderer.renderTexture(&score, 174, 560);
         rRenderer.renderTexture(&speed, 174, 600);
 
         countdown_text.loadText(std::to_string(countdown), tetrisGame.text_color);
@@ -65,12 +66,12 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
     while (!tetrisGame.gameOver() && !manager->ExitGame())
     {
-        int wait_time = tetrisGame.falling_speed();
+        long int wait_time = 1000 - (tetrisGame.level() - 1)*100;
 
-        lines = tetrisGame.clearedLines();
-        cleared_line.loadText(lines, tetrisGame.text_color);
+        currentScore = "Score: " + std::to_string(tetrisGame.score);
+        score.loadText(currentScore, tetrisGame.text_color);
 
-        Level = "Level: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
+        Level = "Level: " + std::to_string(tetrisGame.level());
         speed.loadText(Level, tetrisGame.text_color);
 
         unsigned long long time_2 = SDL_GetTicks();
@@ -92,7 +93,7 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
         rRenderer.clearScreen();
         tetrisGame.drawScene();
-        rRenderer.renderTexture(&cleared_line, 174, 560);
+        rRenderer.renderTexture(&score, 174, 560);
         rRenderer.renderTexture(&speed, 174, 600);
 
         rRenderer.updateScreen();

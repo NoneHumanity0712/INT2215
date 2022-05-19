@@ -34,7 +34,20 @@ void Game::checkState()
     board->storePiece(currentPiece); //store current block
     int prevLines = board->line_cleared;
     board->deleteFullLine(); //delete full line
-    if (board->line_cleared != prevLines && !isMuteSound) ClearLine.playSound();
+    if (board->line_cleared != prevLines && !isMuteSound) 
+    {
+        ClearLine.playSound();
+        switch(board->line_cleared - prevLines)
+        {
+            case 1: score += 100*level();
+                break;
+            case 2: score += 200*level();
+                break;
+            case 3: score += 500*level();
+                break;
+            case 4: score += 800*level();
+        }
+    }
     if (!board->gameOver())
     {
         createNewPiece();
@@ -57,9 +70,9 @@ std::string Game::clearedLines()
 
 int Game::level()
 {
-    int speed = 1000 - (board->line_cleared/10)*100;
-    if (speed < 100) speed = 50;
-    return ((1000 - speed) / 100 + 1);
+    int speed = board->line_cleared/10;
+    if (speed > 9) speed = 10;
+    return speed + 1;
 }
 
 void Game::createNewPiece()
@@ -177,6 +190,7 @@ void Game::event(ACTION a)
                     currentPiece.y--;
                     checkState();
                 }
+                score += 10*level();
                 std::cout << "Action: Soft Drop" << std::endl;
             }
             break;
@@ -218,6 +232,7 @@ void Game::event(ACTION a)
                 currentPiece.y--;
                 checkState();
                 std::cout << "Action: Hard Drop" << std::endl;
+                score += 20*level();
             }
             break;
         }

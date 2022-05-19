@@ -1,5 +1,22 @@
-﻿  Game.cpp
-C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(309,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Board.cpp
+  button.cpp
+  Game.cpp
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(324,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  input.cpp
+  pause.cpp
+  Piece.cpp
+  render.cpp
+  SDL_utils.cpp
+  sound.cpp
   Tetris_Game.cpp
+  texture.cpp
+  theme.cpp
+  Running Code Analysis for C/C++...
   Generating Code...
   Tetris_Game.vcxproj -> C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Tetris_Game\x64\Debug\Tetris_Game.exe
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Game.cpp(15): warning C26495: Variable 'Game::isRestart' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\pause.cpp(7): warning C26495: Variable 'Pause::CurrentSprite' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\pause.cpp(9): warning C26495: Variable 'Pause::pause_game' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\Piece.cpp(3): warning C26495: Variable 'Piece::x' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\theme.cpp(7): warning C26495: Variable 'theme::lightMode' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\HP\OneDrive - vnu.edu.vn\UET\Courses\INT2215\BTL\theme.cpp(9): warning C26495: Variable 'theme::lightMode' is uninitialized. Always initialize a member variable (type.6).

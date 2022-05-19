@@ -15,7 +15,7 @@ int main()
 {
     player newGamer;
     newGamer.score = 15500;
-    newGamer.name = "NTPT";
+    newGamer.name = "Chi";
     ifstream fin("highscores.txt");
     if (fin.is_open())
     {

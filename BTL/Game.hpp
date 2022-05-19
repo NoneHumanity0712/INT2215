@@ -48,7 +48,7 @@ public:
 
     SDL_Color text_color;
 
-    double score;
+    long int score;
 private:
     bool first_time_hold;
     bool used_hold_block;
