@@ -19,8 +19,8 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
     cleared_line.loadText(lines, tetrisGame.text_color);
 
     texture speed;
-    std::string Speed = "Speed: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
-    speed.loadText(Speed, tetrisGame.text_color);
+    std::string Level = "Level: " + std::to_string(tetrisGame.level();
+    speed.loadText(Level, tetrisGame.text_color);
 
     int countdown = 3; // 3... 2... 1...
     texture countdown_text;
@@ -70,8 +70,8 @@ void game(Game tetrisGame, input *manager, render rRenderer, SDL_Event e)
         lines = tetrisGame.clearedLines();
         cleared_line.loadText(lines, tetrisGame.text_color);
 
-        Speed = "Speed: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
-        speed.loadText(Speed, tetrisGame.text_color);
+        Level = "Level: " + std::to_string((1000 - tetrisGame.falling_speed()) / 100);
+        speed.loadText(Level, tetrisGame.text_color);
 
         unsigned long long time_2 = SDL_GetTicks();
 

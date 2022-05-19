@@ -55,11 +55,11 @@ std::string Game::clearedLines()
     return temp;
 }
 
-int Game::falling_speed()
+int Game::level()
 {
     int speed = 1000 - (board->line_cleared/10)*100;
     if (speed < 100) speed = 50;
-    return speed;
+    return ((1000 - speed) / 100 + 1);
 }
 
 void Game::createNewPiece()
@@ -307,6 +307,8 @@ void Game::MuteSound(SDL_Event e)
 void Game::initializeScene()
 {
     srand(time(0));
+    score = 0;
+
     first_time_hold = true;
     used_hold_block = false;
     isLightMode = true;

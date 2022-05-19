@@ -17,7 +17,7 @@ Instruction:
 - Pause Button: pause the game.
 - Theme Switch: switch between dark theme and light theme.
 _______________________________
-SDL2 instruction: Lazy Foo's SDL tutorials
+SDL2 instructions: Lazy Foo's SDL tutorials
 (https://lazyfoo.net/tutorials/SDL/index.php) 
 
 Game logic and basic tutorial: Javier Lopez's Tetris tutorial

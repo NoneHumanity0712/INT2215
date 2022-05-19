@@ -41,13 +41,14 @@ public:
     bool isLightMode;
     bool isRestart;
     bool isMuteSound;
-    int falling_speed();
+    int level();
 
     void YesButton(SDL_Event e);
     void NoButton(SDL_Event e, input *manager);
 
     SDL_Color text_color;
 
+    double score;
 private:
     bool first_time_hold;
     bool used_hold_block;
