@@ -103,6 +103,7 @@ void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
     {
         count_down_sound[i].~sound();
     }
+    std::cout << "end" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -128,9 +129,13 @@ int main(int argc, char **argv)
             {
                 game(tetrisGame, manager, rRenderer, e);
             }
+ 
             string newName;
             getline(cin, newName);
             loadScore("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/highscores.txt", newName, tetrisGame.score);
+
+            rRenderer.clearScreen();
+            std::cout << "2" << std::endl;
             while (!manager->ExitGame() && !tetrisGame.isRestart)
             {
                 while (SDL_PollEvent(&e) != 0 )
@@ -143,7 +148,6 @@ int main(int argc, char **argv)
                 rRenderer.clearScreen();
                 tetrisGame.drawScene();
                 rRenderer.updateScreen();
-
             }
             startgame = tetrisGame.isRestart;
             tetrisGame.~Game();

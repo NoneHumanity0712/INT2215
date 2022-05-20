@@ -87,7 +87,6 @@ private:
     texture gameover;
     texture gameover_light;
     texture gameover_dark;
-    SDL_Rect gameoverRect;
 
     texture yes;
     texture yes_light;
@@ -106,13 +105,13 @@ private:
 
     void soundLoad();
     void drawBackground();
+    void gameoverDraw();
     void drawBoard();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
     void drawHoldPiece(Piece piece);
     void drawNextPiece(Piece piece);
     int getRandom(int min, int max);
-    void gameoverDraw();
 
     sound MovePiece;
     sound ClearLine;

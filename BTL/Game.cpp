@@ -115,7 +115,7 @@ void Game::gameoverDraw()
         no = no_dark;
     }
 
-    gameover.render(340, 300, &gameoverRect);
+    gameover.render(0,0, &background_pic);
     yes.render(yesButtonPos.x, yesButtonPos.y, &yesButtonRect[restartYes.CurrentSprite]);
     no.render(noButtonPos.x, noButtonPos.y, &noButtonRect[restartNo.CurrentSprite]);
 }
@@ -390,7 +390,6 @@ void Game::initializeScene()
 
     gameover_light.loadImage(gameover_path_light);
     gameover_dark.loadImage(gameover_path_dark);
-    gameoverRect = {0, 0, 278, 130};
 
     yes_light.loadImage(yes_path_light);
     yes_dark.loadImage(yes_path_dark);
