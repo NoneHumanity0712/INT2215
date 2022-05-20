@@ -21,7 +21,7 @@ public:
     void free();
 
     bool loadImage(std::string path);
-    bool loadText(std::string text, SDL_Color color);
+    bool loadText(std::string text, SDL_Color color, TTF_Font* font);
     void render (int x, int y, SDL_Rect *clip); 
     void renderCentered (int x, int y);
 

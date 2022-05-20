@@ -8,7 +8,8 @@
 #include "texture.hpp"
 
 extern SDL_Renderer* gRenderer;
-extern TTF_Font* gFont;
+extern TTF_Font* gBigFont;
+extern TTF_Font* gSmallFont;
 
 struct render
 {

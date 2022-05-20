@@ -6,7 +6,6 @@
 
 // SDL_Window *window;
 extern SDL_Renderer* gRenderer;
-extern TTF_Font *gFont;
 
 texture::texture()
 {
@@ -69,11 +68,11 @@ bool texture::loadImage (std::string path)
 
 }
 
-bool texture::loadText(std::string text, SDL_Color color)
+bool texture::loadText(std::string text, SDL_Color color, TTF_Font* font)
 {
     bool success = true;
     free();
-    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(gFont, text.c_str(), color, windowWidth);
+    SDL_Surface *textSurface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, windowWidth);
     if (textSurface == nullptr)
     {        
         std::cout << "SDL_ttf error: " << TTF_GetError() << std::endl; 

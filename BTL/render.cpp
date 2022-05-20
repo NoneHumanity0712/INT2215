@@ -4,7 +4,8 @@
 #include <SDL_ttf.h>
 
 SDL_Renderer *gRenderer = nullptr;
-TTF_Font *gFont = nullptr;
+TTF_Font *gBigFont = nullptr;
+TTF_Font* gSmallFont = nullptr;
 
 render::~render()
 {

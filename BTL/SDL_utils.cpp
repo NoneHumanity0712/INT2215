@@ -8,7 +8,8 @@
 
 SDL_Window* gWindow = nullptr;
 texture tetromino_graphic;
-extern TTF_Font* gFont;
+extern TTF_Font* gBigFont;
+extern TTF_Font* gSmallFont;
 extern SDL_Renderer* gRenderer;
 
 void logSDLError(std::ostream& os, const std::string &msg, bool fatal)
@@ -41,8 +42,10 @@ void logSDL_image_Error(std::ostream& os, const std::string &msg, bool fatal)
 //close gWindow, free memory 
 void close()
 {
-    TTF_CloseFont(gFont);
-    gFont = nullptr;
+    TTF_CloseFont(gBigFont);
+    TTF_CloseFont(gSmallFont);
+    gBigFont = nullptr;
+    gSmallFont = nullptr;
 
     SDL_DestroyRenderer(gRenderer);
     gRenderer = nullptr;
@@ -112,7 +115,8 @@ bool initSDL()
 //return true if load all graphics (image, gFont) successfully 
 void loadGraphic()
 {
-    gFont = TTF_OpenFont(font_path_neu, 28);
-    if (gFont == nullptr)
+    gBigFont = TTF_OpenFont(font_path_neu, 28);
+    gSmallFont = TTF_OpenFont(font_path_neu, 14);
+    if (gBigFont == nullptr || gSmallFont == nullptr)
         logSDL_ttf_Error(std::cout, "Could not load font", true);
 }

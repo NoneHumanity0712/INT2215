@@ -18,11 +18,11 @@ void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
 
     texture score;
     std::string currentScore = "Score: " + std::to_string(tetrisGame.score);
-    score.loadText(currentScore, tetrisGame.text_color);
+    score.loadText(currentScore, tetrisGame.text_color, gBigFont);
 
     texture speed;
     std::string Level = "Level: " + std::to_string(tetrisGame.level());
-    speed.loadText(Level, tetrisGame.text_color);
+    speed.loadText(Level, tetrisGame.text_color, gBigFont);
 
     int countdown = 3; // 3... 2... 1...
     texture countdown_text;
@@ -45,7 +45,7 @@ void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
         rRenderer.renderTexture(&score, 174, 560);
         rRenderer.renderTexture(&speed, 174, 600);
 
-        countdown_text.loadText(std::to_string(countdown), tetrisGame.text_color);
+        countdown_text.loadText(std::to_string(countdown), tetrisGame.text_color, gBigFont);
 
         rRenderer.renderTexture(&countdown_text, windowWidth / 2, windowHeight / 2);
 
@@ -70,10 +70,10 @@ void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
         long int wait_time = 1000 - (tetrisGame.level() - 1)*100;
 
         currentScore = "Score: " + std::to_string(tetrisGame.score);
-        score.loadText(currentScore, tetrisGame.text_color);
+        score.loadText(currentScore, tetrisGame.text_color, gBigFont);
 
         Level = "Level: " + std::to_string(tetrisGame.level());
-        speed.loadText(Level, tetrisGame.text_color);
+        speed.loadText(Level, tetrisGame.text_color, gBigFont);
 
         unsigned long long time_2 = SDL_GetTicks();
 
