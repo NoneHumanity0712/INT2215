@@ -9,7 +9,11 @@
 texture PromptTextTexture;
 texture InputTextTexture;
 
-int main()
+std::string text_input(SDL_Event e, SDL_Color textColor)
 {
+    std::string inputText = "";
+    InputTextTexture.loadText(inputText.c_str(), textColor);
+
+    SDL_StartTextInput();
     
 }
