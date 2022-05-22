@@ -369,7 +369,7 @@ const SDL_Rect nameRect = { 313, 205, 334, 310 };
 
 static std::string ok_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/ok_name_light.png";
 static std::string ok_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/ok_name_dark.png";
-const SDL_Rect okButtonPos = { 455, 466, 70, 40 };
+const SDL_Rect okButtonPos = { 455, 460, 70, 40 };
 
 static std::string highscores_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/highscores.txt";
 
@@ -377,5 +377,9 @@ static std::string highscores_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Cour
 
 static std::string sound_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/sound_light.png";
 static std::string sound_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/sound_dark.png";
+static std::string movepiece_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/movepiece.wav";
+static std::string clearline_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/clearline.wav";
+static std::string switch_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/switch.wav";
+static std::string droppiece_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/droppiece.wav";
 
 #endif

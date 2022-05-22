@@ -100,9 +100,9 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     {
         count_down_sound[i].~sound();
     }
-    std::cout << "end" << std::endl;
+    std::cout << "Game Over!" << std::endl;
 
-    if (tetrisGame.score > lowest_highscore(highscores_path))
+    if (tetrisGame.score > lowest_highscore(highscores_path) || numbers_of_player(highscores_path) < 5)
     {
         std::string newName = "";
         texture InputTextTexture;
@@ -132,11 +132,17 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
                         newName = SDL_GetClipboardText();
                         renderText = true;
                     }
+                    else if (e.key.keysym.sym == SDLK_RETURN)
+                    {
+                        renderText = true;
+                        ok.click = true;
+                    }
                 }
                 else if (e.type == SDL_TEXTINPUT)
                 {
                     //Not copy or pasting
-                    if( !( SDL_GetModState() & KMOD_CTRL && ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' || e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) ) )
+                    if( !( SDL_GetModState() & KMOD_CTRL && ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' 
+                        || e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) ) )
                     {
                         //Append character
                         newName += e.text.text;
@@ -157,19 +163,21 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
                     InputTextTexture.loadText(" ", tetrisGame.text_color, gSmallFont);
                 }
             }
-            
             rRenderer.clearScreen();
-
             tetrisGame.drawScene();
-            rRenderer.renderTexture(&score, windowWidth / 2, windowHeight / 2 - 30);
+            rRenderer.renderTexture(&score, windowWidth / 2, windowHeight / 2 - 40);
             rRenderer.renderTexture(&InputTextTexture, windowWidth / 2, 432);
 
             rRenderer.updateScreen();
         }
         SDL_StopTextInput();
         tetrisGame.isInputName = false;
+        InputTextTexture.free();
         loadScore(highscores_path, newName, tetrisGame.score); 
     } else tetrisGame.isInputName = false;
+
+    score.free();
+    speed.free();
 }
 
 
@@ -199,8 +207,6 @@ int main(int argc, char **argv)
                 game(tetrisGame, manager, rRenderer, e);
             }
             
-            rRenderer.clearScreen();
-            std::cout << "2" << std::endl;
             while (!manager->ExitGame() && !tetrisGame.isRestart)
             {
                 while (SDL_PollEvent(&e) != 0 )

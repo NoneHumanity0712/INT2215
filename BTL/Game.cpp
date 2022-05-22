@@ -6,13 +6,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <string>
-#include <sstream>
+#include "highscores.hpp"
 
 extern SDL_Renderer* gRenderer;
 
 Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
-Pause SoundButton(holdBoxPos.x, pauseButtonPos.y);
+Pause SoundButton(holdBoxPos.x - 10, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
 button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
 button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
@@ -33,6 +32,7 @@ Game::~Game()
     gameover.free();
     yes.free();
     no.free();
+    ok_graphic.free();
 }
 
 void Game::checkState()
@@ -124,47 +124,21 @@ void Game::gameoverDraw()
     gameover.render(0,0, &background_pic);
     yes.render(yesButtonPos.x, yesButtonPos.y, &yesButtonRect[restartYes.CurrentSprite]);
     no.render(noButtonPos.x, noButtonPos.y, &noButtonRect[restartNo.CurrentSprite]);
-}
 
-// std::string Game::inputName(SDL_Event &e)
-// {
-//     //The current input text.
-//     std::string inputText = "";
-//     SDL_StartTextInput();
-//     while (!ok.click)
-//     {
-//         if (e.type == SDL_TEXTINPUT)
-//         {
-//             std::cout << "text inputting" << std::endl;
-//             if (!(SDL_GetModState() & KMOD_CTRL && (e.text.text[0] == 'c'
-//                 || e.text.text[0] == 'C'
-//                 || e.text.text[0] == 'v'
-//                 || e.text.text[0] == 'V')))
-//             {
-//                 inputText += e.text.text;
-//             }
-//         }
-//         else if (e.type == SDL_KEYDOWN)
-//         {
-//             if (e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0)
-//             {
-//                 inputText.pop_back();
-//             }
-//             else if (e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL)
-//             {
-//                 SDL_SetClipboardText(inputText.c_str());
-//             }
-//             else if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
-//             {
-//                 inputText = SDL_GetClipboardText();
-//             }
-//         } 
-//     }
-//     SDL_StopTextInput();
-//     ok.handleEvent(&e);
-//     isInputName = false;
-//     return inputText;
-// }
+    texture player_rank, player_name, player_score;
+    int num = numbers_of_player(highscores_path);
+    for (int i = 0; i < num; i++)
+    {
+        player p = get_player(highscores_path, i);
+        player_rank.loadText(std::to_string(i+1), text_color, gSmallFont);
+        player_name.loadText(p.name, text_color, gSmallFont);
+        player_score.loadText(std::to_string(p.score), text_color, gSmallFont);
+
+        player_rank.renderCentered(370, 330 + 28 * i);
+        player_name.renderCentered(460, 330 + 28 * i);
+        player_score.renderCentered(570, 330 + 28 * i);
+    }
+}
 
 void Game::YesButton(SDL_Event e)
 {
@@ -294,11 +268,13 @@ void Game::event(ACTION a)
             {
                 if (!isMuteSound) DropPiece.playSound();
                 while (board->isMovePossible(currentPiece))
+                {
+                    score += 20 * level();
                     currentPiece.y++;
+                }
                 currentPiece.y--;
                 checkState();
                 std::cout << "Action: Hard Drop" << std::endl;
-                score += 20*level();
             }
             break;
         }
@@ -513,10 +489,10 @@ void Game::pieceFalling()
 
 void Game::soundLoad()
 {
-    MovePiece.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/movepiece.wav");
-    ClearLine.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/clearline.wav");
-    Switch.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/switch.wav");
-    DropPiece.loadSound("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/droppiece.wav");
+    MovePiece.loadSound(movepiece_path);
+    ClearLine.loadSound(clearline_path);
+    Switch.loadSound(switch_path);
+    DropPiece.loadSound(droppiece_path);
 }
 
 void Game::drawBackground()

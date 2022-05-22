@@ -110,3 +110,35 @@ void loadScore(string path, const string name, const double score)
         fin.close();
     }
 }
+
+int numbers_of_player(string path)
+{
+    ifstream fin(path);
+    if (fin.is_open())
+    {
+        int n;
+        fin >> n;
+        return n;
+    }
+}
+
+player get_player(string path, int k)
+{
+    ifstream fin(path);
+    if (fin.is_open())
+    {
+        int n;
+        fin >> n;
+        player temp;
+        for (int i = 0; i <= k; i++)
+        {
+            fin >> temp.score;
+            fin.ignore();
+            string temp_s;
+            getline(fin, temp_s);
+            temp.name = temp_s;
+        }
+        return temp;
+    }
+}
+
