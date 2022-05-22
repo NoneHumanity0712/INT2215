@@ -9,10 +9,12 @@ using namespace std;
 struct player
 {
     string name;
-    double score;
+    long score;
 };
 
-void inputNew(int n);
+long lowest_highscore(string path);
+
+void inputNew(int n, player newGamer, player gamers[], string path);
 
 void loadScore(string path, string n, double s);
 

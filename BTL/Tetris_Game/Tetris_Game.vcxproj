@@ -180,6 +180,8 @@
     <ClInclude Include="..\theme.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\entername_dark.png" />
+    <Image Include="..\entername_light.png" />
     <Image Include="..\gameover_dark.png" />
     <Image Include="..\gameover_light.png" />
     <Image Include="..\minoes-neumorphism_dark.png" />
@@ -190,6 +192,8 @@
     <Image Include="..\Neumorphism_light.png" />
     <Image Include="..\no_button_dark.png" />
     <Image Include="..\no_button_light.png" />
+    <Image Include="..\ok_name_dark.png" />
+    <Image Include="..\ok_name_light.png" />
     <Image Include="..\pause_light.png" />
     <Image Include="..\sound_dark.png" />
     <Image Include="..\sound_light.png" />

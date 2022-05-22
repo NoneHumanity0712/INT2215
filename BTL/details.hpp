@@ -363,6 +363,16 @@ static std::string no_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Course
 static std::string no_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_dark.png";
 const SDL_Rect noButtonPos = {525, 466, 80, 40};
 
+static std::string entername_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/entername_light.png";
+static std::string entername_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/entername_dark.png";
+const SDL_Rect nameRect = { 313, 205, 334, 310 };
+
+static std::string ok_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/ok_name_light.png";
+static std::string ok_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/ok_name_dark.png";
+const SDL_Rect okButtonPos = { 455, 466, 70, 40 };
+
+static std::string highscores_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/highscores.txt";
+
 /* SOUND */
 
 static std::string sound_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/sound_light.png";

@@ -11,11 +11,8 @@
 #include "sound.hpp"
 #include "highscores.hpp"
 
-void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
+void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
 {
-    //set up game
-    tetrisGame.initializeScene();
-
     texture score;
     std::string currentScore = "Score: " + std::to_string(tetrisGame.score);
     score.loadText(currentScore, tetrisGame.text_color, gBigFont);
@@ -104,7 +101,77 @@ void game(Game &tetrisGame, input *manager, render rRenderer, SDL_Event e)
         count_down_sound[i].~sound();
     }
     std::cout << "end" << std::endl;
+
+    if (tetrisGame.score > lowest_highscore(highscores_path))
+    {
+        std::string newName = "";
+        texture InputTextTexture;
+        extern button ok;
+        SDL_StartTextInput();
+        bool quit = false;
+        while (!quit && !ok.click)
+        {
+            bool renderText = false;
+
+            while (SDL_PollEvent(&e) != 0)
+            {
+                if (e.type == SDL_QUIT) quit = true;
+                else if (e.type == SDL_KEYDOWN)
+                {
+                    if( e.key.keysym.sym == SDLK_BACKSPACE && newName.length() > 0 )
+                    {
+                        newName.pop_back();
+                        renderText = true;
+                    }
+                    else if (e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL)
+                    {
+                        SDL_SetClipboardText( newName.c_str() );
+                    }
+                    else if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
+                    {
+                        newName = SDL_GetClipboardText();
+                        renderText = true;
+                    }
+                }
+                else if (e.type == SDL_TEXTINPUT)
+                {
+                    //Not copy or pasting
+                    if( !( SDL_GetModState() & KMOD_CTRL && ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' || e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) ) )
+                    {
+                        //Append character
+                        newName += e.text.text;
+                        renderText = true;
+                    }
+                }
+                ok.handleEvent(&e);
+            }
+            if (renderText)
+            {
+                if (newName != "")
+                {
+                    std::cout << newName << std::endl;
+                    InputTextTexture.loadText(newName, tetrisGame.text_color, gSmallFont);
+                }
+                else
+                {
+                    InputTextTexture.loadText(" ", tetrisGame.text_color, gSmallFont);
+                }
+            }
+            
+            rRenderer.clearScreen();
+
+            tetrisGame.drawScene();
+            rRenderer.renderTexture(&score, windowWidth / 2, windowHeight / 2 - 30);
+            rRenderer.renderTexture(&InputTextTexture, windowWidth / 2, 432);
+
+            rRenderer.updateScreen();
+        }
+        SDL_StopTextInput();
+        tetrisGame.isInputName = false;
+        loadScore(highscores_path, newName, tetrisGame.score); 
+    } else tetrisGame.isInputName = false;
 }
+
 
 int main(int argc, char **argv)
 {
@@ -123,17 +190,15 @@ int main(int argc, char **argv)
             SDL_Event e;
 
             Game tetrisGame;
+            //set up game
+            tetrisGame.initializeScene();
             rRenderer.clearScreen();
 
             if (SDL_PollEvent(&e) != 0)
             {
                 game(tetrisGame, manager, rRenderer, e);
             }
- 
-            string newName;
-            getline(cin, newName);
-            loadScore("C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/highscores.txt", newName, tetrisGame.score);
-
+            
             rRenderer.clearScreen();
             std::cout << "2" << std::endl;
             while (!manager->ExitGame() && !tetrisGame.isRestart)

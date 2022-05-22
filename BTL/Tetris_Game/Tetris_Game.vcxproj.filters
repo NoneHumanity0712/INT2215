@@ -91,9 +91,6 @@
     <ClInclude Include="..\pause.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\theme.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\button.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="..\highscores.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\theme.hpp">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +154,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\sound_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\entername_dark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\entername_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\ok_name_light.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\ok_name_dark.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -1,8 +1,13 @@
 #include <iostream>
 #include <ctime>
+#include <string>
 #include "Game.hpp"
-#include <SDL.h>
 #include <cstdlib>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <string>
+#include <sstream>
 
 extern SDL_Renderer* gRenderer;
 
@@ -11,6 +16,7 @@ Pause SoundButton(holdBoxPos.x, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
 button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
 button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
+button ok(okButtonPos.x, okButtonPos.y, okButtonPos.w, okButtonPos.h);
 
 Game::Game()
 {
@@ -120,6 +126,46 @@ void Game::gameoverDraw()
     no.render(noButtonPos.x, noButtonPos.y, &noButtonRect[restartNo.CurrentSprite]);
 }
 
+// std::string Game::inputName(SDL_Event &e)
+// {
+//     //The current input text.
+//     std::string inputText = "";
+//     SDL_StartTextInput();
+//     while (!ok.click)
+//     {
+//         if (e.type == SDL_TEXTINPUT)
+//         {
+//             std::cout << "text inputting" << std::endl;
+//             if (!(SDL_GetModState() & KMOD_CTRL && (e.text.text[0] == 'c'
+//                 || e.text.text[0] == 'C'
+//                 || e.text.text[0] == 'v'
+//                 || e.text.text[0] == 'V')))
+//             {
+//                 inputText += e.text.text;
+//             }
+//         }
+//         else if (e.type == SDL_KEYDOWN)
+//         {
+//             if (e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0)
+//             {
+//                 inputText.pop_back();
+//             }
+//             else if (e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL)
+//             {
+//                 SDL_SetClipboardText(inputText.c_str());
+//             }
+//             else if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL)
+//             {
+//                 inputText = SDL_GetClipboardText();
+//             }
+//         } 
+//     }
+//     SDL_StopTextInput();
+//     ok.handleEvent(&e);
+//     isInputName = false;
+//     return inputText;
+// }
+
 void Game::YesButton(SDL_Event e)
 {
     restartYes.handleEvent(&e);
@@ -139,6 +185,25 @@ void Game::NoButton(SDL_Event e, input *manager)
         manager->exit();
         std::cout << "Action: Quit" << std::endl;
     }
+}
+
+void Game::drawEntername()
+{
+    if (isLightMode)
+    {
+        entername = entername_light;
+        ok_graphic = ok_graphic_light;
+    }
+    else
+    {
+        entername = entername_dark;
+        ok_graphic = ok_graphic_dark;
+    }
+
+    SDL_Rect name = { 0, 0, nameRect.w, nameRect.h };
+
+    entername.render(nameRect.x, nameRect.y, &name);
+    ok_graphic.render(okButtonPos.x, okButtonPos.y, &okButtonRect[ok.CurrentSprite]);
 }
 
 void Game::drawScene()
@@ -171,7 +236,8 @@ void Game::drawScene()
     drawCurrentPiece(currentPiece);
     drawNextPiece(nextPiece);
 
-    if (gameOver()) gameoverDraw();
+    if (gameOver() && isInputName) drawEntername();
+    if (gameOver() && !isInputName) gameoverDraw();
 }
 
 //handling event from keyboard
@@ -334,6 +400,9 @@ void Game::initializeScene()
     pauseButton.pause_game = false;
     restartNo.click = false;
     restartYes.click = false;
+    ok.click = false;
+
+    isInputName = true;
 
     nextPiece.type = getRandom(0, 6);
     nextPiece.rotation = 0;
@@ -409,6 +478,19 @@ void Game::initializeScene()
         noButtonRect[i].y = 0;
         noButtonRect[i].w = noButtonPos.w;
         noButtonRect[i].h = noButtonPos.h;
+    }
+
+    entername_light.loadImage(entername_path_light);
+    entername_dark.loadImage(entername_path_dark);
+
+    ok_graphic_light.loadImage(ok_path_light);
+    ok_graphic_dark.loadImage(ok_path_dark);
+    for (int i = 0; i < 2; i++)
+    {
+        okButtonRect[i].x = okButtonPos.w * i;
+        okButtonRect[i].y = 0;
+        okButtonRect[i].w = okButtonPos.w;
+        okButtonRect[i].h = okButtonPos.h;
     }
 
     soundLoad();

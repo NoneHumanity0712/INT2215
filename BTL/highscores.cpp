@@ -55,12 +55,34 @@ void inputNew(int n, player newGamer, player gamers[], string path)
     }
 }
 
+long lowest_highscore(string path)
+{
+    ifstream fin(path);
+    if (fin.is_open())
+    {
+        int n;
+        fin >> n;
+        if (n == 0) return 0;
+        else
+        {
+            long score;
+            string name;
+            for (int i = 0; i < n; i++)
+            {
+                fin >> score;
+                fin.ignore();
+                getline(fin, name);
+            }
+            return score;
+        }
+    }
+}
+
 void loadScore(string path, const string name, const double score)
 {
     player newGamer;
     newGamer.score = score;
     newGamer.name = name;
-    //path = "highscores.txt";
     ifstream fin(path);
     if (fin.is_open())
     {

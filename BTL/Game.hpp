@@ -46,6 +46,9 @@ public:
     void YesButton(SDL_Event e);
     void NoButton(SDL_Event e, input *manager);
 
+    bool isInputName;
+    // std::string inputName(SDL_Event &e);
+
     SDL_Color text_color;
 
     long int score;
@@ -103,9 +106,19 @@ private:
     texture sound_button_dark;
     SDL_Rect soundButtonRect[6];
 
+    texture entername;
+    texture entername_light;
+    texture entername_dark;
+
+    texture ok_graphic;
+    texture ok_graphic_light;
+    texture ok_graphic_dark;
+    SDL_Rect okButtonRect[2];
+
     void soundLoad();
     void drawBackground();
     void gameoverDraw();
+    void drawEntername();
     void drawBoard();
     void drawCurrentPiece(Piece piece);
     void drawGhostPiece(Piece piece);
