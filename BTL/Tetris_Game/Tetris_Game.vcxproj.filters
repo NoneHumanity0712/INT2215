@@ -103,10 +103,10 @@
     <ClInclude Include="..\highscores.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\theme.hpp">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\music.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\theme.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -142,12 +142,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\no_button_light.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\yes_button_dark.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\yes_button_light.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\gameover_dark.png">

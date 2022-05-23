@@ -203,8 +203,6 @@
     <Image Include="..\sound_light.png" />
     <Image Include="..\theme_switch_dark.png" />
     <Image Include="..\theme_switch_light.png" />
-    <Image Include="..\yes_button_dark.png" />
-    <Image Include="..\yes_button_light.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\Quicksand-Bold.ttf" />
