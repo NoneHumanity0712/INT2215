@@ -382,4 +382,9 @@ static std::string clearline_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Cours
 static std::string switch_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/switch.wav";
 static std::string droppiece_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/droppiece.wav";
 
+/* MUSIC */
+static std::string music_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/background_music.mp3";
+static std::string music_button_light_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/music_light.png";
+static std::string music_button_dark_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/music_dark.png";
+
 #endif

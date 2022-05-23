@@ -12,6 +12,7 @@ extern SDL_Renderer* gRenderer;
 
 Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
 Pause SoundButton(holdBoxPos.x - 10, pauseButtonPos.y);
+Pause MusicButton(holdBoxPos.x + 50, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
 button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
 button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
@@ -191,6 +192,7 @@ void Game::drawScene()
         pause_button_graphic= pause_button_graphic_light;
         theme_switch_graphic = theme_switch_graphic_light;
         sound_button = sound_button_light;
+        music_graphic = music_graphic_light;
     }
     else
     {
@@ -201,6 +203,7 @@ void Game::drawScene()
         pause_button_graphic = pause_button_graphic_dark;
         theme_switch_graphic = theme_switch_graphic_dark;
         sound_button = sound_button_dark;
+        music_graphic = music_graphic_dark;
     }
 
     drawBackground();
@@ -361,6 +364,13 @@ void Game::MuteSound(SDL_Event e)
     isMuteSound = SoundButton.pause_game;
 }
 
+void Game::MuteMusic(SDL_Event e)
+{
+    MusicButton.handleEvent(&e);
+
+    isMuteMusic = MusicButton.pause_game;
+}
+
 void Game::initializeScene()
 {
     srand(time(0));
@@ -370,6 +380,7 @@ void Game::initializeScene()
     used_hold_block = false;
     isLightMode = true;
     isMuteSound = false;
+    isMuteMusic = false;
     isRestart = false;
 
     themeSwitch.lightMode = true;
@@ -416,6 +427,9 @@ void Game::initializeScene()
 
     sound_button_light.loadImage(sound_path_light);
     sound_button_dark.loadImage(sound_path_dark);
+
+    music_graphic_light.loadImage(music_button_light_path);
+    music_graphic_dark.loadImage(music_button_dark_path);
     for (int i = 0; i < 6; i++)
     {
         pause_button[i].x = button_sprite_size * i;
@@ -427,6 +441,11 @@ void Game::initializeScene()
         soundButtonRect[i].y = 0;
         soundButtonRect[i].w = button_sprite_size;
         soundButtonRect[i].h = button_sprite_size;
+
+        musicButtonRect[i].x = button_sprite_size * i;
+        musicButtonRect[i].y = 0;
+        musicButtonRect[i].w = button_sprite_size;
+        musicButtonRect[i].h = button_sprite_size;
     }
 
     theme_switch_graphic_light.loadImage(switch_path_light);
@@ -501,6 +520,7 @@ void Game::drawBackground()
     pause_button_graphic.render(pauseButtonPos.x, pauseButtonPos.y, &pause_button[pauseButton.CurrentSprite]);
     theme_switch_graphic.render(themeSwitchRect.x, themeSwitchRect.y, &theme_switch);
     sound_button.render(SoundButton.Position.x, SoundButton.Position.y, &soundButtonRect[SoundButton.CurrentSprite]);
+    music_graphic.render(MusicButton.Position.x, MusicButton.Position.y, &musicButtonRect[MusicButton.CurrentSprite]);
 }
 
 void Game::drawBoard()

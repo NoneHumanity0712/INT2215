@@ -35,9 +35,9 @@ Game Graphic Design: all designed by Lê Hoàng Minh Hà using Adobe Photoshop.
 - Next Piece box: 5 (blocks) x 5 (blocks).
 
 _______________________________
-Sound effects:
-- Count Down:
-- Move Piece:
-- Drop Piece:
-- Switch Theme:
-- Clear Line:
+Sound effects: All used sounds are no copyright
+- Count Down: (https://assets.mixkit.co/sfx/download/mixkit-simple-game-countdown-921.wav)
+- Move Piece: 
+- Drop Piece: 
+- Switch Theme: 
+- Clear Line: (http://www.vertigogaming.org/downloads/svencoop/sound/sc_tetris/clear.wav)

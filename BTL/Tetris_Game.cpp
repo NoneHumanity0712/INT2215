@@ -10,6 +10,7 @@
 #include "button.hpp"
 #include "sound.hpp"
 #include "highscores.hpp"
+#include "music.hpp"
 
 void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
 {
@@ -58,6 +59,10 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     //rRenderer.updateScreen();
     manager->clearQueueEvent();
 
+    music background_music;
+    background_music.loadMusic(music_path);
+    if (!tetrisGame.isMuteMusic) background_music.playMusic();
+    bool music_pause = false;
     unsigned long long time_1 = SDL_GetTicks();
 
     count_down_sound[1].playSound();
@@ -65,6 +70,12 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     while (!tetrisGame.gameOver() && !manager->ExitGame())
     {
         long int wait_time = 1000 - (tetrisGame.level() - 1)*100;
+
+        if (tetrisGame.isMuteMusic != music_pause)
+        {
+            background_music.pause_resume();
+            music_pause = tetrisGame.isMuteMusic;
+        }
 
         currentScore = "Score: " + std::to_string(tetrisGame.score);
         score.loadText(currentScore, tetrisGame.text_color, gBigFont);
@@ -81,6 +92,7 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
             tetrisGame.PauseButton(e);
             tetrisGame.ThemeSwitch(e);
             tetrisGame.MuteSound(e);
+            tetrisGame.MuteMusic(e);
         }
 
         if (time_2 - time_1 >= wait_time && !tetrisGame.isPause)
@@ -101,6 +113,8 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
         count_down_sound[i].~sound();
     }
     std::cout << "Game Over!" << std::endl;
+    background_music.stopMusic();
+    background_music.~music();
 
     if (tetrisGame.score > lowest_highscore(highscores_path) || numbers_of_player(highscores_path) < 5)
     {

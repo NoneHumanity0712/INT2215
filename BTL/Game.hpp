@@ -32,6 +32,7 @@ public:
     void PauseButton(SDL_Event e);
     void ThemeSwitch(SDL_Event e);
     void MuteSound(SDL_Event e);
+    void MuteMusic(SDL_Event e);
 
     bool gameOver();
     void pieceFalling();
@@ -41,6 +42,7 @@ public:
     bool isLightMode;
     bool isRestart;
     bool isMuteSound;
+    bool isMuteMusic;
     int level();
 
     void YesButton(SDL_Event e);
@@ -114,6 +116,11 @@ private:
     texture ok_graphic_light;
     texture ok_graphic_dark;
     SDL_Rect okButtonRect[2];
+
+    texture music_graphic;
+    texture music_graphic_light;
+    texture music_graphic_dark;
+    SDL_Rect musicButtonRect[6];
 
     void soundLoad();
     void drawBackground();

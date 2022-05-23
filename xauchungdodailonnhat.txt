@@ -1,0 +1,5 @@
+s độ dài M, t độ dài N
+f(M, N) là kết quả của dãy độ dài M với dãy N
+
+xét cặp kí tự đầu tiên:
+    if bằng nhau: f(M, N) = 1 
