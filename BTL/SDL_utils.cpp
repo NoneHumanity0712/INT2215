@@ -5,9 +5,11 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include "render.hpp"
+#include "Game.hpp"
+#include "music.hpp"
+#include "sound.hpp"
 
 SDL_Window* gWindow = nullptr;
-texture tetromino_graphic;
 extern TTF_Font* gBigFont;
 extern TTF_Font* gSmallFont;
 extern SDL_Renderer* gRenderer;
@@ -104,6 +106,7 @@ bool initSDL()
                     printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
                     success = false;
                 }
+                Mix_Volume(-1, MIX_MAX_VOLUME / 2);
                 SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
                 SDL_RenderSetLogicalSize(gRenderer, windowWidth, windowHeight);
             }

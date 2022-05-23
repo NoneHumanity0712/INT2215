@@ -15,6 +15,7 @@ class button
     friend class Game;
 public:
     button(int x, int y, int w, int h);
+    button(SDL_Rect r);
 
     bool click;
 

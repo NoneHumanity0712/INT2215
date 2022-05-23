@@ -354,14 +354,9 @@ const char font_path_neu[] = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2
 static std::string gameover_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/gameover_light.png";
 static std::string gameover_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/gameover_dark.png";
 
-
-static std::string yes_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/yes_button_light.png";
-static std::string yes_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/yes_button_dark.png";
-const SDL_Rect yesButtonPos = {356, 466, 80, 40};
-
 static std::string no_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_light.png";
 static std::string no_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/no_button_dark.png";
-const SDL_Rect noButtonPos = {525, 466, 80, 40};
+const SDL_Rect noButtonPos = {windowWidth/2 - 40, 466, 80, 40};
 
 static std::string entername_path_light = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/entername_light.png";
 static std::string entername_path_dark = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/entername_dark.png";

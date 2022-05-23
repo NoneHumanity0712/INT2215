@@ -23,8 +23,6 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     speed.loadText(Level, tetrisGame.text_color, gBigFont);
 
     int countdown = 3; // 3... 2... 1...
-    texture countdown_text;
-
     sound count_down_sound[2];
     for (int i = 0; i < 2; i++)
     {
@@ -33,7 +31,7 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     }
 
     manager->clearQueueEvent();
-
+    texture countdown_text;
     while (countdown > 0)
     {
         rRenderer.clearScreen();
@@ -63,8 +61,8 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     background_music.loadMusic(music_path);
     if (!tetrisGame.isMuteMusic) background_music.playMusic();
     bool music_pause = false;
-    unsigned long long time_1 = SDL_GetTicks();
 
+    unsigned long long time_1 = SDL_GetTicks();
     count_down_sound[1].playSound();
 
     while (!tetrisGame.gameOver() && !manager->ExitGame())
@@ -108,13 +106,9 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
 
         rRenderer.updateScreen();
     }
-    for (int i = 0; i < 2; i++)
-    {
-        count_down_sound[i].~sound();
-    }
+
     std::cout << "Game Over!" << std::endl;
     background_music.stopMusic();
-    background_music.~music();
 
     if (tetrisGame.score > lowest_highscore(highscores_path) || numbers_of_player(highscores_path) < 5)
     {
@@ -192,56 +186,52 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
 
     score.free();
     speed.free();
+    background_music.~music();
+    for (int i = 0; i < 2; i++)
+    {
+        count_down_sound[i].~sound();
+    }
+    countdown_text.free();
 }
 
 
 int main(int argc, char **argv)
 {
-    bool startgame = false;
+    input* manager = new input;
+    render rRenderer;
+    Game tetrisGame;
 
-    do
+    if (initSDL())
     {
-        startgame = false;
-        if (initSDL())
+        loadGraphic();
+
+        SDL_Event e;
+
+        //set up game
+        tetrisGame.initializeScene();
+
+        if (SDL_PollEvent(&e) != 0)
         {
-            input* manager = new input;
-            render rRenderer;
-
-            loadGraphic();
-
-            SDL_Event e;
-
-            Game tetrisGame;
-            //set up game
-            tetrisGame.initializeScene();
-            rRenderer.clearScreen();
-
-            if (SDL_PollEvent(&e) != 0)
-            {
-                game(tetrisGame, manager, rRenderer, e);
-            }
-            
-            while (!manager->ExitGame() && !tetrisGame.isRestart)
-            {
-                while (SDL_PollEvent(&e) != 0 )
-                {
-                    manager->pollAction(e);
-                    tetrisGame.YesButton(e);
-                    tetrisGame.NoButton(e, manager);
-                }
-
-                rRenderer.clearScreen();
-                tetrisGame.drawScene();
-                rRenderer.updateScreen();
-            }
-            startgame = tetrisGame.isRestart;
-            tetrisGame.~Game();
-            delete manager;
+            game(tetrisGame, manager, rRenderer, e);
         }
-        close();
-    }
-    while (startgame);
+        
+        while (!manager->ExitGame() && !tetrisGame.quit)
+        {
+            while (SDL_PollEvent(&e) != 0 )
+            {
+                manager->pollAction(e);
+                tetrisGame.QuitButton(e);
+            }
 
+            rRenderer.clearScreen();
+            tetrisGame.drawScene();
+            rRenderer.updateScreen();
+        }  
+    }
+    tetrisGame.~Game();
+    delete manager;
+    close();
+    
     system("pause");
     return 0;
 }

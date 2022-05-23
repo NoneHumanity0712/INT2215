@@ -3,6 +3,9 @@
 
 #include <SDL.h>
 #include "texture.hpp"
+#include "Game.hpp"
+#include "music.hpp"
+#include "sound.hpp"
 
 void logSDLError(std::ostream& os, const std::string &msg, bool fatal);
 

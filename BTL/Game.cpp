@@ -14,9 +14,8 @@ Pause pauseButton(pauseButtonPos.x, pauseButtonPos.y);
 Pause SoundButton(holdBoxPos.x - 10, pauseButtonPos.y);
 Pause MusicButton(holdBoxPos.x + 50, pauseButtonPos.y);
 theme themeSwitch(themeSwitchRect.x, themeSwitchRect.y);
-button restartYes(yesButtonPos.x, yesButtonPos.y, yesButtonPos.w, yesButtonPos.h);
-button restartNo(noButtonPos.x, noButtonPos.y, noButtonPos.w, noButtonPos.h);
-button ok(okButtonPos.x, okButtonPos.y, okButtonPos.w, okButtonPos.h);
+button restartNo(noButtonPos);
+button ok(okButtonPos);
 
 Game::Game()
 {
@@ -26,14 +25,53 @@ Game::Game()
 Game::~Game()
 {
     tetromino_graphic.free();
+    tetromino_graphic_light.free();
+    tetromino_graphic_dark.free();
+
     ghost_tetromino_graphic.free();
+    ghost_tetromino_graphic_light.free();
+    ghost_tetromino_graphic_dark.free();
+
     background.free();
+    background_light.free();
+    background_dark.free();
+
     pause_button_graphic.free();
+    pause_button_graphic_light.free();
+    pause_button_graphic_dark.free();
+
     theme_switch_graphic.free();
+    theme_switch_graphic_light.free();
+    theme_switch_graphic_dark.free();
+
     gameover.free();
-    yes.free();
+    gameover_light.free();
+    gameover_dark.free();
+
     no.free();
+    no_light.free();
+    no_dark.free();
+
     ok_graphic.free();
+    ok_graphic_light.free();
+    ok_graphic_dark.free();
+
+    sound_button.free();
+    sound_button_light.free();
+    sound_button_dark.free();
+
+    entername.free();
+    entername_light.free();
+    entername_dark.free();
+
+    music_graphic.free();
+    music_graphic_light.free();
+    music_graphic_dark.free();
+
+    MovePiece.~sound();
+    ClearLine.~sound();
+    Switch.~sound();
+    DropPiece.~sound();
 }
 
 void Game::checkState()
@@ -113,17 +151,14 @@ void Game::gameoverDraw()
     if (isLightMode)
     {
         gameover = gameover_light;
-        yes = yes_light;
         no = no_light;
     } else
     {
         gameover = gameover_dark;
-        yes = yes_dark;
         no = no_dark;
     }
 
     gameover.render(0,0, &background_pic);
-    yes.render(yesButtonPos.x, yesButtonPos.y, &yesButtonRect[restartYes.CurrentSprite]);
     no.render(noButtonPos.x, noButtonPos.y, &noButtonRect[restartNo.CurrentSprite]);
 
     texture player_rank, player_name, player_score;
@@ -141,23 +176,12 @@ void Game::gameoverDraw()
     }
 }
 
-void Game::YesButton(SDL_Event e)
-{
-    restartYes.handleEvent(&e);
-    if (restartYes.click)
-    {
-        isRestart = true;
-        std::cout << "Action: Restart" << std::endl;
-    }
-}
-
-void Game::NoButton(SDL_Event e, input *manager)
+void Game::QuitButton(SDL_Event e)
 {
     restartNo.handleEvent(&e);
     if (restartNo.click)
     {
-        isRestart = false;
-        manager->exit();
+        quit = true;
         std::cout << "Action: Quit" << std::endl;
     }
 }
@@ -376,18 +400,12 @@ void Game::initializeScene()
     srand(time(0));
     score = 0;
 
+    quit = false;
     first_time_hold = true;
     used_hold_block = false;
     isLightMode = true;
     isMuteSound = false;
     isMuteMusic = false;
-    isRestart = false;
-
-    themeSwitch.lightMode = true;
-    pauseButton.pause_game = false;
-    restartNo.click = false;
-    restartYes.click = false;
-    ok.click = false;
 
     isInputName = true;
 
@@ -454,16 +472,6 @@ void Game::initializeScene()
 
     gameover_light.loadImage(gameover_path_light);
     gameover_dark.loadImage(gameover_path_dark);
-
-    yes_light.loadImage(yes_path_light);
-    yes_dark.loadImage(yes_path_dark);
-    for (int i = 0; i < 2; i++)
-    {
-        yesButtonRect[i].x = yesButtonPos.w*i;
-        yesButtonRect[i].y = 0;
-        yesButtonRect[i].w = yesButtonPos.w;
-        yesButtonRect[i].h = yesButtonPos.h;
-    }
 
     no_light.loadImage(no_path_light);
     no_dark.loadImage(no_path_dark);

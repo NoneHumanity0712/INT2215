@@ -15,7 +15,8 @@ music::~music()
 void music::loadMusic(std::string path)
 {
     Music = Mix_LoadMUS(path.c_str());
-    if( Music == NULL )
+    
+    if( Music == nullptr )
 	{
 		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
 	}

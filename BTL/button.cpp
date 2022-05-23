@@ -15,6 +15,11 @@ button::button(int x, int y, int w, int h)
     click = false;
 }
 
+button::button(SDL_Rect r)
+{
+    Box = r;
+}
+
 void button::handleEvent(SDL_Event *e)
 {
     if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP )

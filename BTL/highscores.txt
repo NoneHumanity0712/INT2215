@@ -1,11 +1,11 @@
 5
-103540
+400000
+Minh Ha Le
+200000
+Player 1
+100000
 Nguyen Thuy Trang
-74680
+30000
 Thuy Trang
-69360
-Yoooo
-67600
-Ha
-40020
-NoneHumanity
+27420
+test 2

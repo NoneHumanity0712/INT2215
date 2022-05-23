@@ -35,18 +35,17 @@ public:
     void MuteMusic(SDL_Event e);
 
     bool gameOver();
+    bool quit;
     void pieceFalling();
     void swap(Piece &a, Piece &b);
     std::string clearedLines();
     bool isPause;
     bool isLightMode;
-    bool isRestart;
     bool isMuteSound;
     bool isMuteMusic;
     int level();
 
-    void YesButton(SDL_Event e);
-    void NoButton(SDL_Event e, input *manager);
+    void QuitButton(SDL_Event e);
 
     bool isInputName;
     // std::string inputName(SDL_Event &e);
@@ -57,7 +56,9 @@ public:
 private:
     bool first_time_hold;
     bool used_hold_block;
+
     Board* board;
+
     Piece currentPiece {0, 0};
     Piece ghostPiece {0, 0};
     Piece holdPiece {0, 0};
@@ -92,11 +93,6 @@ private:
     texture gameover;
     texture gameover_light;
     texture gameover_dark;
-
-    texture yes;
-    texture yes_light;
-    texture yes_dark;
-    SDL_Rect yesButtonRect[2];
 
     texture no;
     texture no_light;
