@@ -151,6 +151,7 @@
     <ClCompile Include="..\Game.cpp" />
     <ClCompile Include="..\highscores.cpp" />
     <ClCompile Include="..\input.cpp" />
+    <ClCompile Include="..\music.cpp" />
     <ClCompile Include="..\pause.cpp" />
     <ClCompile Include="..\Piece.cpp" />
     <ClCompile Include="..\render.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="..\Game.hpp" />
     <ClInclude Include="..\highscores.hpp" />
     <ClInclude Include="..\input.hpp" />
+    <ClInclude Include="..\music.hpp" />
     <ClInclude Include="..\pause.hpp" />
     <ClInclude Include="..\Piece.hpp" />
     <ClInclude Include="..\render.hpp" />
@@ -188,6 +190,8 @@
     <Image Include="..\minoes-neumorphism_ghost_dark.png" />
     <Image Include="..\minoes-neumorphism_ghost_light.png" />
     <Image Include="..\minoes-neumorphism_light.png" />
+    <Image Include="..\music_dark.png" />
+    <Image Include="..\music_light.png" />
     <Image Include="..\Neumorphism_dark.png" />
     <Image Include="..\Neumorphism_light.png" />
     <Image Include="..\no_button_dark.png" />
@@ -206,6 +210,7 @@
     <Font Include="..\Quicksand-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="..\background_music.mp3" />
     <Media Include="..\clearline.wav" />
     <Media Include="..\countdown0.wav" />
     <Media Include="..\countdown1.wav" />
