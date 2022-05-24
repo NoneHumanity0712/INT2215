@@ -26,7 +26,7 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     sound count_down_sound[2];
     for (int i = 0; i < 2; i++)
     {
-        std::string sound_path = "C:/Users/HP/OneDrive - vnu.edu.vn/UET/Courses/INT2215/BTL/countdown" + std::to_string(i) + ".wav";
+        std::string sound_path = path + "countdown" + std::to_string(i) + ".wav";
         count_down_sound[i].loadSound(sound_path);
     }
 
@@ -54,16 +54,16 @@ void game(Game &tetrisGame, input *manager, render &rRenderer, SDL_Event e)
     }
     rRenderer.clearScreen();
 
-    //rRenderer.updateScreen();
-    manager->clearQueueEvent();
-
     music background_music;
     background_music.loadMusic(music_path);
-    if (!tetrisGame.isMuteMusic) background_music.playMusic();
+
+    manager->clearQueueEvent();
+   
     bool music_pause = false;
 
     unsigned long long time_1 = SDL_GetTicks();
     count_down_sound[1].playSound();
+    if (!tetrisGame.isMuteMusic) background_music.playMusic();
 
     while (!tetrisGame.gameOver() && !manager->ExitGame())
     {

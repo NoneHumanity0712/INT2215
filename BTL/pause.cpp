@@ -61,7 +61,6 @@ void Pause::handleEvent(SDL_Event *e)
 					if (!pause_game) CurrentSprite = BUTTON_SPRITE_MOUSE_DOWN_PAUSE;
 					else CurrentSprite = BUTTON_SPRITE_MOUSE_DOWN_UNPAUSE;
 
-					std::cout << "Action: Pause/Unpause" << std::endl;
 					break;
 				}
 			}

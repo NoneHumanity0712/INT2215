@@ -118,8 +118,8 @@ bool initSDL()
 //return true if load all graphics (image, gFont) successfully 
 void loadGraphic()
 {
-    gBigFont = TTF_OpenFont(font_path_neu, 28);
-    gSmallFont = TTF_OpenFont(font_path_neu, 14);
+    gBigFont = TTF_OpenFont(font_path_neu.c_str(), 28);
+    gSmallFont = TTF_OpenFont(font_path_neu.c_str(), 14);
     if (gBigFont == nullptr || gSmallFont == nullptr)
         logSDL_ttf_Error(std::cout, "Could not load font", true);
 }

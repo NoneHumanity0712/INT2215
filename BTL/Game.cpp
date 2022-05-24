@@ -370,28 +370,32 @@ void Game::event(ACTION a)
 void Game::PauseButton(SDL_Event e)
 {
     pauseButton.handleEvent(&e);
-
+    if (isPause != pauseButton.pause_game) std::cout << "Action: Pause/Unpause" << std::endl;
     isPause = pauseButton.pause_game;
 }
 
 void Game::ThemeSwitch(SDL_Event e)
 {
     themeSwitch.handleEvent(&e);
-    if (isLightMode != themeSwitch.lightMode && !isMuteSound) Switch.playSound();
+    if (isLightMode != themeSwitch.lightMode && !isMuteSound)
+    {
+        Switch.playSound();
+        std::cout << "Action: Switch theme" << std::endl;
+    }
     isLightMode = themeSwitch.lightMode;
 }
 
 void Game::MuteSound(SDL_Event e)
 {
     SoundButton.handleEvent(&e);
-
+    if (isMuteSound != SoundButton.pause_game) std::cout << "Action: Mute/Unmute sound" << std::endl;
     isMuteSound = SoundButton.pause_game;
 }
 
 void Game::MuteMusic(SDL_Event e)
 {
     MusicButton.handleEvent(&e);
-
+    if (isMuteMusic != MusicButton.pause_game) std::cout << "Action: Pause/Resume music" << std::endl;
     isMuteMusic = MusicButton.pause_game;
 }
 

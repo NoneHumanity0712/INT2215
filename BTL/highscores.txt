@@ -1,11 +1,11 @@
 5
-400000
+40000
 Minh Ha Le
-200000
+33920
+Le Hoang Minh Ha
+20000
 Player 1
-100000
+10000
 Nguyen Thuy Trang
-30000
-Thuy Trang
-27420
-test 2
+6200
+test 3
