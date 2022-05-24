@@ -1,4 +1,4 @@
-Tetris game in C++ using SDL2.
+Tetris game in C++ using SDL2 (SDL.h, SDL_image.h, SDL_ttf.h, SDL_mixer.h)
 _______________________________
 How to play:
 - Right/Left Arrow: move right/left
@@ -52,6 +52,7 @@ Game Graphic Design: all designed by Lê Hoàng Minh Hà using Adobe Photoshop.
 - Game field: 10 (blocks) x 22 (blocks) (the first two lines where new piece starts are hidden).
 - Hold Piece box: 5 (blocks) x 5 (blocks).
 - Next Piece box: 5 (blocks) x 5 (blocks).
+- Buttons.
 
 _______________________________
 Sound effects: All used sounds are no copyright
