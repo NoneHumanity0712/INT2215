@@ -1,5 +1,6 @@
 # Tetris game in C++ using SDL2 
 *(SDL.h, SDL_image.h, SDL_ttf.h, SDL_mixer.h)*
+
 ![image](https://user-images.githubusercontent.com/40814521/169949095-2858bc9a-4d85-46a5-8bfa-081826770d53.png)
 
 _______________________________
@@ -21,6 +22,7 @@ _______________________________
 - Theme Switch: switch between dark theme and light theme.
 - Mute Sound Button: mute/unmute sound effects (when move piece or switch theme).
 - Mute Music Button: pause/resume background music. The music is looped until the game is over. Music will still be played when the game is paused.
+
 ![image](https://user-images.githubusercontent.com/40814521/169949227-7d5b0fc2-9b8c-4183-912c-0225d4d5f5a7.png)
 
 _______________________________
@@ -38,7 +40,9 @@ _______________________________
 - If the board has fewer than 5 scores, the new score will be added to the board, then the board will be sorted.
 - If the board has 5 scores and the new score is higher than one of the score on the board, the lowest score will be removed from the board as the new score added to the board in descending order.
 - Players can enter their names to be saved on the board.
+
 ![image](https://user-images.githubusercontent.com/40814521/169949449-2dec5c59-f7f2-47d3-8d4b-7b83191462eb.png)
+
 ![image](https://user-images.githubusercontent.com/40814521/169949513-82e2a009-8a53-4921-90e3-de0c9088eefc.png)
 
 _______________________________
@@ -57,7 +61,7 @@ _______________________________
 - Game field: 10 (blocks) x 22 (blocks) (the first two lines where new piece starts are hidden).
 - Hold Piece box: 5 (blocks) x 5 (blocks).
 - Next Piece box: 5 (blocks) x 5 (blocks).
-- Buttons.
+- Buttons: pause, theme switch, mute sound, mute music.
 
 _______________________________
 ## Sound effects: All used sounds are no copyright
